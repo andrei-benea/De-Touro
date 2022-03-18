@@ -1,11 +1,8 @@
 module.exports = {
-    '@tags': 'login',
+    '@tags': 'login-dt',
 
-    'Login into De-Touro QA'(browser){
+    'Login into De-Touro QA' (browser) {
         
-      //  const username = 'andrei.benea89+989@gmail.com';
-      //  const password = 'ungam+20';
-
         const login = browser.page.detouroLogin();
 
         login
