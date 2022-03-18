@@ -4,6 +4,7 @@ module.exports = {
     'Login into KKx3 QA' (browser) {
         
         const login = browser.page.kkx3();
+        //const frame = iframe.contentWindow.document.getElementsByTagName("H1");
 
         login
             .navigate()
@@ -14,6 +15,9 @@ module.exports = {
             .click('@kkDeTouroGroup')
             .waitForElementVisible('@loggedInUser')
             .expect.element('@loggedInUser').text.to.contain('Andrei Benea')
+
+        login
+            .loadDeTouro()
 
         browser
             .saveScreenshot('tests_output/kkx3.png')

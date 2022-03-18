@@ -11,5 +11,8 @@ module.exports = {
             .setPass()
             .login()
             .assert.urlContains('https://qa.de-touro.de/Index')
+        
+        browser
+          .saveScreenshot('tests_output/detouro.png')
     }
 }
