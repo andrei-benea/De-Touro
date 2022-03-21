@@ -10,7 +10,9 @@ module.exports = {
         kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(33)',
         loggedInUser: '#ext-comp-1181',
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
-        deTouroKta: '#main'
+        frameName: '[name="FDLiFrame"]',
+        deTouroKta: '#aspnetForm',
+        ktaIcon: '#ctl00_MainContent_Image1'
     },
 
     commands: [{
@@ -36,7 +38,20 @@ module.exports = {
         loadDeTouro() {
             return this
                 .click('@treeDeTouro')
-                //.waitForElementVisible('@deTouroKta');
         },
+        //Additional optional functions.. Keep for later.
+        getFrameSrc() {
+            return this
+                .getElementProperty('[name="FDLiFrame"]', 'src', src => {
+                    console.log(src.value)
+                }
+                )
+        },
+        setFrameAttribute() {
+            return this
+                .setAttribute('@frameName', 'id', '0', function (result) {
+                    console.log('result', result);
+                });
+        }
     }]
 }

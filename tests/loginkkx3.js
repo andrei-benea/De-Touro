@@ -1,10 +1,9 @@
 module.exports = {
     '@tags': 'login-kkx3',
 
-    'Login into KKx3 QA' (browser) {
-        
+    'Login into KKx3 QA'(browser) {
+
         const login = browser.page.kkx3();
-        //const frame = iframe.contentWindow.document.getElementsByTagName("H1");
 
         login
             .navigate()
@@ -20,6 +19,15 @@ module.exports = {
             .loadDeTouro()
 
         browser
+            .waitForElementVisible('#ext-comp-1003')
+            .waitForElementVisible('[name="FDLiFrame"]')
+            .pause(500)
+            .frame(0)
             .saveScreenshot('tests_output/kkx3.png')
+
+        login
+            .waitForElementVisible('@deTouroKta')
+            .click('@ktaIcon')
+            .saveScreenshot('tests_output/kkx3-inframe.png')
     }
 }
