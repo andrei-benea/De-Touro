@@ -10,20 +10,15 @@ module.exports = {
             .setUser()
             .setPass()
             .login()
-            .click('@kkSwitchButton')
-            .click('@kkDeTouroGroup')
+            .switchToGroupKk()
+            .selectDeTouroFromGroup()
             .waitForElementVisible('@loggedInUser')
+            .loadDeTouro()
+            .waitForElementVisible('@frame')
             .expect.element('@loggedInUser').text.to.contain('Andrei Benea')
 
-        login
-            .loadDeTouro()
-
         browser
-            .waitForElementVisible('#ext-comp-1003')
-            .waitForElementVisible('[name="FDLiFrame"]')
-            .pause(500)
             .frame(0)
-            .saveScreenshot('tests_output/kkx3.png')
 
         login
             .waitForElementVisible('@deTouroKta')
