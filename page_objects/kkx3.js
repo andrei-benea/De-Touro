@@ -11,8 +11,12 @@ module.exports = {
         loggedInUser: '#ext-comp-1181',
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
         frame: '[name="FDLiFrame"]',
-        deTouroKta: '#aspnetForm',
-        ktaIcon: '#ctl00_MainContent_Image1'
+        aspNetForm: '#aspnetForm',
+        ktaIcon: '#ctl00_MainContent_Image1',
+        newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
+        kvnrInput: '#ctl00_MainContent_formViewInsured_textBoxKVNR',
+        uiHelperInsurantSelector: '.ui-helper-hidden-accessible',
+        kvnrSearchResult: '#ui-id-7'
     },
 
     commands: [{
@@ -30,7 +34,7 @@ module.exports = {
             return this
                 .click('@submitButton');
         },
-        selectGroup() {
+        selectKkFromGroup() {
             return this
                 .click('@kkSwitchButton')
                 .click('@kkDeTouroGroup');
@@ -39,13 +43,19 @@ module.exports = {
             return this
                 .click('@treeDeTouro')
         },
-        switchToGroupKk() {
+        loadKtaModule() {
             return this
-                .click('@kkSwitchButton')
+                .click('@ktaIcon')
         },
-        selectDeTouroFromGroup() {
+        createNewKta() {
             return this
-                .click('@kkDeTouroGroup')
+                .click('@newKtaButton')
+                .waitForElementVisible('@kvnrInput')
+                .setValue('@kvnrInput', 'a123')
+                .pause(500)
+                // .sendKeys(browser.Keys.DOWN_ARROW, browser.Keys.DOWN_ARROW, browser.Keys.ENTER)
+                // .waitForElementVisible('@kvnrSearchResult')
+                // .click('@kvnrSearchResult')
         },
         //Additional optional functions.. Keep for later.
         getFrameSrc() {
