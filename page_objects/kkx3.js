@@ -74,9 +74,9 @@ module.exports = {
                 .waitForElementVisible('@stepThreeWeiterButton')
                 .click('@stepThreeWeiterButton')
                 .waitForElementVisible('@saveKtaButton')
-                .pause(3000)
+                .pause(2000)
                 .click('@saveKtaButton')
-                .pause(1000)
+                .pause(500)
                 .waitForElementVisible('@printFrame')
         },
         printDocuments() {
