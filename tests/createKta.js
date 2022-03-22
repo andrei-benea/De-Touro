@@ -35,7 +35,7 @@ module.exports = {
 
         login
             .getKTANumber()
-            // .publishKta()
+            .publishKta()
     
         browser
             .saveScreenshot('tests_output/kkx3-inframe.png')

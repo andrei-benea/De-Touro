@@ -87,9 +87,10 @@ module.exports = {
         },
         getKTANumber() {
             return this
-                .elementIdText('@ktaNumber', 'number', number => {
-                    console.log(number.value)
-                })
+                .getText('@ktaNumber', function(result) {
+                    console.log("The KTA Nr. is:", result.value)
+                }
+            )
         },
         publishKta() {
             return this
@@ -106,13 +107,14 @@ module.exports = {
                 .getElementProperty('@frame', 'src', src => {
                     console.log(src.value)
                 }
-                )
+            )
         },
         setFrameAttribute() {
             return this
                 .setAttribute('@frame', 'id', '0', function (result) {
                     console.log('result', result);
-                });
+                }
+            )
         }
     }]
 }
