@@ -11,16 +11,15 @@ module.exports = {
             .setPass()
             .login()
             .selectKkFromGroup()
-            .waitForElementVisible('@loggedInUser')
+            .waitForElementVisible('@loggedInUser', 'User is logged in!')
             .loadDeTouro()
-            .waitForElementVisible('@frame')
+            .waitForElementVisible('@frame', 'General iframe is visible!')
             .expect.element('@loggedInUser').text.to.contain('Andrei Benea')
 
         browser
             .frame(0)
 
         login
-            .waitForElementVisible('@aspNetForm')
             .loadKtaModule('@ktaIcon')
             .saveNewKta()
 

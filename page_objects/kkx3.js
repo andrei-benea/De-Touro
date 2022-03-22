@@ -34,21 +34,21 @@ module.exports = {
         setUser() {
             const username = 'zhp.benea'
             return this
-                .setValue('@usernameInput', username);
+                .setValue('@usernameInput', username)
         },
         setPass() {
             const password = 'ungam+30'
             return this
-                .setValue('@passwordInput', password);
+                .setValue('@passwordInput', password)
         },
         login() {
             return this
-                .click('@submitButton');
+                .click('@submitButton')
         },
         selectKkFromGroup() {
             return this
                 .click('@kkSwitchButton')
-                .click('@kkDeTouroGroup');
+                .click('@kkDeTouroGroup')
         },
         loadDeTouro() {
             return this
@@ -61,7 +61,7 @@ module.exports = {
         saveNewKta() {
             return this
                 .click('@newKtaButton')
-                .waitForElementVisible('@kvnrInput')
+                .waitForElementVisible('@kvnrInput', 'Step 1 will be passed!')
                 .setValue('@kvnrInput', 'A123456778')
                 .click('@result')
                 .pause(300)
@@ -69,19 +69,19 @@ module.exports = {
                 .click('@ktaTemplateConfirm')
                 .pause(300)
                 .click('@stepOneWeiterButton')
-                .waitForElementVisible('@stepTwoWeiterButton')
+                .waitForElementVisible('@stepTwoWeiterButton', 'Step 2 will be passed!')
                 .click('@stepTwoWeiterButton')
-                .waitForElementVisible('@stepThreeWeiterButton')
+                .waitForElementVisible('@stepThreeWeiterButton', 'Step 3 will be passed!')
                 .click('@stepThreeWeiterButton')
-                .waitForElementVisible('@saveKtaButton')
+                .waitForElementVisible('@saveKtaButton', 'Kta will be saved!')
                 .pause(2000)
                 .click('@saveKtaButton')
                 .pause(500)
-                .waitForElementVisible('@printFrame')
+                .waitForElementVisible('@printFrame', 'Print iframe visible!')
         },
         printDocuments() {
             return this
-                .waitForElementVisible('@printDocumentsOkButton')
+                .waitForElementVisible('@printDocumentsOkButton', 'No documents will be printed!')
                 .click('@printDocumentsOkButton')
                 .pause(500)
         },
@@ -94,11 +94,11 @@ module.exports = {
         },
         publishKta() {
             return this
-                .waitForElementVisible('@publishKtaButton')
+                .waitForElementVisible('@publishKtaButton', 'Kta details loaded!')
                 .click('@publishKtaButton')
-                .waitForElementVisible('@confirmPublishButton')
+                .waitForElementVisible('@confirmPublishButton', 'Confirm publish is visible!')
                 .click('@confirmPublishButton')
-                .waitForElementVisible('@ktaIsPublishedConfirmationWindow')
+                .waitForElementVisible('@ktaIsPublishedConfirmationWindow', 'Kta successfully published!')
                 .expect.element('@ktaIsPublishedConfirmationWindow').text.to.contain('KTA VERÖFFENTLICHT')
         },
         //Additional optional functions.. Keep for later.
