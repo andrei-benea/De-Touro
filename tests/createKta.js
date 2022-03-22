@@ -18,15 +18,26 @@ module.exports = {
 
         browser
             .frame(0)
-            // .sendKeys()
 
         login
             .waitForElementVisible('@aspNetForm')
             .loadKtaModule('@ktaIcon')
-            .createNewKta()
+            .saveNewKta()
 
         browser
-            .keyDown(browser.Key.DOWN_ARROW, browser.Key.DOWN_ARROW, browser.Key.ENTER)
+            .frame(0, 0)
+        
+        login
+            .printDocuments()
+
+        browser
+            .frameParent()
+
+        login
+            .getKTANumber()
+            // .publishKta()
+    
+        browser
             .saveScreenshot('tests_output/kkx3-inframe.png')
     }
 }
