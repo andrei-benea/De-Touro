@@ -21,6 +21,6 @@ module.exports = {
         login() {
             return this
                 .click('@submitButton');
-        }
+        },
     }]
 }
