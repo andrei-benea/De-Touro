@@ -11,16 +11,16 @@ module.exports = {
         setUser() {
             const username = 'andrei.benea89+989@gmail.com'
             return this
-                .setValue('@usernameInput', username);
+                .setValue('@usernameInput', username)
         },
         setPass() {
             const password = 'ungam+20'
             return this
-                .setValue('@passwordInput', password);
+                .setValue('@passwordInput', password)
         },
         login() {
             return this
-                .click('@submitButton');
+                .click('@submitButton')
         },
     }]
 }
