@@ -19,8 +19,6 @@ module.exports = {
             .waitForElementVisible('@ktaFirstRow')
             .identifyFirstRowKta()
             .placeBid()
-
-        index
             .identifyFirstRowKta()
 
         browser

@@ -14,20 +14,11 @@ module.exports = {
         closeKtaDetailsButton: '.x-tool-img x-tool-close'
     },
     commands: [{
-        // identifyKtasInGrid() {
-        //     return this
-        //     elementIdElements('@allKtasGrid', 'id', 'ul li', async function (result) {
-        //             console.log(result.value)
-        //         })
-        // },
         identifyFirstRowKta() {
             return this
                 .getText('@ktaFirstRow', function (result) {
                     console.log('The KTA details are:', result.value)
                 })
-                // .getText('@ktaFirstRow', function (result) {
-                //     console.log('Current bid is:', result.value)
-                // })
         },
         placeBid() {
             return this
@@ -43,10 +34,7 @@ module.exports = {
                 .waitForElementVisible('@confirmBidPlacementButton', 'Placing bid.....')
                 .click('@confirmBidPlacementButton')
                 .pause(2000)
-                // .waitForElementVisible('@pricePerSingleRide', 'Bid placed..')
-                // .click('@closeKtaDetailsButton')
-                .waitForElementVisible('@ktaFirstRow', 'KTA grid loaded!')
-                // .expect.element('@bidFirstRow').text.to.contain('123,00 €')
+                .waitForElementVisible('@ktaFirstRow', 'Bid placed!')
         }
     }]
 }
