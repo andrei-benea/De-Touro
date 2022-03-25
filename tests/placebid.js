@@ -15,9 +15,11 @@ module.exports = {
             .assert.urlContains('https://qa.de-touro.de/Index')
 
         index
+            .pause(5000)
+            .waitForElementVisible('@ktaFirstRow')
             .identifyFirstRowKta()
             .placeBid()
-        
+
         index
             .identifyFirstRowKta()
 

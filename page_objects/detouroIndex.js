@@ -1,8 +1,8 @@
 module.exports = {
     url: 'https://qa.de-touro.de/Index',
     elements: {
-        allKtasGrid: '#gridview-1250-body',
-        ktaFirstRow: '#gridview-1250-record-3123',
+        allKtasGrid: '#gridview-1250-table',
+        ktaFirstRow: '[data-recordindex="0"]',
         ktaNrFirstRow: '#ext-gen2036',
         bidFirstRow: '#ext-gen2045',
         placeBidButton: '#button-1469',
@@ -10,20 +10,24 @@ module.exports = {
         mwst19Button: '#mwst19',
         placeBidButtonInner: '#button-1490',
         confirmBidPlacementButton: '#button-1015',
-        pricePerSingleRide: '#displayfield-1624-inputEl',
-        closeKtaDetailsButton: '#tool-1686-toolEl'
+        pricePerSingleRide: '.x-fieldset profile-fieldset x-box-item x-fieldset-default',
+        closeKtaDetailsButton: '.x-tool-img x-tool-close'
     },
     commands: [{
+        // identifyKtasInGrid() {
+        //     return this
+        //     elementIdElements('@allKtasGrid', 'id', 'ul li', async function (result) {
+        //             console.log(result.value)
+        //         })
+        // },
         identifyFirstRowKta() {
             return this
-                .getText('@ktaNrFirstRow', function (result) {
-                    console.log('The KTA Nr. is:', result.value)
-                }
-            )
-                .getText('@bidFirstRow', function (result) {
-                    console.log('Current bid is:', result.value)
-                }
-            )
+                .getText('@ktaFirstRow', function (result) {
+                    console.log('The KTA details are:', result.value)
+                })
+                // .getText('@ktaFirstRow', function (result) {
+                //     console.log('Current bid is:', result.value)
+                // })
         },
         placeBid() {
             return this
@@ -38,10 +42,11 @@ module.exports = {
                 .click('@placeBidButtonInner')
                 .waitForElementVisible('@confirmBidPlacementButton', 'Placing bid.....')
                 .click('@confirmBidPlacementButton')
-                .waitForElementVisible('@pricePerSingleRide', 'Bid placed..')
-                .click('@closeKtaDetailsButton')
-                .waitForElementVisible('@ktaNrFirstRow', 'KTA grid loaded!')
-                .expect.element('@bidFirstRow').text.to.contain('123,00 €')
+                .pause(2000)
+                // .waitForElementVisible('@pricePerSingleRide', 'Bid placed..')
+                // .click('@closeKtaDetailsButton')
+                .waitForElementVisible('@ktaFirstRow', 'KTA grid loaded!')
+                // .expect.element('@bidFirstRow').text.to.contain('123,00 €')
         }
     }]
 }
