@@ -3,19 +3,16 @@ module.exports = {
     elements: {
         allKtasGrid: '#gridview-1250-table',
         ktaFirstRow: '[data-recordindex="0"]',
-        ktaNrFirstRow: '#ext-gen2036',
-        bidFirstRow: '#ext-gen2045',
         placeBidButton: '#button-1469',
         placeBidInputCell: '#numberfield-1477-inputEl',
         mwst19Button: '#mwst19',
         placeBidButtonInner: '#button-1490',
         confirmBidPlacementButton: '#button-1015',
-        pricePerSingleRide: '.x-fieldset profile-fieldset x-box-item x-fieldset-default',
-        closeKtaDetailsButton: '.x-tool-img x-tool-close'
     },
     commands: [{
         identifyFirstRowKta() {
             return this
+                .waitForElementVisible('@ktaFirstRow', 'KTA grid loaded!')
                 .getText('@ktaFirstRow', function (result) {
                     console.log('The KTA details are:', result.value)
                 })
