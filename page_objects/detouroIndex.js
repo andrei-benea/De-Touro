@@ -14,6 +14,7 @@ module.exports = {
             return this
                 .waitForElementVisible('@ktaFirstRow', 'KTA grid loaded!')
                 .getText('@ktaFirstRow', function (result) {
+                    // const bidAmount = document.getElementById('@ktaFirstRow').children[14].text
                     console.log('The KTA details are:', result.value)
                 })
         },
