@@ -14,6 +14,7 @@ module.exports = {
         aspNetForm: '#aspnetForm',
         ktaIcon: '#ctl00_MainContent_Image1',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
+        firstRowKtaGrid: '#ctl00_MainContent_ASPxGridViewDrives_DXDataRow0',
         kvnrInput: '#ctl00_MainContent_formViewInsured_textBoxKVNR',
         result: '.ui-menu-item',
         ktaTemplateOne: '#ktaModelsContainer > li:nth-child(1)',
@@ -63,17 +64,16 @@ module.exports = {
                 .click('@treeDeTouro')
                 .pause(2000)
         },
-        // countFrames() {
-        //     return this
-        //     var frame = browser.frame; 
-        //     // or var frames = window.parent.frames;
-
-        //     for (var i = 0; i < frame.length; i++) {
-        //         // do something with each subframe as frames[i]
-        //         // frames[i].document.body.style.background = "red";
-        //         console.log(i.value)
-        //     }
-        // },
+        countFrames() {
+            return this
+                .elements('css selector', '#FDLiFrame', function (elements) {
+                    browser.elementIdText(elementsObj.ELEMENT, function (result){
+                        if (index % 3 == 0) {
+                            console.log('\n' + result.value)
+                        }
+                    })
+                })
+        },
         loadKtaModule() {
             return this
                 .click('@ktaIcon')
@@ -99,6 +99,11 @@ module.exports = {
                 .pause(500)
                 .waitForElementVisible('@printFrame', 'Print iframe visible!')
         },
+        loadFirstKtaFromGrid() {
+            return this
+                .waitForElementVisible('@firstRowKtaGrid', 'Loading first KTA from grid!')
+                .click('@firstRowKtaGrid')
+        },
         printDocuments() {
             return this
                 .pause(1000)
@@ -110,15 +115,13 @@ module.exports = {
             return this
                 .getText('@ktaNumber', function (result) {
                     console.log("The KTA Nr. is:", result.value)
-                }
-                )
+                })
         },
         getDaStatus() {
             return this
                 .getText('@ktaDetailsDaStatus', function (result) {
                     console.log("The DA Status is:", text.value)
-                }
-                )
+                })
         },
         publishKta() {
             return this
@@ -156,15 +159,21 @@ module.exports = {
             return this
                 .getElementProperty('@frame', 'src', src => {
                     console.log(src.value)
-                }
-                )
+                })
         },
         setFrameAttribute() {
             return this
                 .setAttribute('@frame', 'id', '0', function (result) {
                     console.log('result', result);
-                }
-                )
-        }
+                })
+        },
+        // var frame = browser.frame; 
+        //     // or var frames = window.parent.frames;
+
+        //     for (var i = 0; i < frame.length; i++) {
+        //         // do something with each subframe as frames[i]
+        //         // frames[i].document.body.style.background = "red";
+        //         console.log(i.value)
+        //     }
     }]
 }
