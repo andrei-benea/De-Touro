@@ -38,18 +38,7 @@ module.exports = {
             .triggerFdlSearch()
         
         browser
-            .expect.element('#ui-id-4').text.to.contain('DIREKT-ANFRAGE')
-        
-        browser
-            .frame(0, function (result) {
-                console.log(result)
-            })
-            .frame(0, function (result) {
-                console.log(result)
-            })
-        
-        browser
-            .saveScreenshot('tests_output/test-screen.png')
+            .frame(10)
         
         kkx3
             .searchForFdl()

@@ -119,8 +119,9 @@ module.exports = {
         },
         getDaStatus() {
             return this
+                .waitForElementVisible('@ktaDetailsDaStatus', 'DA sent successfully!')
                 .getText('@ktaDetailsDaStatus', function (result) {
-                    console.log("The DA Status is:", text.value)
+                    console.log("The DA Status is:", result.value)
                 })
         },
         publishKta() {
@@ -141,18 +142,17 @@ module.exports = {
         },
         searchForFdl() {
             return this
-                .waitForElementVisible('@fdlSearchDaInput')
+                .waitForElementVisible('@fdlSearchDaInput', 'FDL Input is visible!')
                 .setValue('@fdlSearchDaInput', 'Asklepios QA')
                 .click('@fdlSearchDaButton')
                 .pause(1000)
         },
         publishDa() {
             return this
-                .waitForElementVisible('@fdlSearchResultFirstRow')
+                .waitForElementVisible('@fdlSearchResultFirstRow', 'Search result is visible!')
                 .click('@fdlSearchResultFirstRow')
-                .waitForElementVisible('@publishDaButton')
+                .waitForElementVisible('@publishDaButton', 'Sending DA....')
                 .click('@publishDaButton')
-                .waitForElementVisible('@ktaDetailsDaStatus')
         },
         //Additional optional functions.. Keep for later.
         getFrameSrc() {
