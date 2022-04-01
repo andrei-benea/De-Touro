@@ -23,11 +23,19 @@ module.exports = {
         stepThreeWeiterButton: '#ctl00_MainContent_formViewDetails_ASPxButtonNext_CD',
         saveKtaButton: '#ctl00_MainContent_formViewTransport_ASPxButtonSave_CD',
         printFrame: '#ctl00_MainContent_PrintDocumentPopup_CIF-1',
+        fdlSearchFrame: '#dialogContent',
         printDocumentsOkButton: '#ctl00_Content_linkButtonPrintDocument',
         ktaNumber: '#ctl00_labelKtaNumber',
         publishKtaButton: '#ctl00_MainContent_formViewKta_linkButtonAuctionPublish',
+        publishDaButton: '#ctl00_Content_linkButtonAuctionPublish',
+        directAnfrageButton: '#ctl00_MainContent_formViewKta_linkButtonDirectInvite',
         confirmPublishButton: 'body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.no-close.error-dialog.confirm-kta-publish-dialog.ui-draggable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(2)',
-        ktaIsPublishedConfirmationWindow: '#ui-id-1'
+        ktaIsPublishedConfirmationWindow: '#ui-id-1',
+        fdlSearchFrameTitle: '#ui-id-4',
+        fdlSearchDaInput: '#ctl00_Content_textBoxControlSearch',
+        fdlSearchDaButton: '#ctl00_Content_ImageButtonFilter',
+        fdlSearchResultFirstRow: '#ctl00_Content_ASPxGridViewSearchDriver_cell0_1_ctl00',
+        ktaDetailsDaStatus: '#ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus'
     },
 
     commands: [{
@@ -53,7 +61,19 @@ module.exports = {
         loadDeTouro() {
             return this
                 .click('@treeDeTouro')
+                .pause(2000)
         },
+        // countFrames() {
+        //     return this
+        //     var frame = browser.frame; 
+        //     // or var frames = window.parent.frames;
+
+        //     for (var i = 0; i < frame.length; i++) {
+        //         // do something with each subframe as frames[i]
+        //         // frames[i].document.body.style.background = "red";
+        //         console.log(i.value)
+        //     }
+        // },
         loadKtaModule() {
             return this
                 .click('@ktaIcon')
@@ -81,16 +101,24 @@ module.exports = {
         },
         printDocuments() {
             return this
+                .pause(1000)
                 .waitForElementVisible('@printDocumentsOkButton', 'No documents will be printed!')
                 .click('@printDocumentsOkButton')
                 .pause(500)
         },
         getKTANumber() {
             return this
-                .getText('@ktaNumber', function(result) {
+                .getText('@ktaNumber', function (result) {
                     console.log("The KTA Nr. is:", result.value)
                 }
-            )
+                )
+        },
+        getDaStatus() {
+            return this
+                .getText('@ktaDetailsDaStatus', function (result) {
+                    console.log("The DA Status is:", text.value)
+                }
+                )
         },
         publishKta() {
             return this
@@ -101,20 +129,42 @@ module.exports = {
                 .waitForElementVisible('@ktaIsPublishedConfirmationWindow', 'Kta successfully published!')
                 .expect.element('@ktaIsPublishedConfirmationWindow').text.to.contain('KTA VERÖFFENTLICHT')
         },
+        triggerFdlSearch() {
+            return this
+                .waitForElementVisible('@directAnfrageButton', 'Create DA button is visible!')
+                .click('@directAnfrageButton')
+                .pause(5000)
+                .waitForElementVisible('@fdlSearchFrame', 'FDL-Search iframe visible!')
+        },
+        searchForFdl() {
+            return this
+                .waitForElementVisible('@fdlSearchDaInput')
+                .setValue('@fdlSearchDaInput', 'Asklepios QA')
+                .click('@fdlSearchDaButton')
+                .pause(1000)
+        },
+        publishDa() {
+            return this
+                .waitForElementVisible('@fdlSearchResultFirstRow')
+                .click('@fdlSearchResultFirstRow')
+                .waitForElementVisible('@publishDaButton')
+                .click('@publishDaButton')
+                .waitForElementVisible('@ktaDetailsDaStatus')
+        },
         //Additional optional functions.. Keep for later.
         getFrameSrc() {
             return this
                 .getElementProperty('@frame', 'src', src => {
                     console.log(src.value)
                 }
-            )
+                )
         },
         setFrameAttribute() {
             return this
                 .setAttribute('@frame', 'id', '0', function (result) {
                     console.log('result', result);
                 }
-            )
+                )
         }
     }]
 }

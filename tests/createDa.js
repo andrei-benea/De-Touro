@@ -1,11 +1,12 @@
 module.exports = {
-    '@tags': 'create-kta',
+    '@tags': 'create-da',
 
-    'Create KTA'(browser) {
+    'Create DA' (browser) {
 
         const kkx3 = browser.page.kkx3();
 
         kkx3
+            .maximizeWindow()
             .navigate()
             .setUser()
             .setPass()
@@ -28,15 +29,39 @@ module.exports = {
         
         kkx3
             .printDocuments()
-
+        
         browser
             .frameParent()
 
         kkx3
             .getKTANumber()
-            .publishKta()
-    
+            .triggerFdlSearch()
+        
         browser
-            .saveScreenshot('tests_output/kkx3-inframe.png')
+            .expect.element('#ui-id-4').text.to.contain('DIREKT-ANFRAGE')
+        
+        browser
+            .frame(0, function (result) {
+                console.log(result)
+            })
+            .frame(0, function (result) {
+                console.log(result)
+            })
+        
+        browser
+            .saveScreenshot('tests_output/test-screen.png')
+        
+        kkx3
+            .searchForFdl()
+            .publishDa()
+        
+        browser
+            .frameParent()
+        
+        kkx3
+            .getDaStatus()
+
+        browser
+            .saveScreenshot('tests_output/test-screen.png')
     }
 }
