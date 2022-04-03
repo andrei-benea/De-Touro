@@ -1,7 +1,7 @@
 module.exports = {
-    '@tags': 'create-da',
+    '@tags': 'create-ba',
 
-    'Create DA' (browser) {
+    'Create KTA'(browser) {
 
         const kkx3 = browser.page.kkx3();
 
@@ -22,35 +22,34 @@ module.exports = {
 
         kkx3
             .loadKtaModule()
-            .saveNewKta()
+            .saveNewBa()
 
         browser
             .frame(0, 0)
-        
+
         kkx3
             .printDocuments()
-        
+
         browser
             .frameParent()
 
         kkx3
             .getKTANumber()
-            .triggerFdlSearchDa()
-        
+            .triggerFdlSearchBa()
+
         browser
             .frame(10)
-        
+
         kkx3
-            .searchForFdl()
-            .publishDa()
-        
+            .publishBa()
+
         browser
             .frameParent()
-        
+
         kkx3
             .getKtaStatus()
 
         browser
-            .saveScreenshot('tests_output/test-screen.png')
+            .saveScreenshot('tests_output/kkx3-inframe.png')
     }
 }

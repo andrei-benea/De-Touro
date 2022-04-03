@@ -23,7 +23,7 @@ module.exports = {
             .loadKtaModule()
             .loadFirstKtaFromGrid()
             .getKTANumber()
-            .triggerFdlSearch()
+            .triggerFdlSearchDa()
 
         browser
             .frame(10)

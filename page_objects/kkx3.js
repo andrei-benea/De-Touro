@@ -22,6 +22,8 @@ module.exports = {
         stepOneWeiterButton: '#ctl00_MainContent_formViewInsured_ASPxButtonNext_CD',
         stepTwoWeiterButton: '#ctl00_MainContent_formViewDoctor_ASPxButtonNext_B',
         stepThreeWeiterButton: '#ctl00_MainContent_formViewDetails_ASPxButtonNext_CD',
+        vmktTreeContract: '[class="fancytree-lastsib fancytree-exp-nl fancytree-ico-c"]',
+        vmktTreeContractSelected: '[class="fancytree-active fancytree-lastsib fancytree-selected fancytree-exp-nl fancytree-ico-c"]',
         saveKtaButton: '#ctl00_MainContent_formViewTransport_ASPxButtonSave_CD',
         printFrame: '#ctl00_MainContent_PrintDocumentPopup_CIF-1',
         fdlSearchFrame: '#dialogContent',
@@ -29,14 +31,17 @@ module.exports = {
         ktaNumber: '#ctl00_labelKtaNumber',
         publishKtaButton: '#ctl00_MainContent_formViewKta_linkButtonAuctionPublish',
         publishDaButton: '#ctl00_Content_linkButtonAuctionPublish',
+        publishBaButton: '#ctl00_Content_linkButtonAuctionPublish',
         directAnfrageButton: '#ctl00_MainContent_formViewKta_linkButtonDirectInvite',
+        befoerderungsAnfrageButton: '#ContractInvite',
         confirmPublishButton: 'body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.no-close.error-dialog.confirm-kta-publish-dialog.ui-draggable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(2)',
         ktaIsPublishedConfirmationWindow: '#ui-id-1',
         fdlSearchFrameTitle: '#ui-id-4',
         fdlSearchDaInput: '#ctl00_Content_textBoxControlSearch',
         fdlSearchDaButton: '#ctl00_Content_ImageButtonFilter',
         fdlSearchResultFirstRow: '#ctl00_Content_ASPxGridViewSearchDriver_cell0_1_ctl00',
-        ktaDetailsDaStatus: '#ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus'
+        fdlSearchBaResultFirstRow: '#ctl00_Content_ASPxGridViewVmktDrivers_cell0_1_selectedCheckBox',
+        ktaDetailsStatus: '#ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus'
     },
 
     commands: [{
@@ -89,6 +94,29 @@ module.exports = {
                 .pause(500)
                 .waitForElementVisible('@printFrame', 'Print iframe visible!')
         },
+        saveNewBa() {
+            return this
+                .click('@newKtaButton')
+                .waitForElementVisible('@kvnrInput', 'Step 1 will be passed!')
+                .setValue('@kvnrInput', 'A123456778')
+                .click('@result')
+                .pause(300)
+                .click('@ktaTemplateOne')
+                .click('@ktaTemplateConfirm')
+                .pause(300)
+                .click('@stepOneWeiterButton')
+                .waitForElementVisible('@stepTwoWeiterButton', 'Step 2 will be passed!')
+                .click('@stepTwoWeiterButton')
+                .waitForElementVisible('@stepThreeWeiterButton', 'Step 3 will be passed!')
+                .click('@stepThreeWeiterButton')
+                .waitForElementVisible('@saveKtaButton', 'Kta will be saved!')
+                .pause(2000)
+                .click('@vmktTreeContract')
+                // .waitForElementVisible('@vmktTreeContractSelected', 'Contract selected!')
+                .click('@saveKtaButton')
+                .pause(500)
+                .waitForElementVisible('@printFrame', 'Print iframe visible!')
+        },
         loadFirstKtaFromGrid() {
             return this
                 .waitForElementVisible('@firstRowKtaGrid', 'Loading first KTA from grid!')
@@ -107,11 +135,11 @@ module.exports = {
                     console.log("The KTA Nr. is:", result.value)
                 })
         },
-        getDaStatus() {
+        getKtaStatus() {
             return this
-                .waitForElementVisible('@ktaDetailsDaStatus', 'DA sent successfully!')
-                .getText('@ktaDetailsDaStatus', function (result) {
-                    console.log("The DA Status is:", result.value)
+                .waitForElementVisible('@ktaDetailsStatus', 'DA sent successfully!')
+                .getText('@ktaDetailsStatus', function (result) {
+                    console.log("The KTA Status is:", result.value)
                 })
         },
         publishKta() {
@@ -123,10 +151,17 @@ module.exports = {
                 .waitForElementVisible('@ktaIsPublishedConfirmationWindow', 'Kta successfully published!')
                 .expect.element('@ktaIsPublishedConfirmationWindow').text.to.contain('KTA VERÖFFENTLICHT')
         },
-        triggerFdlSearch() {
+        triggerFdlSearchDa() {
             return this
                 .waitForElementVisible('@directAnfrageButton', 'Create DA button is visible!')
                 .click('@directAnfrageButton')
+                .pause(5000)
+                .waitForElementVisible('@fdlSearchFrame', 'FDL-Search iframe visible!')
+        },
+        triggerFdlSearchBa() {
+            return this
+                .waitForElementVisible('@befoerderungsAnfrageButton', 'Create BA button is visible!')
+                .click('@befoerderungsAnfrageButton')
                 .pause(5000)
                 .waitForElementVisible('@fdlSearchFrame', 'FDL-Search iframe visible!')
         },
@@ -135,6 +170,14 @@ module.exports = {
                 .waitForElementVisible('@fdlSearchDaInput', 'FDL Input is visible!')
                 .setValue('@fdlSearchDaInput', 'Asklepios QA')
                 .click('@fdlSearchDaButton')
+                .pause(1000)
+        },
+        publishBa() {
+            return this
+                .waitForElementVisible('@fdlSearchBaResultFirstRow', 'Selecting first row FDL!')
+                .click('@fdlSearchBaResultFirstRow')
+                .waitForElementVisible('@publishBaButton', 'Sending BA....')
+                .click('@publishBaButton')
                 .pause(1000)
         },
         publishDa() {
@@ -178,10 +221,10 @@ module.exports = {
         // var frame = browser.frame; 
         //     // or var frames = window.parent.frames;
 
-            // for (var i = 0; i < frame.length; i++) {
-            //     // do something with each subframe as frames[i]
-            //     // frames[i].document.body.style.background = "red";
-            //     console.log(i.value)
-            // }
+        // for (var i = 0; i < frame.length; i++) {
+        //     // do something with each subframe as frames[i]
+        //     // frames[i].document.body.style.background = "red";
+        //     console.log(i.value)
+        // }
     }]
 }
