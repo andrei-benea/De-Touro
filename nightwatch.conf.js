@@ -21,7 +21,7 @@ module.exports = {
   page_objects_path: ['page_objects'],
 
   // See https://nightwatchjs.org/guide/extending-nightwatch/custom-commands.html
-  custom_commands_path: ['node_modules/nightwatch/examples/custom-commands/'],
+  custom_commands_path: ['custom_commands'],
 
   // See https://nightwatchjs.org/guide/extending-nightwatch/custom-assertions.html
   custom_assertions_path: '',
@@ -40,8 +40,8 @@ module.exports = {
       launch_url: 'https://nightwatchjs.org',
 
       screenshots: {
-        enabled: false,
-        path: 'screens',
+        enabled: true,
+        path: 'tests_output/screens',
         on_failure: true
       },
 

@@ -64,16 +64,6 @@ module.exports = {
                 .click('@treeDeTouro')
                 .pause(2000)
         },
-        countFrames() {
-            return this
-                .elements('css selector', '#FDLiFrame', function (elements) {
-                    browser.elementIdText(elementsObj.ELEMENT, function (result){
-                        if (index % 3 == 0) {
-                            console.log('\n' + result.value)
-                        }
-                    })
-                })
-        },
         loadKtaModule() {
             return this
                 .click('@ktaIcon')
@@ -167,13 +157,31 @@ module.exports = {
                     console.log('result', result);
                 })
         },
-        // var frame = browser.frame; 
-        //     // or var frames = window.parent.frames;
-
+        // countFrames() {
+        //     var frame = browser.frame; 
         //     for (var i = 0; i < frame.length; i++) {
         //         // do something with each subframe as frames[i]
         //         // frames[i].document.body.style.background = "red";
         //         console.log(i.value)
         //     }
+        // },
+        // countFrames() {
+        //     return this
+        //         .elements('css selector', '#FDLiFrame', function (browser) {
+        //             browser.elementIdText(elementsObj.ELEMENT, function (result){
+        //                 if (index % 3 == 0) {
+        //                     console.log('\n' + result.value)
+        //                 }
+        //             })
+        //         })
+        // },
+        // var frame = browser.frame; 
+        //     // or var frames = window.parent.frames;
+
+            // for (var i = 0; i < frame.length; i++) {
+            //     // do something with each subframe as frames[i]
+            //     // frames[i].document.body.style.background = "red";
+            //     console.log(i.value)
+            // }
     }]
 }

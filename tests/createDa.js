@@ -4,6 +4,7 @@ module.exports = {
     'Create DA' (browser) {
 
         const kkx3 = browser.page.kkx3();
+        // const commands = browser.page.countFrames();
 
         kkx3
             .maximizeWindow()

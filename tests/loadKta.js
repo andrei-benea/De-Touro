@@ -1,7 +1,7 @@
 module.exports = {
-    '@tags': 'load-kta',
+    '@tags': 'load-kta-send-da',
 
-    'Load KTA in status New' (browser) {
+    'Load KTA and Send as DA'(browser) {
         const kkx3 = browser.page.kkx3();
 
         kkx3
@@ -24,17 +24,20 @@ module.exports = {
             .loadFirstKtaFromGrid()
             .getKTANumber()
             .triggerFdlSearch()
-            // .countFrames()
-        
+
         browser
             .frame(10)
-        
-        browser
-            .saveScreenshot('tests_output/test-screen.png')
 
         kkx3
             .searchForFdl()
-        
+            .publishDa()
+
+        browser
+            .frameParent()
+
+        kkx3
+            .getDaStatus()
+
         browser
             .saveScreenshot('tests_output/loaded-kta.png')
     }
