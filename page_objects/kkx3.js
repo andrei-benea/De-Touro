@@ -137,7 +137,7 @@ module.exports = {
         },
         getKtaStatus() {
             return this
-                .waitForElementVisible('@ktaDetailsStatus', 'DA sent successfully!')
+                .waitForElementVisible('@ktaDetailsStatus', 'Sending successful!')
                 .getText('@ktaDetailsStatus', function (result) {
                     console.log("The KTA Status is:", result.value)
                 })
@@ -208,16 +208,16 @@ module.exports = {
         //         console.log(i.value)
         //     }
         // },
-        // countFrames() {
-        //     return this
-        //         .elements('css selector', '#FDLiFrame', function (browser) {
-        //             browser.elementIdText(elementsObj.ELEMENT, function (result){
-        //                 if (index % 3 == 0) {
-        //                     console.log('\n' + result.value)
-        //                 }
-        //             })
-        //         })
-        // },
+        countFrames() {
+            return this
+                .elements('css selector', '#FDLiFrame', function (browser) {
+                    browser.elementIdText(elementsObj.ELEMENT, function (result){
+                        if (index % 3 == 0) {
+                            console.log('\n' + result.value)
+                        }
+                    })
+                })
+        },
         // var frame = browser.frame; 
         //     // or var frames = window.parent.frames;
 
