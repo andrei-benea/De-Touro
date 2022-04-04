@@ -5,13 +5,15 @@ module.exports = {
         ktaFirstRow: '[data-recordindex="0"]',
         acceptBaOrDaButton: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(4)',
         placeBidButtonKta: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
-        placeBidInputCell: '[class="x-field x-table-plain x-form-item x-form-type-text x-box-item x-field-default x-hbox-form-item"]',
+        placeBidButtonKtaInner: '[class="x-window bid-body x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
+        confirmBidKta: '[class="x-window x-message-box x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
+        placeBidInputCell: '[class="x-form-field x-form-required-field x-form-text x-form-focus x-field-form-focus x-field-default-form-focus"]',
+        placeBidInputCell2: '[class="x-field x-table-plain x-form-item x-form-type-text x-box-item x-field-default x-hbox-form-item"]',
+        placeBidInputCellInvalid: '[class="x-form-field x-form-required-field x-form-text x-form-invalid-field x-form-focus x-field-form-focus x-field-default-form-focus"]',
+        placeBidInputCellGood: '[class="x-form-field x-form-required-field x-form-text"]',
         stornoBidButton: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
         ktaDetailsWindow: '[class="x-window x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box x-resizable x-window-resizable x-window-default-resizable"]',
-        closeKtaDetailsButton: '[class="x-tool x-box-item x-tool-default x-tool-after-title x-tool-pressed"]',
         mwst19Button: '#mwst19',
-        placeBidButtonInner: '#button-1490',
-        confirmBidPlacementButton: '#button-1015',
     },
     commands: [{
         identifyFirstRowKta() {
@@ -22,21 +24,39 @@ module.exports = {
                     console.log('The KTA details are:', result.value)
                 })
         },
-        placeBid() {
+        placeBidKta() {
             return this
                 .doubleClick('@ktaFirstRow')
-                .waitForElementVisible('@placeBidButton', 'Placing bid..')
-                .click('@placeBidButton')
-                .pause(1000)
-                .waitForElementVisible('@placeBidInputCell', 'Placing bid...')
-                .setValue('@placeBidInputCell', '123', 'Applying price..')
-                .click('@mwst19Button')
-                .waitForElementVisible('@placeBidButtonInner', 'Placing bid....')
-                .click('@placeBidButtonInner')
-                .waitForElementVisible('@confirmBidPlacementButton', 'Placing bid.....')
-                .click('@confirmBidPlacementButton')
                 .pause(2000)
-                .waitForElementVisible('@ktaFirstRow', 'Bid placed!')
+                .waitForElementVisible('@placeBidButtonKta', 'Placing bid..')
+                .click('@placeBidButtonKta')
+                .pause(1000)
+                .waitForElementVisible('@placeBidInputCellGood', 'Placing bid...')
+                .setValue('@placeBidInputCellGood', '123', 'Applying price..')
+                .click('@mwst19Button')
+                .waitForElementVisible('@placeBidButtonKtaInner', 'Placing bid....')
+                .click('@placeBidButtonKtaInner')
+                .waitForElementVisible('@confirmBidKta', 'Placing bid.....')
+                .click('@confirmBidKta')
+                .pause(2000)
+                .waitForElementVisible('@stornoBidButton', 'Bid placed!')
+        },
+        placeBidDa() {
+            return this
+                .doubleClick('@ktaFirstRow')
+                .pause(2000)
+                .waitForElementVisible('@acceptBaOrDaButton', 'Placing bid..')
+                .click('@acceptBaOrDaButton')
+                .pause(1000)
+                .waitForElementVisible('@placeBidInputCellGood', 'Placing bid...')
+                .setValue('@placeBidInputCellGood', '123', 'Applying price..')
+                .click('@mwst19Button')
+                .waitForElementVisible('@placeBidButtonKtaInner', 'Placing bid....')
+                .click('@placeBidButtonKtaInner')
+                .waitForElementVisible('@confirmBidKta', 'Placing bid.....')
+                .click('@confirmBidKta')
+                .pause(2000)
+                .waitForElementVisible('@stornoBidButton', 'Bid placed!')
         },
         acceptBa() {
             return this

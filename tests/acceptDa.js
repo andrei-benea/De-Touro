@@ -1,5 +1,5 @@
 module.exports = {
-    '@tags': 'place-bid',
+    '@tags': 'accept-da',
 
     'Place bid'(browser) {
 
@@ -17,10 +17,10 @@ module.exports = {
         index
             .pause(3000)
             .identifyFirstRowKta()
-            .placeBidKta()
+            .placeBidDa()
             .sendKeys('@ktaDetailsWindow', [browser.Keys.ESCAPE])
 
         browser
-            .saveScreenshot('tests_output/bid-placed-kta.png')
+            .saveScreenshot('tests_output/bid-placed-da.png')
     }
 }
