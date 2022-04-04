@@ -7,12 +7,8 @@ module.exports = {
         placeBidButtonKta: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
         placeBidButtonKtaInner: '[class="x-window bid-body x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
         confirmBidKta: '[class="x-window x-message-box x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
-        placeBidInputCell: '[class="x-form-field x-form-required-field x-form-text x-form-focus x-field-form-focus x-field-default-form-focus"]',
-        placeBidInputCell2: '[class="x-field x-table-plain x-form-item x-form-type-text x-box-item x-field-default x-hbox-form-item"]',
-        placeBidInputCellInvalid: '[class="x-form-field x-form-required-field x-form-text x-form-invalid-field x-form-focus x-field-form-focus x-field-default-form-focus"]',
         placeBidInputCellGood: '[class="x-form-field x-form-required-field x-form-text"]',
         stornoBidButton: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
-        ktaDetailsWindow: '[class="x-window x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box x-resizable x-window-resizable x-window-default-resizable"]',
         mwst19Button: '#mwst19',
     },
     commands: [{
@@ -20,7 +16,6 @@ module.exports = {
             return this
                 .waitForElementVisible('@ktaFirstRow', 'KTA grid loaded!')
                 .getText('@ktaFirstRow', function (result) {
-                    // const bidAmount = document.getElementById('@ktaFirstRow').children[14].text
                     console.log('The KTA details are:', result.value)
                 })
         },
