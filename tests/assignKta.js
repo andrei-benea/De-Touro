@@ -21,13 +21,11 @@ module.exports = {
 
         kkx3
             .loadKtaModule()
-            .click('@ktaGridFilterLaufende')
+            .filterKtaToLaufende()
             .pause(3000)
             .loadFirstKtaFromGrid()
             .getKTANumber()
-            .click('@ktaDetailsBidHistory')
-            .click('@bidHistoryAssignKtaButton')
-            .click('@bidHistoryConfirmAssignmentButton')
+            .assignKta()
 
         browser
             .frame(2)

@@ -2,7 +2,10 @@ module.exports = {
     url: 'https://qa.de-touro.de/Index',
     elements: {
         allKtasGrid: '#gridview-1250-table',
+        ktaGridFilterMeineAuftraege: '[class="x-toolbar navigation-panel x-box-item x-toolbar-default x-table-layout-ct"] > table > tbody > tr:nth-child(2) > td:nth-child(4) [class="x-btn-button"]',
         ktaFirstRow: '[data-recordindex="0"]',
+        ktaSecondRow: '[data-recordindex="1"]',
+        ktaThirdRow: '[data-recordindex="2"]',
         acceptBaOrDaButton: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(4)',
         placeBidButtonKta: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
         placeBidButtonKtaInner: '[class="x-window bid-body x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
@@ -15,8 +18,22 @@ module.exports = {
     commands: [{
         identifyFirstRowKta() {
             return this
-                .waitForElementVisible('@ktaFirstRow', 'KTA grid loaded!')
+                .waitForElementVisible('@ktaFirstRow', 'Identifying KTA 1...')
                 .getText('@ktaFirstRow', function (result) {
+                    console.log('The KTA details are:', result.value)
+                })
+        },
+        identifySecondRowKta() {
+            return this
+                .waitForElementVisible('@ktaSecondRow', 'Identifying KTA 2...')
+                .getText('@ktaSecondRow', function (result) {
+                    console.log('The KTA details are:', result.value)
+                })
+        },
+        identifyThirdRowKta() {
+            return this
+                .waitForElementVisible('@ktaThirdRow', 'Identifying KTA 3...')
+                .getText('@ktaThirdRow', function (result) {
                     console.log('The KTA details are:', result.value)
                 })
         },

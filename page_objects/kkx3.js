@@ -78,6 +78,10 @@ module.exports = {
             return this
                 .click('@ktaIcon')
         },
+        filterKtaToLaufende() {
+            return this
+                .click('@ktaGridFilterLaufende')
+        },
         saveNewKta() {
             return this
                 .click('@newKtaButton')
@@ -149,7 +153,7 @@ module.exports = {
         },
         getKtaStatusAssigned() {
             return this
-                .waitForElementVisible('@ktaLifeCycleStatus', 'Sending successful!')
+                .waitForElementVisible('@ktaLifeCycleStatus', 'Assignment successful!')
                 .getText('@ktaLifeCycleStatus', function (result) {
                     console.log("The KTA Status is:", result.value)
                 })
@@ -199,6 +203,14 @@ module.exports = {
                 .waitForElementVisible('@publishDaButton', 'Sending DA....')
                 .click('@publishDaButton')
         },
+        assignKta() {
+            return this
+                .click('@ktaDetailsBidHistory')
+                .waitForElementVisible('@bidHistoryAssignKtaButton', 'Checking bids..')
+                .click('@bidHistoryAssignKtaButton')
+                .waitForElementVisible('@bidHistoryConfirmAssignmentButton', 'Assigning...')
+                .click('@bidHistoryConfirmAssignmentButton')
+        },
         //Additional optional functions.. Keep for later.
         getFrameSrc() {
             return this
@@ -223,7 +235,7 @@ module.exports = {
         countFrames() {
             return this
                 .elements('css selector', '#FDLiFrame', function (browser) {
-                    browser.elementIdText(elementsObj.ELEMENT, function (result){
+                    browser.elementIdText(elementsObj.ELEMENT, function (result) {
                         if (index % 3 == 0) {
                             console.log('\n' + result.value)
                         }
