@@ -7,9 +7,10 @@ module.exports = {
         placeBidButtonKta: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
         placeBidButtonKtaInner: '[class="x-window bid-body x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
         confirmBidKta: '[class="x-window x-message-box x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
-        placeBidInputCellGood: '[class="x-form-field x-form-required-field x-form-text"]',
-        stornoBidButton: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
+        placeBidInputCellGood: '[class="x-form-field x-form-required-field x-form-text"]',        
         mwst19Button: '#mwst19',
+        stornoBidButton: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
+        ktaDetailsWindow: '[class="x-window x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box x-resizable x-window-resizable x-window-default-resizable"]'
     },
     commands: [{
         identifyFirstRowKta() {
@@ -35,6 +36,7 @@ module.exports = {
                 .click('@confirmBidKta')
                 .pause(2000)
                 .waitForElementVisible('@stornoBidButton', 'Bid placed!')
+                .sendKeys('@ktaDetailsWindow', [browser.Keys.ESCAPE])
         },
         placeBidDa() {
             return this
@@ -52,6 +54,7 @@ module.exports = {
                 .click('@confirmBidKta')
                 .pause(2000)
                 .waitForElementVisible('@stornoBidButton', 'Bid placed!')
+                .sendKeys('@ktaDetailsWindow', [browser.Keys.ESCAPE])
         },
         acceptBa() {
             return this
@@ -60,6 +63,7 @@ module.exports = {
                 .waitForElementVisible('@acceptBaOrDaButton', 'Accepting BA..')
                 .click('@acceptBaOrDaButton')
                 .waitForElementVisible('@stornoBidButton', 'BA accepted successfully!')
+                .sendKeys('@ktaDetailsWindow', [browser.Keys.ESCAPE])
         }
     }]
 }

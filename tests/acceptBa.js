@@ -18,7 +18,6 @@ module.exports = {
             .pause(3000)
             .identifyFirstRowKta()
             .acceptBa()
-            .sendKeys('@ktaDetailsWindow', [browser.Keys.ESCAPE])
 
         browser
             .saveScreenshot('tests_output/kta-details.png')

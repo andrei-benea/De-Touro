@@ -18,7 +18,6 @@ module.exports = {
             .pause(3000)
             .identifyFirstRowKta()
             .placeBidKta()
-            .sendKeys('@ktaDetailsWindow', [browser.Keys.ESCAPE])
 
         browser
             .saveScreenshot('tests_output/bid-placed-kta.png')

@@ -14,6 +14,7 @@ module.exports = {
         aspNetForm: '#aspnetForm',
         ktaIcon: '#ctl00_MainContent_Image1',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
+        ktaGridFilterLaufende: '[id="ctl00_MainContent_MenuDisplayAuctions"] > ul > li:nth-child(4)',
         firstRowKtaGrid: '#ctl00_MainContent_ASPxGridViewDrives_DXDataRow0',
         kvnrInput: '#ctl00_MainContent_formViewInsured_textBoxKVNR',
         result: '.ui-menu-item',
@@ -41,7 +42,11 @@ module.exports = {
         fdlSearchDaButton: '#ctl00_Content_ImageButtonFilter',
         fdlSearchResultFirstRow: '#ctl00_Content_ASPxGridViewSearchDriver_cell0_1_ctl00',
         fdlSearchBaResultFirstRow: '#ctl00_Content_ASPxGridViewVmktDrivers_cell0_1_selectedCheckBox',
-        ktaDetailsStatus: '#ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus'
+        ktaDetailsBidHistory: '[id="mainMenuLiRight"] > ul > li:nth-child(5)',
+        ktaDetailsStatus: '#ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus',
+        bidHistoryAssignKtaButton: '[id="ctl00_MainContent_ASPxGridViewBidList_tccell0_0"]',
+        bidHistoryConfirmAssignmentButton: '[class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front no-close error-dialog confirm-kta-bid-dialog ui-draggable ui-dialog-buttons"] [class="ui-dialog-buttonset"] > button:nth-child(2)',
+        ktaLifeCycleStatus: '#ctl00_MainContent_LabelKTAStatus'
     },
 
     commands: [{
@@ -139,6 +144,13 @@ module.exports = {
             return this
                 .waitForElementVisible('@ktaDetailsStatus', 'Sending successful!')
                 .getText('@ktaDetailsStatus', function (result) {
+                    console.log("The KTA Status is:", result.value)
+                })
+        },
+        getKtaStatusAssigned() {
+            return this
+                .waitForElementVisible('@ktaLifeCycleStatus', 'Sending successful!')
+                .getText('@ktaLifeCycleStatus', function (result) {
                     console.log("The KTA Status is:", result.value)
                 })
         },
