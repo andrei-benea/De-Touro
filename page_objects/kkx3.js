@@ -46,7 +46,7 @@ module.exports = {
         ktaDetailsStatus: '#ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus',
         bidHistoryAssignKtaButton: '[id="ctl00_MainContent_ASPxGridViewBidList_tccell0_0"]',
         bidHistoryConfirmAssignmentButton: '[class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front no-close error-dialog confirm-kta-bid-dialog ui-draggable ui-dialog-buttons"] [class="ui-dialog-buttonset"] > button:nth-child(2)',
-        ktaLifeCycleStatus: '#ctl00_MainContent_LabelKTAStatus'
+        ktaLifeCycleStatus: '#ctl00_MainContent_LabelKTAStatus > b'
     },
 
     commands: [{

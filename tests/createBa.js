@@ -1,5 +1,5 @@
 module.exports = {
-    '@tags': 'create-ba',
+    '@tags': 'create',
 
     'Create KTA'(browser) {
 

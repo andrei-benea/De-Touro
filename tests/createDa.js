@@ -1,5 +1,5 @@
 module.exports = {
-    '@tags': 'create-da',
+    '@tags': 'create',
 
     'Create DA' (browser) {
 

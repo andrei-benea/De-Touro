@@ -3,9 +3,16 @@ module.exports = {
     elements: {
         allKtasGrid: '#gridview-1250-table',
         ktaGridFilterMeineAuftraege: '[class="x-toolbar navigation-panel x-box-item x-toolbar-default x-table-layout-ct"] > table > tbody > tr:nth-child(2) > td:nth-child(4) [class="x-btn-button"]',
+        ktaRow: '[id="gridview-1250-body"] > tr',
         ktaFirstRow: '[data-recordindex="0"]',
+        ktaFirstRowNr: '[data-recordindex="0"] > td:nth-child(6) > div',
+        ktaFirstRowStatus: '[data-recordindex="0"] > td:nth-child(18) > div',
         ktaSecondRow: '[data-recordindex="1"]',
+        ktaSecondRowNr: '[data-recordindex="1"] > td:nth-child(6) > div',
+        ktaSecondRowStatus: '[data-recordindex="1"] > td:nth-child(18) > div',
         ktaThirdRow: '[data-recordindex="2"]',
+        ktaThirdRowNr: '[data-recordindex="2"] > td:nth-child(6) > div',
+        ktaThirdRowStatus: '[data-recordindex="2"] > td:nth-child(18) > div',
         ktaAssignedNewest: '[class="x-panel-body x-grid-body x-panel-body-default x-layout-fit x-panel-body-default x-docked-noborder-right x-docked-noborder-left"] [class="x-gridview-1416-table x-grid-table x-grid-with-col-lines"] > tbody >tr:last-child',
         ktaAssignedNewestUploadedRidesButton: '[class="x-gridview-1416-table x-grid-table x-grid-with-col-lines"] > tbody >tr:last-child [class="x-grid-cell x-grid-td x-grid-cell-actioncolumn-1519 x-unselectable  x-action-col-cell"]',
         ktaAssignedNewestUploadProofsButton: '[class="x-gridview-1416-table x-grid-table x-grid-with-col-lines"] > tbody >tr:last-child [class="x-grid-cell x-grid-td x-grid-cell-actioncolumn-1520 x-unselectable  x-action-col-cell"]',
@@ -40,25 +47,55 @@ module.exports = {
         uploadedRidesListSecondRowStatusSent: '[class="x-window x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [ class="x-grid-view x-fit-item x-grid-view-default x-unselectable"] [data-recordindex="1"] > td:last-child > div > img:nth-child(2)',
     },
     commands: [{
-        identifyFirstRowKta() {
-            return this
-                .waitForElementVisible('@ktaFirstRow', 'Identifying KTA 1...')
-                .getText('@ktaFirstRow', function (result) {
-                    console.log('The KTA details are:', result.value)
+        countKtas() {
+            browser
+                .elements('css selector', '[id="gridview-1250-body"] > tr', result => {
+                    const numElements = result.value.length;
+                    console.log(numElements);
                 })
         },
-        identifySecondRowKta() {
-            return this
-                .waitForElementVisible('@ktaSecondRow', 'Identifying KTA 2...')
-                .getText('@ktaSecondRow', function (result) {
-                    console.log('The KTA details are:', result.value)
+        getUnreadKta() {
+            let i = 0;
+            let x = new Promise(resolve => {
+                browser.elements('css selector', '[id="gridview-1250-body"] > tr', result => {
+                    resolve(result.value.length)
                 })
+                numElementsPromise.then(numElements => {
+                    console.log(numElements);
+                })
+            })
+            while (i <= x, i++) {
+                browser
+                    .getAttribute('[id="gridview-1250-body"] > tr', 'data-record-index', function (result) {
+                        console.log(x.value)
+                    })
+            }
         },
-        identifyThirdRowKta() {
+        identifyKtasNewestKtas() {
             return this
-                .waitForElementVisible('@ktaThirdRow', 'Identifying KTA 3...')
-                .getText('@ktaThirdRow', function (result) {
-                    console.log('The KTA details are:', result.value)
+                .getText('@ktaFirstRowNr', function (result) {
+                    console.log('The KTA Nr. is:', result.value)
+
+                    const index = browser.page.detouroIndex();
+                    index.getText('@ktaFirstRowStatus', function (result) {
+                        console.log('Status............', result.value)
+                    })
+                })
+                .getText('@ktaSecondRowNr', function (result) {
+                    console.log('The KTA Nr. is:', result.value)
+
+                    const index = browser.page.detouroIndex();
+                    index.getText('@ktaSecondRowStatus', function (result) {
+                        console.log('Status............', result.value)
+                    })
+                })
+                .getText('@ktaThirdRowNr', function (result) {
+                    console.log('The KTA Nr. is:', result.value)
+
+                    const index = browser.page.detouroIndex();
+                    index.getText('@ktaThirdRowStatus', function (result) {
+                        console.log('Status............', result.value)
+                    })
                 })
         },
         placeBidKta() {
@@ -127,7 +164,7 @@ module.exports = {
                 .setValue('@uploadProofWindowTourTypComboBox', 'Hin- und Rückfahrt')
                 .sendKeys('@uploadProofWindowTourTypComboBox', [browser.Keys.ENTER])
                 .waitForElementVisible('@uploadProofFileInputx', 'Selecting file to upload....')
-                .setValue('@uploadProofFileInputy', 
+                .setValue('@uploadProofFileInputy',
                     require('path').resolve(__dirname + '/../tests_input/test-image.png'))
                 .waitForElementVisible('@uploadProofOkButton', 'File added successfully!')
                 .click('@uploadProofOkButton')

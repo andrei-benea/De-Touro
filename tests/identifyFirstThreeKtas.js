@@ -1,5 +1,5 @@
 module.exports = {
-    '@tags': 'check-ktas',
+    '@tags': 'identify',
 
     'Check First Three KTAs from Grid'(browser) {
         const login = browser.page.detouroLogin();
@@ -15,9 +15,7 @@ module.exports = {
 
         index
             .pause(3000)
-            .identifyFirstRowKta()
-            .identifySecondRowKta()
-            .identifyThirdRowKta()
+            .identifyKtasNewestKtas()
 
         browser
             .saveScreenshot('tests_output/kta-grid.png')
