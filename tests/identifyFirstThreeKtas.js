@@ -16,6 +16,7 @@ module.exports = {
         index
             .pause(3000)
             .identifyKtasNewestKtas()
+            .smartKtas()
 
         browser
             .saveScreenshot('tests_output/kta-grid.png')

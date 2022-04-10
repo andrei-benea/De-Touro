@@ -4,6 +4,8 @@ module.exports = {
         allKtasGrid: '#gridview-1250-table',
         ktaGridFilterMeineAuftraege: '[class="x-toolbar navigation-panel x-box-item x-toolbar-default x-table-layout-ct"] > table > tbody > tr:nth-child(2) > td:nth-child(4) [class="x-btn-button"]',
         ktaRow: '[id="gridview-1250-body"] > tr',
+        ktaRowDynamic: '[class="x-grid-row tour-grid-unread-row x-grid-data-row"]',
+        ktaRowAltDynamic: '[class="x-grid-row x-grid-row-alt tour-grid-unread-row x-grid-data-row"]',
         ktaFirstRow: '[data-recordindex="0"]',
         ktaFirstRowNr: '[data-recordindex="0"] > td:nth-child(6) > div',
         ktaFirstRowStatus: '[data-recordindex="0"] > td:nth-child(18) > div',
@@ -47,30 +49,64 @@ module.exports = {
         uploadedRidesListSecondRowStatusSent: '[class="x-window x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [ class="x-grid-view x-fit-item x-grid-view-default x-unselectable"] [data-recordindex="1"] > td:last-child > div > img:nth-child(2)',
     },
     commands: [{
-        countKtas() {
-            browser
-                .elements('css selector', '[id="gridview-1250-body"] > tr', result => {
-                    const numElements = result.value.length;
-                    console.log(numElements);
+        smartKtas() {
+            const index = browser.page.detouroIndex();
+
+            index
+                .api.elements('@ktaRowDynamic', result => {
+                    /////TOTALLY WORKS//////
+                    // for (let i = 0; i < result.value.length; i++) {
+                    //     console.log('message:', result.value.length)
+                    // }
+                    //////////END///////////
+                    let u = result.value.length;
+                    index
+                        .api.elements('@ktaRowAltDynamic', result => {
+                            let ua = result.value.length
+                            // console.log('Unread KTAs Alt Row:', ua)
+                            console.log('Unread KTA Total:', u+ua)
+                            return 
+                        })
+                    console.log('Checking unread KTAs..')
+                    return 
+                })
+            // index    
+            //     .api.elements('@ktaRowAltDynamic', result => {
+            //         console.log('Unread KTAs Alt Row:', result.value.length)
+            //         return result.value.length
+            //     })
+            index
+                .getAttribute('@ktaRow', 'class', function (result) {
+                    /////TOTALLY WORKS//////
+                    for (let i = 0; i < 1; i++) {
+                        if (result.value === 'x-grid-row tour-grid-unread-row x-grid-data-row') {
+                            console.log('1 unread KTA - function is wip')
+                        }
+                        else
+                            return
+                    }
+                    //////////END///////////
+                    console.log('result', result);
                 })
         },
-        getUnreadKta() {
-            let i = 0;
-            let x = new Promise(resolve => {
-                browser.elements('css selector', '[id="gridview-1250-body"] > tr', result => {
-                    resolve(result.value.length)
-                })
-                numElementsPromise.then(numElements => {
-                    console.log(numElements);
-                })
-            })
-            while (i <= x, i++) {
-                browser
-                    .getAttribute('[id="gridview-1250-body"] > tr', 'data-record-index', function (result) {
-                        console.log(x.value)
-                    })
-            }
-        },
+        ////////////////////////////////
+        // getUnreadKta() {
+        //     let i = 0;
+        //     let x = new Promise(resolve => {
+        //         browser.elements('css selector', '[id="gridview-1250-body"] > tr', result => {
+        //             resolve(result.value.length)
+        //         })
+        // numElementsPromise.then(numElements => {
+        //     console.log(numElements);
+        // })
+        //     })
+        //     while (i <= x, i++) {
+        //         browser
+        //             .getAttribute('[id="gridview-1250-body"] > tr', 'data-record-index', function (result) {
+        //                 console.log(x.value)
+        //             })
+        //     }
+        // },
         identifyKtasNewestKtas() {
             return this
                 .getText('@ktaFirstRowNr', function (result) {
