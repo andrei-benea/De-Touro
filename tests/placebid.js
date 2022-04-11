@@ -16,7 +16,6 @@ module.exports = {
 
         index
             .pause(3000)
-            .identifyFirstRowKta()
             .placeBidKta()
 
         browser

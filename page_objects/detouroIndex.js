@@ -1,12 +1,16 @@
+const { maxHeaderSize } = require('http');
+
 module.exports = {
     url: 'https://qa.de-touro.de/Index',
     elements: {
         allKtasGrid: '#gridview-1250-table',
         ktaGridFilterMeineAuftraege: '[class="x-toolbar navigation-panel x-box-item x-toolbar-default x-table-layout-ct"] > table > tbody > tr:nth-child(2) > td:nth-child(4) [class="x-btn-button"]',
         ktaRow: '[id="gridview-1250-body"] > tr',
-        ktaRowDynamic: '[class="x-grid-row tour-grid-unread-row x-grid-data-row"]',
-        ktaRowAltDynamic: '[class="x-grid-row x-grid-row-alt tour-grid-unread-row x-grid-data-row"]',
+        ktaRowStatus: '[id="gridview-1250-body"] > tr > td:last-child',
+        ktaRowUnread: '[class="x-grid-row tour-grid-unread-row x-grid-data-row"]',
+        ktaRowAltUnread: '[class="x-grid-row x-grid-row-alt tour-grid-unread-row x-grid-data-row"]',
         ktaFirstRow: '[data-recordindex="0"]',
+        ktaFirstRowAlt: '[id="gridview-1250-body"] > tr:first-child',
         ktaFirstRowNr: '[data-recordindex="0"] > td:nth-child(6) > div',
         ktaFirstRowStatus: '[data-recordindex="0"] > td:nth-child(18) > div',
         ktaSecondRow: '[data-recordindex="1"]',
@@ -49,42 +53,100 @@ module.exports = {
         uploadedRidesListSecondRowStatusSent: '[class="x-window x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [ class="x-grid-view x-fit-item x-grid-view-default x-unselectable"] [data-recordindex="1"] > td:last-child > div > img:nth-child(2)',
     },
     commands: [{
+        openUnreadKtas() {
+            const index = browser.page.detouroIndex();
+
+            index
+                .getAttribute('@ktaRow', 'class', function (result) {
+                    // let c = result.value
+                    // if (result.value === 'x-grid-row tour-grid-unread-row x-grid-data-row') {
+                    //     console.log('Unread KTA identified!', c)
+                    // }
+                    // else
+                    console.log('Checking for unread KTAs..', result)
+                })
+
+            index
+                .api.elements('@ktaRow', result => {
+                    result.api.forEach(() => {
+                        console.log(result);
+                        // food.ingredients.forEach((ingredient) => {
+                        //     console.log(ingredient);
+                        // });
+                    });
+                    console.log('KTAs on screen:', result.value.length)
+                })
+        },
         smartKtas() {
             const index = browser.page.detouroIndex();
 
             index
-                .api.elements('@ktaRowDynamic', result => {
-                    /////TOTALLY WORKS//////
-                    // for (let i = 0; i < result.value.length; i++) {
-                    //     console.log('message:', result.value.length)
-                    // }
-                    //////////END///////////
+                .api.elements('@ktaRowUnread', result => {
                     let u = result.value.length;
+
                     index
-                        .api.elements('@ktaRowAltDynamic', result => {
+                        .api.elements('@ktaRowAltUnread', result => {
                             let ua = result.value.length
-                            // console.log('Unread KTAs Alt Row:', ua)
-                            console.log('Unread KTA Total:', u+ua)
-                            return 
+                            for (let i = 0; i < u + ua; i++) {
+                                console.log('ping nr. depends on unread kta nr.')
+                            }
+                            console.log('Unread KTA Total:', u + ua)
+                            return
+                        })
+
+                    index
+                        .getAttribute('@ktaRow', 'data-recordindex', result => {
+                            let nr = result.value;
+
+                            //////////WORKING ... not needed...///////////
+                            // index
+                            //     .api.elements('@ktaRow', result => {
+                            //         let max = result.value.length
+                            //         let row = 1
+                            //         for (i = nr; i < max; i++) {
+                            //             index.api.elements()
+                            //             console.log('This and'+row)
+                            //         }
+                            //         console.log('Total Nr. of KTAs on screen:', result.value.length)
+                            //     })
+                            /////////////////END/////////////////////////
+
+                            console.log('Data Record Index:', nr)
                         })
                     console.log('Checking unread KTAs..')
-                    return 
+                    return
                 })
-            // index    
-            //     .api.elements('@ktaRowAltDynamic', result => {
-            //         console.log('Unread KTAs Alt Row:', result.value.length)
-            //         return result.value.length
+
+            index
+                .api.elements('@ktaRow', result => {
+                    console.log('KTAs on screen:', result.value.length)
+                })
+            ////////NOT WORKING//////////////////
+            // .getText('@ktaRowStatus', result => {
+            //     console.log(result.value)
+            // })
+            ////////////////END//////////////////
+            ///////WORKING BUT NOT NEEDED ACTUALLY/////////
+            // index
+            //     .api.elements('@ktaRowStatus', elements => {
+            //     // console.log(elements);
+            //     elements.value.forEach(element => {
+            //         let key = Object.prototype.valueOf(element)[0];
+            //         let ElementIDvalue = element[key];
+            //         console.log("key = ", key);
+            //         console.log("WebElementIDvalue = ", ElementIDvalue);
             //     })
+            // })
+            /////////////////END///////////////////////////
+
             index
                 .getAttribute('@ktaRow', 'class', function (result) {
                     /////TOTALLY WORKS//////
-                    for (let i = 0; i < 1; i++) {
-                        if (result.value === 'x-grid-row tour-grid-unread-row x-grid-data-row') {
-                            console.log('1 unread KTA - function is wip')
-                        }
-                        else
-                            return
+                    if (result.value === 'x-grid-row tour-grid-unread-row x-grid-data-row') {
+                        console.log('1 unread KTA - function is wip')
                     }
+                    else
+                        return
                     //////////END///////////
                     console.log('result', result);
                 })
@@ -136,6 +198,14 @@ module.exports = {
         },
         placeBidKta() {
             return this
+                .getText('@ktaFirstRowNr', function (result) {
+                    console.log('The KTA Nr. is:', result.value)
+
+                    const index = browser.page.detouroIndex();
+                    index.getText('@ktaFirstRowStatus', function (result) {
+                        console.log('Status............', result.value)
+                    })
+                })
                 .doubleClick('@ktaFirstRow')
                 .pause(2000)
                 .waitForElementVisible('@placeBidButtonKta', 'Placing bid..')
@@ -154,6 +224,14 @@ module.exports = {
         },
         placeBidDa() {
             return this
+                .getText('@ktaFirstRowNr', function (result) {
+                    console.log('The KTA Nr. is:', result.value)
+
+                    const index = browser.page.detouroIndex();
+                    index.getText('@ktaFirstRowStatus', function (result) {
+                        console.log('Status............', result.value)
+                    })
+                })
                 .doubleClick('@ktaFirstRow')
                 .pause(2000)
                 .waitForElementVisible('@acceptBaOrDaButton', 'Placing bid..')
@@ -172,6 +250,14 @@ module.exports = {
         },
         acceptBa() {
             return this
+                .getText('@ktaFirstRowNr', function (result) {
+                    console.log('The KTA Nr. is:', result.value)
+
+                    const index = browser.page.detouroIndex();
+                    index.getText('@ktaFirstRowStatus', function (result) {
+                        console.log('Status............', result.value)
+                    })
+                })
                 .doubleClick('@ktaFirstRow')
                 .pause(2000)
                 .waitForElementVisible('@acceptBaOrDaButton', 'Accepting BA..')
@@ -239,4 +325,10 @@ module.exports = {
         //     console.log('result', result);
         // })
     }]
+}
+
+function newFunction(index) {
+    index
+        .doubleClick('@ktaFirstRow')
+        .pause(2000);
 }
