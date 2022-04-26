@@ -11,7 +11,6 @@ module.exports = {
             .setPass()
             .login()
             .selectKkFromGroup()
-            .waitForElementVisible('@loggedInUser', 'User is logged in!')
             .loadDeTouro()
             .waitForElementVisible('@frame', 'General iframe is visible!')
             .expect.element('@loggedInUser').text.to.contain('Andrei Benea')

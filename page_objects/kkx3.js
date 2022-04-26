@@ -14,6 +14,7 @@ module.exports = {
         aspNetForm: '#aspnetForm',
         ktaIcon: '#ctl00_MainContent_Image1',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
+        copyKtaButton: '[id="ctl00_MainContent_ASPxPopupMenuRow_DXI2_"]',
         ktaGridFilterLaufende: '[id="ctl00_MainContent_MenuDisplayAuctions"] > ul > li:nth-child(4)',
         firstRowKtaGrid: '#ctl00_MainContent_ASPxGridViewDrives_DXDataRow0',
         kvnrInput: '#ctl00_MainContent_formViewInsured_textBoxKVNR',
@@ -68,6 +69,8 @@ module.exports = {
             return this
                 .click('@kkSwitchButton')
                 .click('@kkDeTouroGroup')
+                .waitForElementVisible('@loggedInUser', 'User is logged in!')
+                .pause(2000)
         },
         loadDeTouro() {
             return this
@@ -125,6 +128,56 @@ module.exports = {
                 .click('@saveKtaButton')
                 .pause(500)
                 .waitForElementVisible('@printFrame', 'Print iframe visible!')
+        },
+        copyKta() {
+            return this
+                .rightClick('@firstRowKtaGrid')
+                .click('@copyKtaButton')
+                .waitForElementVisible('@kvnrInput', 'Step 1 will be passed!')
+                .click('@stepOneWeiterButton')
+                .waitForElementVisible('@stepTwoWeiterButton', 'Step 2 will be passed!')
+                .click('@stepTwoWeiterButton')
+                .waitForElementVisible('@stepThreeWeiterButton', 'Step 3 will be passed!')
+                .click('@stepThreeWeiterButton')
+                .waitForElementVisible('@saveKtaButton', 'Kta will be saved!')
+                .pause(2000)
+                .click('@saveKtaButton')
+                .pause(500)
+                .waitForElementVisible('@printFrame', 'Print iframe visible!')
+        },
+        createKtaLoop() {
+            const kkx3 = browser.page.kkx3();
+            kkx3
+                .maximizeWindow()
+                .navigate()
+                .setUser()
+                .setPass()
+                .login()
+                .selectKkFromGroup()
+                .loadDeTouro()
+                .waitForElementVisible('@frame', 'General iframe is visible!')
+                .expect.element('@loggedInUser').text.to.contain('Andrei Benea')
+
+            browser
+                .frame(0)
+
+            kkx3
+                .loadKtaModule()
+                .saveNewKta()
+
+            browser
+                .frame(0, 0)
+
+            kkx3
+                .printDocuments()
+
+            browser
+                .frameParent()
+
+            kkx3
+                .getKTANumber()
+                .publishKta()
+                .end()
         },
         loadFirstKtaFromGrid() {
             return this

@@ -1,7 +1,8 @@
 module.exports = {
-    '@tags': 'load-kta-send-da',
+    '@tags': 'copy-kta',
 
-    'Load KTA and Send as DA'(browser) {
+    'Copy KTA'(browser) {
+
         const kkx3 = browser.page.kkx3();
 
         kkx3
@@ -11,7 +12,6 @@ module.exports = {
             .setPass()
             .login()
             .selectKkFromGroup()
-            // .waitForElementVisible('@loggedInUser', 'User is logged in!')
             .loadDeTouro()
             .waitForElementVisible('@frame', 'General iframe is visible!')
             .expect.element('@loggedInUser').text.to.contain('Andrei Benea')
@@ -21,24 +21,23 @@ module.exports = {
 
         kkx3
             .loadKtaModule()
-            .loadFirstKtaFromGrid()
-            .getKTANumber()
-            .triggerFdlSearchDa()
+            .copyKta()
+            // .copyKtaLoop()
 
         browser
-            .frame(10)
+            .frame(0, 0)
 
         kkx3
-            .searchForFdl()
-            .publishDa()
+            .printDocuments()
 
         browser
             .frameParent()
 
         kkx3
-            .getDaStatus()
+            .getKTANumber()
+            .publishKta()
 
         browser
-            .saveScreenshot('tests_output/loaded-kta.png')
+            .saveScreenshot('tests_output/kkx3-inframe.png')
     }
 }

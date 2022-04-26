@@ -1,17 +1,17 @@
 module.exports = {
-    '@tags': 'create',
+    '@tags': 'create-kta',
 
     'Create KTA'(browser) {
 
         const kkx3 = browser.page.kkx3();
 
         kkx3
+            .maximizeWindow()
             .navigate()
             .setUser()
             .setPass()
             .login()
             .selectKkFromGroup()
-            .waitForElementVisible('@loggedInUser', 'User is logged in!')
             .loadDeTouro()
             .waitForElementVisible('@frame', 'General iframe is visible!')
             .expect.element('@loggedInUser').text.to.contain('Andrei Benea')
