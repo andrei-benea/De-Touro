@@ -56,4 +56,3 @@ Create your first branch!
 </h1>
 <p>
 <code>git checkout -b your-branch-name</code>
-</p>
