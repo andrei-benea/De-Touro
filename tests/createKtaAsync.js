@@ -3,12 +3,12 @@ import AsyncKkx from "../page_objects/asyncKkx3";
 const asyncKkx3 = new AsyncKkx();
 
 describe('Create new KTA', () => {
-    it('will perform initialization', async () => {
+    it('browser initialization', async () => {
         await asyncKkx3.initPage();
         await asyncKkx3.loadSite();
         await asyncKkx3.verifyUrl();
     }),
-    it('will perform login', async () => {
+    it('login to KT', async () => {
         await asyncKkx3.loginKt();
     })
 })
