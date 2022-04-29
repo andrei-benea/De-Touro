@@ -1,11 +1,11 @@
 # detouro
 Test library for verifying De-Touro KT and LE processes.
 
-# How to fetch the code?
+## How to fetch the code?
 Always use master branch as it should only contain working tests!
 `git clone https://...`
 
-# Initialize project
+## Initialize project
 Run the following commands:
 
 `npm install nightwatch --save-dev`
@@ -16,7 +16,7 @@ Run the following commands:
 
 `npm install @babel/preset-env --save-dev`
 
-# Commands for running available tests
+## Commands for running available tests
 Creates all order types
 `npm test -- --tag create`
 
@@ -38,5 +38,5 @@ Assigning newest 'to assign' order
 Uploading proofs of performance on newest order
 `npm test -- --tag process-kta`
 
-# Create your first branch!
+## Create your first branch!
 `git checkout -b your-branch-name`
