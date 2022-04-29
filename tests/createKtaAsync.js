@@ -6,7 +6,7 @@ describe('Create new KTA', () => {
     it('will perform initialization', async () => {
         await asyncKkx3.initPage();
         await asyncKkx3.loadSite();
-        await asyncKkx3.verifyLogin();
+        await asyncKkx3.verifyUrl();
     }),
     it('will perform login', async () => {
         await asyncKkx3.loginKt();

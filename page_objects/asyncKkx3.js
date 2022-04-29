@@ -17,19 +17,25 @@ export default class AsyncKkx3 {
     async loadSite() {
         return browser.url('https://check-kkx3.zhp-online.de/x3/de/')
     };
-    async verifyLogin() {
+    async verifyUrl() {
         return browser.assert.urlContains('https://check-kkx3.zhp-online.de/x3/de/')
     }
     async loginKt() {
         return browser
-            .setValue(this.elements.usernameInput, credentials.username)
-            .setValue(this.elements.passwordInput, credentials.password)
-            .click(this.elements.submitButton)
+            .setValue(this.elements.usernameInput, credentials.username, async () => {
+                console.log('Setting username..')
+            })
+            .setValue(this.elements.passwordInput, credentials.password, async () => {
+                console.log('Setting password..')
+            })
+            .click(this.elements.submitButton, async () => {
+                console.log('Logging in...')
+            })
             .waitForElementVisible(this.elements.kkSwitchButton, 'Switching to KK group..')
             .click(this.elements.kkSwitchButton)
             .waitForElementVisible(this.elements.kkDeTouroGroup, 'Selecting De-Touro group..')
             .click(this.elements.kkDeTouroGroup)
-            .waitForElementVisible(this.elements.loggedInUser)
+            .waitForElementVisible(this.elements.loggedInUser, 'Login successful!')
             .expect.element(this.elements.loggedInUser).text.to.contain('Andrei Benea')
     };
 };
