@@ -6,6 +6,7 @@ How to fetch the code?
 </h1>
 <p>
 Always use master branch as it should only contain working tests!
+<br>
 <code>git clone https://...</code>
 </p>
 <h1>
@@ -16,9 +17,6 @@ Initialize project
 <code>npm install chromedriver --save-dev</code>
 <code>npm install @babel/core --save-dev</code>
 <code>npm install @babel/preset-env --save-dev</code>
-<code>npm install @babel/register --save-dev</code>
-<code>npm install @babel/plugin-transform-arrow-functions --save-dev</code>
-<code>npm install babel-plugin-add-module-exports --save-dev</code>
 </p>
 <h1>
 Commands for running available tests
@@ -56,3 +54,4 @@ Create your first branch!
 </h1>
 <p>
 <code>git checkout -b your-branch-name</code>
+</p>
