@@ -3,6 +3,7 @@ const { maxHeaderSize } = require('http');
 module.exports = {
     url: 'https://qa.de-touro.de/Index',
     elements: {
+        ukfLoginPopupDecideLaterButton: '[id="button-1021-btnEl"]',
         allKtasGrid: '#gridview-1250-table',
         ktaGridFilterMeineAuftraege: '[class="x-toolbar navigation-panel x-box-item x-toolbar-default x-table-layout-ct"] > table > tbody > tr:nth-child(2) > td:nth-child(4) [class="x-btn-button"]',
         ktaRow: '[id="gridview-1250-body"] > tr',
@@ -19,9 +20,9 @@ module.exports = {
         ktaThirdRow: '[data-recordindex="2"]',
         ktaThirdRowNr: '[data-recordindex="2"] > td:nth-child(6) > div',
         ktaThirdRowStatus: '[data-recordindex="2"] > td:nth-child(18) > div',
-        ktaAssignedNewest: '[class="x-panel-body x-grid-body x-panel-body-default x-layout-fit x-panel-body-default x-docked-noborder-right x-docked-noborder-left"] [class="x-gridview-1416-table x-grid-table x-grid-with-col-lines"] > tbody >tr:last-child',
-        ktaAssignedNewestUploadedRidesButton: '[class="x-gridview-1416-table x-grid-table x-grid-with-col-lines"] > tbody >tr:last-child [class="x-grid-cell x-grid-td x-grid-cell-actioncolumn-1519 x-unselectable  x-action-col-cell"]',
-        ktaAssignedNewestUploadProofsButton: '[class="x-gridview-1416-table x-grid-table x-grid-with-col-lines"] > tbody >tr:last-child [class="x-grid-cell x-grid-td x-grid-cell-actioncolumn-1520 x-unselectable  x-action-col-cell"]',
+        ktaAssignedNewest: '[id="gridview-1434-table"] > tbody >tr:last-child',
+        ktaAssignedNewestUploadedRidesButton: '[class="x-gridview-1434-table x-grid-table x-grid-with-col-lines"] > tbody >tr:last-child [class="x-grid-cell x-grid-td x-grid-cell-actioncolumn-1537 x-unselectable  x-action-col-cell"]',
+        ktaAssignedNewestUploadProofsButton: '[class="x-gridview-1434-table x-grid-table x-grid-with-col-lines"] > tbody >tr:last-child [class="x-grid-cell x-grid-td x-grid-cell-actioncolumn-1538 x-unselectable  x-action-col-cell"]',
         acceptBaOrDaButton: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(4)',
         placeBidButtonKta: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)',
         placeBidButtonKtaInner: '[class="x-window bid-body x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
@@ -51,6 +52,11 @@ module.exports = {
         uploadedRidesListSecondRowStatusSent: '[class="x-window x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box"] [ class="x-grid-view x-fit-item x-grid-view-default x-unselectable"] [data-recordindex="1"] > td:last-child > div > img:nth-child(2)',
     },
     commands: [{
+        closeUkfLoginPopup() {
+            return this
+                .waitForElementVisible('@ukfLoginPopupDecideLaterButton', 'Closing UKF Login Popup')
+                .click('@ukfLoginPopupDecideLaterButton')
+        },
         openUnreadKtas() {
             const index = browser.page.detouroIndex();
 
@@ -266,6 +272,7 @@ module.exports = {
         switchToMyAssignments() {
             return this
                 .click('@ktaGridFilterMeineAuftraege')
+                .pause(1000)
                 .waitForElementVisible('@ktaAssignedNewest', 'Identifying newest KTA..')
         },
         getNewestAssignedKtaDetails() {

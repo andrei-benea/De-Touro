@@ -16,6 +16,7 @@ module.exports = {
 
         index
             .pause(3000)
+            .closeUkfLoginPopup()
             .placeBidDa()
 
         browser

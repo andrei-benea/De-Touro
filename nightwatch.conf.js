@@ -12,7 +12,7 @@
 //            |___/
 //
 /////BABEL CONFIGURATION FOR ES6/////////////////
-require('@babel/register')() 
+require('@babel/register')()
 // OR
 // require('babel-core/register')
 ////////////////////////////////////////////////
@@ -37,9 +37,9 @@ module.exports = {
     //   presets: ["@babel/preset-env"],
     // }),
   ],
-  
+
   // See https://nightwatchjs.org/guide/#external-globals
-  globals_path : '',
+  globals_path: '',
 
   webdriver: {},
 
@@ -55,7 +55,7 @@ module.exports = {
       },
 
       desiredCapabilities: {
-        browserName : 'chrome'
+        browserName: 'chrome'
       },
 
       webdriver: {
@@ -64,11 +64,11 @@ module.exports = {
       }
     },
 
-    
+
 
     firefox: {
-      desiredCapabilities : {
-        browserName : 'firefox',
+      desiredCapabilities: {
+        browserName: 'firefox',
         alwaysMatch: {
           acceptInsecureCerts: true,
           'moz:firefoxOptions': {
@@ -90,9 +90,9 @@ module.exports = {
     },
 
     chrome: {
-      desiredCapabilities : {
-        browserName : 'chrome',
-        'goog:chromeOptions' : {
+      desiredCapabilities: {
+        browserName: 'chrome',
+        'goog:chromeOptions': {
           // More info on Chromedriver: https://sites.google.com/a/chromium.org/chromedriver/
           //
           // w3c:false tells Chromedriver to run using the legacy JSONWire protocol (not required in Chrome 78)
@@ -116,9 +116,9 @@ module.exports = {
     },
 
     edge: {
-      desiredCapabilities : {
-        browserName : 'MicrosoftEdge',
-        'ms:edgeOptions' : {
+      desiredCapabilities: {
+        browserName: 'MicrosoftEdge',
+        'ms:edgeOptions': {
           w3c: true,
           // More info on EdgeDriver: https://docs.microsoft.com/en-us/microsoft-edge/webdriver-chromium/capabilities-edge-options
           args: [
@@ -181,7 +181,7 @@ module.exports = {
       // More info on configuring capabilities can be found on:
       // https://www.browserstack.com/automate/capabilities?tag=selenium-4
       desiredCapabilities: {
-        'bstack:options' : {
+        'bstack:options': {
           userName: '${BROWSERSTACK_USER}',
           accessKey: '${BROWSERSTACK_KEY}',
         }
@@ -209,7 +209,7 @@ module.exports = {
       extends: 'browserstack',
       desiredCapabilities: {
         browserName: 'chrome',
-        chromeOptions : {
+        chromeOptions: {
           w3c: true
         }
       }
@@ -277,7 +277,7 @@ module.exports = {
       extends: 'selenium_server',
       desiredCapabilities: {
         browserName: 'chrome',
-        chromeOptions : {
+        chromeOptions: {
           w3c: true
         }
       }

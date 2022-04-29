@@ -15,6 +15,7 @@ module.exports = {
 
         index
             .pause(3000)
+            .closeUkfLoginPopup()
             .switchToMyAssignments()
             .getNewestAssignedKtaDetails()
             .uploadPerformanceProofs()
