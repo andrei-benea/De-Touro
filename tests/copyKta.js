@@ -22,7 +22,6 @@ module.exports = {
         kkx3
             .loadKtaModule()
             .copyKta()
-            // .copyKtaLoop()
 
         browser
             .frame(0, 0)

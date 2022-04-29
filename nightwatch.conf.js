@@ -11,6 +11,11 @@
 //             __/ |
 //            |___/
 //
+/////BABEL CONFIGURATION FOR ES6/////////////////
+require('@babel/register')() 
+// OR
+// require('babel-core/register')
+////////////////////////////////////////////////
 
 module.exports = {
   // An array of folders (excluding subfolders) where your tests are located;
@@ -27,7 +32,11 @@ module.exports = {
   custom_assertions_path: '',
 
   // See https://nightwatchjs.org/guide/extending-nightwatch/plugin-api.html
-  plugins: [],
+  plugins: [
+    // require("@babel/core").transform("code", {
+    //   presets: ["@babel/preset-env"],
+    // }),
+  ],
   
   // See https://nightwatchjs.org/guide/#external-globals
   globals_path : '',
