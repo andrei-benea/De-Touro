@@ -1,4 +1,6 @@
-credentials = {
-    username: 'zhp.benea',
-    password: 'ungam+30',
+module.exports = {
+    credentials: {
+        username: 'zhp.benea',
+        password: 'ungam+30'
+    }
 }
