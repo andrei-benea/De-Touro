@@ -15,14 +15,11 @@ export default class AsyncKkx3 {
         ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]'
     };
     async initPage() {
-        return browser.maximizeWindow()
+        return browser
+            .maximizeWindow()
+            .url(this.url)
+            .assert.urlContains(this.url)
     };
-    async loadSite() {
-        return browser.url('https://check-kkx3.zhp-online.de/x3/de/')
-    };
-    async verifyUrl() {
-        return browser.assert.urlContains('https://check-kkx3.zhp-online.de/x3/de/')
-    }
     async loginKt() {
         return browser
             .customLogin(this.elements.usernameInput, this.elements.passwordInput, this.elements.loginButton)
@@ -31,15 +28,15 @@ export default class AsyncKkx3 {
             .waitForElementVisible(this.elements.loggedInUser, 'Login successful!')
             .expect.element(this.elements.loggedInUser).text.to.contain('Andrei Benea')
     };
-    async loadDeTouroModule() {
+    async loadDeTouro() {
         return browser
             .customClick(this.elements.treeDeTouro)
             .waitForElementVisible(this.elements.frame, 'Loading iframe...')
-    }
+    };
     async loadKtaModule() {
         return browser
             .frame(0)
             .customClick(this.elements.ktaModuleStartButton)
             .waitForElementVisible(this.elements.ktaGridKt, 'KTA grid loaded!')
-    }
+    };
 };
