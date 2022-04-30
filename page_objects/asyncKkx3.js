@@ -75,7 +75,7 @@ export default class AsyncKkx3 {
             .frameParent(async () => {
                 console.log('Moving up one frame!')
             })
-            .customGetText(this.elements.ktaDetailsKtaNumber)
+            .logKtaNumber(this.elements.ktaDetailsKtaNumber)
     };
     async publishDa() {
         return browser
