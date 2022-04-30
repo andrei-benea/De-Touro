@@ -25,8 +25,7 @@ export default class AsyncKkx3 {
             .customLogin(this.elements.usernameInput, this.elements.passwordInput, this.elements.loginButton)
             .customClick(this.elements.kkSwitchButton)
             .customClick(this.elements.kkDeTouroGroup)
-            .waitForElementVisible(this.elements.loggedInUser, 'Login successful!')
-            .expect.element(this.elements.loggedInUser).text.to.contain('Andrei Benea')
+            .customAssertText(this.elements.loggedInUser, 'Andrei Benea')
     };
     async loadDeTouro() {
         return browser
