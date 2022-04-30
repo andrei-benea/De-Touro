@@ -1,4 +1,9 @@
 import { credentials } from "../tests_input/loginInfoKt";
+// import CustomClick from "../custom_commands/customClick";
+
+// let customClick = new CustomClick();
+
+// const customClick = new CustomClick();
 
 export default class AsyncKkx3 {
     url = 'https://check-kkx3.zhp-online.de/x3/de/';
@@ -10,6 +15,10 @@ export default class AsyncKkx3 {
         selectGroupInput: '#ext-comp-1037',
         kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(33)',
         loggedInUser: '#ext-comp-1181',
+        treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
+        frame: '[name="FDLiFrame"]',
+        ktaModuleStartButton: '#ctl00_MainContent_Image1',
+        ktaGridKt: '[class="dxgvTable_deTouroKT"]',
     };
     async initPage() {
         return browser.maximizeWindow()
@@ -38,4 +47,17 @@ export default class AsyncKkx3 {
             .waitForElementVisible(this.elements.loggedInUser, 'Login successful!')
             .expect.element(this.elements.loggedInUser).text.to.contain('Andrei Benea')
     };
+    async loadDeTouroModule() {
+        return browser
+            .customClick(this.elements.treeDeTouro)
+            // .waitForElementVisible(this.elements.treeDeTouro, 'Starting De-Touro..')
+            // .click(this.elements.treeDeTouro)
+            .waitForElementVisible(this.elements.frame, 'Loading iframe...')
+    }
+    async loadKtaModule() {
+        return browser
+            .waitForElementVisible(this.elements.ktaModuleStartButton, 'Loading KTA module...')
+            .click(this.elements.ktaModuleStartButton)
+            .waitForElementVisible(this.elements.ktaGridKt, 'KTA grid loaded!')
+    }
 };

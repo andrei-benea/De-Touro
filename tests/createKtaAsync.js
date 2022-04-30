@@ -11,4 +11,11 @@ describe('Create new KTA', () => {
     it('login to KT', async () => {
         await asyncKkx3.loginKt();
     })
+    it('De-Touro start-up', async () => {
+        await asyncKkx3.loadDeTouroModule();
+        await browser.frame(0);
+    })
+    it('KTA Module start-up', async () => {
+        await asyncKkx3.loadKtaModule();
+    })
 })
