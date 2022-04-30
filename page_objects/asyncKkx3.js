@@ -1,3 +1,5 @@
+import { patient } from "../tests_input/patientData";
+
 export default class AsyncKkx3 {
     url = 'https://check-kkx3.zhp-online.de/x3/de/';
     elements = {
@@ -14,6 +16,14 @@ export default class AsyncKkx3 {
         ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
         ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]',
+        wizardKvnrInput: '[id="ctl00_MainContent_formViewInsured_textBoxKVNR"]',
+        wizardKvnrSearchResult: '[class="ui-menu-item"]',
+        wizardContainerFirstItem: '[id="ktaModelsContainer"] > li:nth-child(1)',
+        wizardContainerConfirmButton: '[class="ui-dialog-buttonset"]>button:nth-child(1)',
+        wizardPatientNextButton: '[id="ctl00_MainContent_formViewInsured_ASPxButtonNext"]',
+        wizardDoctorNextButton: '[id="ctl00_MainContent_formViewDoctor_ASPxButtonNext"]',
+        wizardDetailsNextButton: '[id="ctl00_MainContent_formViewDetails_ASPxButtonNext"]',
+        wizardTransportSaveKtaButton: '[id="ctl00_MainContent_formViewTransport_ASPxButtonSave"]',
     };
     async initPage() {
         return browser
@@ -41,5 +51,13 @@ export default class AsyncKkx3 {
     async saveNewKta() {
         return browser
             .customClick(this.elements.newKtaButton)
+            .customSetValue(this.elements.wizardKvnrInput, patient.kvnr)
+            .customClick(this.elements.wizardKvnrSearchResult)
+            .customClick(this.elements.wizardContainerFirstItem)
+            .customClick(this.elements.wizardContainerConfirmButton)
+            .customClick(this.elements.wizardPatientNextButton)
+            .customClick(this.elements.wizardDoctorNextButton)
+            .customClick(this.elements.wizardDetailsNextButton)
+            .customClick(this.elements.wizardTransportSaveKtaButton)
     }
 };

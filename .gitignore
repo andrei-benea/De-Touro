@@ -21,7 +21,6 @@ logs
 *.JPG
 *.xml
 *.log
-tests_input/
 tests_output/
 
 #Logs
