@@ -19,6 +19,7 @@ export default class AsyncKkx3 {
         frame: '[name="FDLiFrame"]',
         ktaModuleStartButton: '#ctl00_MainContent_Image1',
         ktaGridKt: '[class="dxgvTable_deTouroKT"]',
+        ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]'
     };
     async initPage() {
         return browser.maximizeWindow()
@@ -50,14 +51,12 @@ export default class AsyncKkx3 {
     async loadDeTouroModule() {
         return browser
             .customClick(this.elements.treeDeTouro)
-            // .waitForElementVisible(this.elements.treeDeTouro, 'Starting De-Touro..')
-            // .click(this.elements.treeDeTouro)
             .waitForElementVisible(this.elements.frame, 'Loading iframe...')
     }
     async loadKtaModule() {
         return browser
-            .waitForElementVisible(this.elements.ktaModuleStartButton, 'Loading KTA module...')
-            .click(this.elements.ktaModuleStartButton)
+            .frame(0)
+            .customClick(this.elements.ktaModuleStartButton)
             .waitForElementVisible(this.elements.ktaGridKt, 'KTA grid loaded!')
     }
 };
