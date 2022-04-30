@@ -12,6 +12,7 @@ export default class AsyncKkx3 {
         loggedInUser: '#ext-comp-1181',
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
         frameMain: '[name="FDLiFrame"]',
+        framePrint: '[id="ctl00_MainContent_PrintDocumentPopup_CIF-1"]',
         ktaModuleStartButton: '#ctl00_MainContent_Image1',
         ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
@@ -24,6 +25,7 @@ export default class AsyncKkx3 {
         wizardDoctorNextButton: '[id="ctl00_MainContent_formViewDoctor_ASPxButtonNext"]',
         wizardDetailsNextButton: '[id="ctl00_MainContent_formViewDetails_ASPxButtonNext"]',
         wizardTransportSaveKtaButton: '[id="ctl00_MainContent_formViewTransport_ASPxButtonSave"]',
+        wizardPrintConfirmButton: '[id="ctl00_Content_linkButtonPrintDocument"]',
     };
     async initPage() {
         return browser
@@ -59,5 +61,7 @@ export default class AsyncKkx3 {
             .customClick(this.elements.wizardDoctorNextButton)
             .customClick(this.elements.wizardDetailsNextButton)
             .customClick(this.elements.wizardTransportSaveKtaButton)
+            .customFrameSwitch(this.elements.framePrint, 0)
+            .customClick(this.elements.wizardPrintConfirmButton)
     }
 };
