@@ -9,10 +9,11 @@ export default class AsyncKkx3 {
         kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(33)',
         loggedInUser: '#ext-comp-1181',
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
-        frame: '[name="FDLiFrame"]',
+        frameMain: '[name="FDLiFrame"]',
         ktaModuleStartButton: '#ctl00_MainContent_Image1',
-        ktaGridKt: '[class="dxgvTable_deTouroKT"]',
-        ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]'
+        ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
+        newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
+        ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]',
     };
     async initPage() {
         return browser
@@ -30,12 +31,15 @@ export default class AsyncKkx3 {
     async loadDeTouro() {
         return browser
             .customClick(this.elements.treeDeTouro)
-            .waitForElementVisible(this.elements.frame, 'Loading iframe...')
+            .customFrameSwitch(this.elements.frameMain, 0)
     };
     async loadKtaModule() {
         return browser
-            .frame(0)
             .customClick(this.elements.ktaModuleStartButton)
             .waitForElementVisible(this.elements.ktaGridKt, 'KTA grid loaded!')
     };
+    async saveNewKta() {
+        return browser
+            .customClick(this.elements.newKtaButton)
+    }
 };

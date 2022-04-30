@@ -15,4 +15,7 @@ describe('Create new KTA', () => {
     it('KTA Module start-up', async () => {
         await asyncKkx3.loadKtaModule();
     })
+    it('save a new KTA', async () => {
+        await asyncKkx3.saveNewKta();
+    })
 })
