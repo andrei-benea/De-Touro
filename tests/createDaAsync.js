@@ -18,4 +18,7 @@ describe('Create new KTA', () => {
     it('save a new KTA', async () => {
         await asyncKkx3.saveNewKta();
     })
+    it('publish as DA', async () => {
+        await asyncKkx3.publishDa();
+    })
 })
