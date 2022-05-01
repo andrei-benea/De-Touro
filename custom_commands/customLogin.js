@@ -1,4 +1,4 @@
-import { credentials } from "../tests_input/loginInfoLe";
+import { credentials } from "../tests_input/loginInfoKt";
 
 module.exports = class CustomLogin {
     async command(user, pass, button) {
