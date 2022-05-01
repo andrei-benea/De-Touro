@@ -1,4 +1,5 @@
 import { patient } from "../tests_input/patientData";
+import { service_providers } from "../tests_input/serviceProviderListKt";
 
 export default class AsyncKkx3 {
     url = 'https://check-kkx3.zhp-online.de/x3/de/';
@@ -13,6 +14,7 @@ export default class AsyncKkx3 {
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
         frameMain: '[name="FDLiFrame"]',
         framePrint: '[id="ctl00_MainContent_PrintDocumentPopup_CIF-1"]',
+        frameFdl: '[id="dialogContent"]',
         ktaModuleStartButton: '#ctl00_MainContent_Image1',
         ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
@@ -26,6 +28,13 @@ export default class AsyncKkx3 {
         wizardDetailsNextButton: '[id="ctl00_MainContent_formViewDetails_ASPxButtonNext"]',
         wizardTransportSaveKtaButton: '[id="ctl00_MainContent_formViewTransport_ASPxButtonSave"]',
         wizardPrintConfirmButton: '[id="ctl00_Content_linkButtonPrintDocument"]',
+        wizardSearchForFdlInput: '[id="ctl00_Content_textBoxControlSearch"]',
+        wizardSearchForFdlButton: '[class="searchButton-icon"]',
+        wizardSearchForFdlSingleResult: '[id="ctl00_Content_ASPxGridViewSearchDriver_cell0_1_ctl00"]',
+        wizardSearchForFdlSendDaButton: '[id="ctl00_Content_linkButtonAuctionPublish"]',
+        ktaDetailsKtaNumber: '[id="ctl00_labelKtaNumber"]',
+        ktaDetailsKtaStatus: '[id="ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus"]',
+        ktaDetailsPublishAsDaButton: '[id="ctl00_MainContent_formViewKta_linkButtonDirectInvite"]',
     };
     async initPage() {
         return browser
@@ -63,5 +72,22 @@ export default class AsyncKkx3 {
             .customClick(this.elements.wizardTransportSaveKtaButton)
             .customFrameSwitch(this.elements.framePrint, 0)
             .customClick(this.elements.wizardPrintConfirmButton)
-    }
+            .frameParent(async () => {
+                console.log('Moving up one frame!')
+            })
+            .logKtaNumber(this.elements.ktaDetailsKtaNumber)
+    };
+    async publishDa() {
+        return browser
+            .customClick(this.elements.ktaDetailsPublishAsDaButton)
+            .customFrameSwitch(this.elements.frameFdl, 10)
+            .customSetValue(this.elements.wizardSearchForFdlInput, service_providers.fdl.name)
+            .customClick(this.elements.wizardSearchForFdlButton)
+            .customClick(this.elements.wizardSearchForFdlSingleResult)
+            .customClick(this.elements.wizardSearchForFdlSendDaButton)
+            .frameParent(async () => {
+                console.log('Moving up one frame!')
+            })
+            .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
+    };
 };
