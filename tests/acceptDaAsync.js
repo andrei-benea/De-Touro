@@ -11,5 +11,8 @@ describe('Accept newest available DA', () => {
     it('login to LE', async () => {
         await asyncDtLogin.loginLe();
     })
+    it('kta analysis, checking for KTAs w/o bids', async () => {
+        await asyncDtIndex.smartKtas();
+    })
 })
 
