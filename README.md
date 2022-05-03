@@ -16,27 +16,31 @@ Run the following commands:
 
 `npm install @babel/preset-env --save-dev`
 
-## Commands for running available tests
-Creates all order types
-`npm test -- --tag create`
+`npm install dotenv --save`
 
-Identifies first three LE orders
-`npm test -- --tag identify`
+## Setup .env file
+For the async tests to work (successful login), you'll have to create a .env file in your root folder. There you'll have to store the desired credentials
 
-Places bid on newest LE order (KTA)
-`npm test -- --tag place-bid`
+File contents:
+KT_USER="insert_your_KT_username_here"
+KT_PASS="insert_your_KT_password_here"
 
-Places bid on newest LE order (DA)
-`npm test -- --tag accept-da`
+LE_USER="insert_your_LE_username_here"
+LE_PASS="insert_your_LE_password_here"
 
-Places bid on newest LE order (BA)
-`npm test -- --tag accept-ba`
+## Commands for running available tests (async)
+Because this setup is using environment variables, the command for running the test must include the '--env' argument.
+Possible values are: 'kt' and 'le'
 
-Assigning newest 'to assign' order
-`npm test -- --tag assign-kta`
+KT:
+`npm test -- --env kt tests/createDaAsync.js`
 
-Uploading proofs of performance on newest order
-`npm test -- --tag process-kta`
+LE:
+`npm test -- --env le tests/acceptDaAsync.js`
+
+## Commands for running available tests (old)
+Like in the below example simply run test while passing the --tag argument. Applies to tests in /tests/old folder
+`npm test -- --tag tagname`
 
 ## Create your first branch!
-`git checkout -b your-branch-name`
+`git checkout -b new-branch-name`
