@@ -1,5 +1,5 @@
 import { patient } from "../tests_input/patientData";
-import { service_providers } from "../tests_input/serviceProviderListKt";
+import { service_providers } from "../tests_input/serviceProviderData";
 
 export default class AsyncKkx3 {
     url = 'https://check-kkx3.zhp-online.de/x3/de/';

@@ -8,8 +8,11 @@ describe('Accept newest available DA', () => {
     it('browser initialization', async () => {
         await asyncDtLogin.initPage();
     })
-    it('check for bids', async () => {
+    it('login to LE', async () => {
         await asyncDtLogin.loginLe();
-    } )
+    })
+    it('checking orders', async () => {
+        await asyncDtIndex.loginLe();
+    })
 })
 

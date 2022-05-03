@@ -17,8 +17,6 @@ logs
 *.sw*
 
 #Ignore work files 
-*.png
-*.JPG
 *.xml
 *.log
 tests_output/

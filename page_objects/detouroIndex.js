@@ -1,5 +1,3 @@
-const { maxHeaderSize } = require('http');
-
 module.exports = {
     url: 'https://qa.de-touro.de/Index',
     elements: {

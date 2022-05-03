@@ -64,7 +64,55 @@ module.exports = {
       }
     },
 
+    kt: {
+      disable_error_log: false,
+      launch_url: 'https://check-kkx3.zhp-online.de/x3/de/',
 
+      globals: {
+        username: 'zhp.benea',
+        password: 'ungam+30',
+      },
+
+      screenshots: {
+        enabled: true,
+        path: 'tests_output/screens',
+        on_failure: true
+      },
+
+      desiredCapabilities: {
+        browserName: 'chrome'
+      },
+
+      webdriver: {
+        start_process: true,
+        server_path: ''
+      }
+    },
+
+    le: {
+      disable_error_log: false,
+      launch_url: 'https://qa.de-touro.de/Login?',
+
+      globals: {
+        username: 'andrei.benea89+989@gmail.com',
+        password: 'ungam+20',
+      },
+
+      screenshots: {
+        enabled: true,
+        path: 'tests_output/screens',
+        on_failure: true
+      },
+
+      desiredCapabilities: {
+        browserName: 'chrome'
+      },
+
+      webdriver: {
+        start_process: true,
+        server_path: ''
+      }
+    },
 
     firefox: {
       desiredCapabilities: {
