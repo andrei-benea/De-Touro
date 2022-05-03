@@ -19,5 +19,9 @@
     "babel-preset-es2015": "^6.24.1",
     "chromedriver": "^99.0.0",
     "nightwatch": "^2.1.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "error-reporting": "^0.0.3"
   }
 }

@@ -11,8 +11,5 @@ describe('Accept newest available DA', () => {
     it('login to LE', async () => {
         await asyncDtLogin.loginLe();
     })
-    it('checking orders', async () => {
-        await asyncDtIndex.loginLe();
-    })
 })
 
