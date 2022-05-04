@@ -1,13 +1,14 @@
 module.exports = class SmartKtas {
-    async command(element) {
+    async command(element, elementu) {
         // for (let i = 0; i < 1; i++) {
         await browser
-            .waitForElementVisible(element, 'Element visible!')
+            .pause(2000)
+            // .waitForElementVisible(element, 'Element visible!')
             .elements('css selector', element, function (elements) {
                 elements.value.forEach(function (elementsObj) {
                     let elementID = elementsObj[Object.keys(elementsObj)[0]]
-                    console.log(`WebElementID: ${elementID}`)
-                    browser.elementIdAttribute(elementID, function (result) {
+                    // console.log(`WebElementID: ${elementID}`)
+                    browser.elementIdAttribute(elementID, 'data-recordindex', function (result) {
                         // if (data-recordindex == 0) {
                         console.log('\n' + result.value)
                         // }
