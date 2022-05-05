@@ -7,7 +7,7 @@ module.exports = class SmartKtas {
                 elements.value.forEach(function (elementsObj) {
                     let elementID = elementsObj[Object.keys(elementsObj)[0]]
                     console.log(`WebElementID: ${elementID}`)
-                    browser.elementIdAttribute(elementID, function (result) {
+                    browser.elementIdAttribute(elementID, 'data-recordindex', function (result) {
                         // if (data-recordindex == 0) {
                         console.log('\n' + result.value)
                         // }
