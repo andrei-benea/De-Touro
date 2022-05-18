@@ -1,8 +1,41 @@
 module.exports = class SmartKtas {
-    async command(element, scndelement, othrelement) {
+    async command(element, scndelement, othrelement, frthelement, ffthelement, sxthelement) {
         await browser
             .pause(2000)
-            .elements('css selector', element, function(object) {
+            .elements('css selector', element, function (object) {
+                let elementID = object[Object.keys(object)[0]]
+                console.log(elementID.length)
+                if (elementID.length === 0) {
+                    console.log('No unread KTAs!')
+                    console.log('Checking bids..')
+                    browser.elements('css selector', ffthelement, function (objecty) {
+                        let anotherElementID = objecty[Object.keys(objecty)[0]]
+                        console.log('Available KTAs: ' + anotherElementID.length)
+                        // for (let i = 0; i < anotherElementID.length; i++) {
+
+                        // }
+                    })
+                    browser.elements('css selector', sxthelement, function (objectz) {
+                        let anotherElementID = objectz[Object.keys(objectz)[0]]
+                        console.log('Available KTAs: ' + anotherElementID.length)
+                    })
+                }
+                else console.log(`WebElementID: ${elementID}`)
+                for (let i = 0; i < elementID.length; i++) {
+                    browser
+                        .doubleClick(elementID[i])
+                        .waitForElementVisible(othrelement, 'Inside first for loop')
+                        .elements('css selector', frthelement, function (objectx) {
+                            let otherElementID = objectx[Object.keys(objectx)[0]]
+                            console.log(otherElementID.length)
+                            console.log(`WebElementID: ${otherElementID}`)
+                        })
+
+                    browser
+                        .sendKeys(othrelement, [browser.Keys.ESCAPE]);
+                }
+            })
+            .elements('css selector', scndelement, function (object) {
                 let elementID = object[Object.keys(object)[0]]
                 console.log(elementID.length)
                 if (elementID.length === 0) {
@@ -16,21 +49,7 @@ module.exports = class SmartKtas {
                         .sendKeys(othrelement, [browser.Keys.ESCAPE]);
                 }
             })
-            .elements('css selector', scndelement, function(object) {
-                let elementID = object[Object.keys(object)[0]]
-                console.log(elementID.length)
-                if (elementID.length === 0) {
-                    console.log('No unread KTAs!')
-                }
-                else console.log(`WebElementID: ${elementID}`)
-                for (let i = 0; i < elementID.length; i++) {
-                    browser
-                        .doubleClick(elementID[i])
-                        .waitForElementVisible(othrelement)
-                        .sendKeys(othrelement, [browser.Keys.ESCAPE]);
-                }
-            })
-            console.log('looppppp')
+        console.log('looppppp')
     }
 }
 

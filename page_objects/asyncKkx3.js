@@ -51,6 +51,7 @@ export default class AsyncKkx3 {
     };
     async loadDeTouro() {
         return browser
+            .pause(2000)
             .customClick(this.elements.treeDeTouro)
             .customFrameSwitch(this.elements.frameMain, 0)
     };
