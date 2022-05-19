@@ -14,8 +14,38 @@ export default class AsyncDtIndex {
         ktaDetailsPlaceBidButtonDa: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(4)',
         ktaDetailsPlaceBidButtonBa: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(4)',
     }
-    async smartKtas() {
-        return browser
-            .smartKtas(this.elements.ktaGridRowUnread, this.elements.ktaGridRowAltUnread, this.elements.ktaDetailsContainer, this.elements.ktaDetailsContainerTitle, this.elements.ktaGridRowReadBidField, this.elements.ktaGridRowAltReadBidField)
-        }
+    async checkForUnreadKtas() {
+        browser
+            .pause(2000)
+            .elements('css selector', this.elements.ktaGridRowUnread, (object) => {
+                    let items = object[Object.keys(object)[0]]
+                    browser.elements('css selector', this.elements.ktaGridRowAltUnread, (object) => {
+                        let itemsAlt = object[Object.keys(object)[0]]
+                        let itemsAll = items.length + itemsAlt.length
+                        if (itemsAll != 0) {
+                            console.log('Unread KTAs available: ', itemsAll)
+                            for (let i = 0; i < items.length; i++) {
+                                browser
+                                    .doubleClick(items[i])
+                                    .waitForElementVisible(this.elements.ktaDetailsContainer)
+                                    .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
+                            }
+                            for (let i = 0; i < itemsAlt.length; i++) {
+                                browser
+                                    .doubleClick(itemsAlt[i])
+                                    .waitForElementVisible(this.elements.ktaDetailsContainer)
+                                    .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
+                            }
+                        }
+                        else {
+                            console.log('No unread KTAs!')
+                        }
+                    })
+                })
+            }
+    // async smartKtas() {
+    //     return browser
+    //         .smartKtas(this.elements.ktaGridRowUnread, this.elements.ktaGridRowAltUnread)
+    //         // .smartKtasAlt(this.elements.ktaGridRowAltUnread)
+    //     }
 };
