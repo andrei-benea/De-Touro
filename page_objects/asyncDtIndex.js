@@ -13,7 +13,7 @@ export default class AsyncDtIndex {
         ktaDetailsDaIdentifier: '[class="x-component da-text x-box-item x-component-default"]',
         ktaDetailsBaIdentifier: '[class="x-component ba-text x-box-item x-component-default"]',
         ktaDetailsPlaceBidButtonKta: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(3)',
-        ktaDetailsPlaceBidButtonDa: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(4)',
+        ktaDetailsPlaceBidButtonDa: '[class="x-window x-layer x-window-default x-closable x-window-closable x-window-default-closable x-border-box x-resizable x-window-resizable x-window-default-resizable"] [class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(4)',
         ktaDetailsPlaceBidButtonBa: '[class="x-toolbar x-docked x-toolbar-footer x-docked-bottom x-toolbar-docked-bottom x-toolbar-footer-docked-bottom x-box-layout-ct"] > div > div > a:nth-child(4)',
         ktaDetailsBidInput: '[class="x-form-field x-form-required-field x-form-text"]',
         ktaDetailsMwst19Button: '[id="mwst19-btnEl"]',
@@ -48,6 +48,7 @@ export default class AsyncDtIndex {
                                                         .customClick(this.elements.ktaDetailsMwst19Button)
                                                         .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
                                                         .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                                                        .pause(2000)
                                                 }
                                                 else return
                                             })
@@ -73,6 +74,7 @@ export default class AsyncDtIndex {
                                                         .customClick(this.elements.ktaDetailsMwst19Button)
                                                         .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
                                                         .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                                                        .pause(2000)
                                                 }
                                                 else return
                                             })
