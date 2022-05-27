@@ -11,11 +11,12 @@
 //             __/ |
 //            |___/
 //
-///ENV VAR CONFIG////////////////
+///ENV VAR CONFIG///////////////////////////////
 require('dotenv').config()
-// verify configuration
+// verify configuration ////////////////////////
 //console.log(process.env)
-/////BABEL CONFIGURATION FOR ES6/////////////////
+/////BABEL CONFIGURATION FOR ES6////////////////
+////////////////////////////////////////////////
 require('@babel/register')()
 // OR
 // require('babel-core/register')
