@@ -57,7 +57,7 @@ module.exports = {
                 .setValue('@usernameInput', username)
         },
         setPass() {
-            const password = 'ungam+30'
+            const password = 'ungam+40'
             return this
                 .setValue('@passwordInput', password)
         },

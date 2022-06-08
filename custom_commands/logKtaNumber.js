@@ -3,8 +3,8 @@ module.exports = class LogKtaNumber {
         var fs = require('fs');
         return browser
             .waitForElementVisible(element, 'Element visible')
-            .getText(element, (result) => {
-                fs.writeFile('tests_output/ktanumber.txt', result.value, (err) => {
+            .getText(element, async (result) => {
+                fs.writeFile('tests_output/ktanumber.txt', result.value, 'utf8', (err) => {
                     if (err) throw err;
                     console.log('Saving KTA number to output file!')
                 })

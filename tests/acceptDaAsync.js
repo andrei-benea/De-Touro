@@ -12,7 +12,7 @@ describe('Accept newest available DA', () => {
         await asyncDtLogin.loginLe();
     })
     it('kta analysis, checking for unread KTAs', async () => {
-        await asyncDtIndex.checkForUnreadKtas();
+        await asyncDtIndex.placeBid();
     })
 })
 
