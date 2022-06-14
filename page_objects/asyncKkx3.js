@@ -17,6 +17,8 @@ export default class AsyncKkx3 {
         frameFdl: '[id="dialogContent"]',
         ktaModuleStartButton: '#ctl00_MainContent_Image1',
         ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
+        ktaGridKtNavBarButton: '[class="gridLink"]',
+        ktaGridKtaType: '[id="ctl00_MainContent_ASPxGridViewDrives_tccell0_3"]',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
         ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]',
         wizardKvnrInput: '[id="ctl00_MainContent_formViewInsured_textBoxKVNR"]',
@@ -90,5 +92,39 @@ export default class AsyncKkx3 {
                 console.log('Moving up one frame!')
             })
             .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
+            .customClick(this.elements.ktaGridKtNavBarButton)
+            .pause(5000)
     };
+    async confirmKtaType() {
+        const fs = require('fs');
+
+        fs.readFile('tests_output/ktanumber.txt', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            browser
+                // .customClick(this.elements.ktaNrSearchInput)
+                .customSetValue(this.elements.ktaNrSearchInput, data)
+                .pause(3000)
+                .waitForElementVisible(this.elements.ktaGridKtaType, 'Kta type visible.........!')
+                .getText(this.elements.ktaGridKtaType, async (result) => {
+                    fs.appendFile('tests_output/ktanumber.txt', `\n${result.value}`, 'utf8', (err) => {
+                        if (err) throw err;
+                        console.log('KTA type saved to file!');
+                    });
+                })
+            console.log('Filtering for KTA:........ ', data);
+        });
+
+        // browser
+        //     // .pause(3000)
+        //     .waitForElementVisible(this.elements.ktaGridKtaType, 'Kta type visible.........!')
+        //     .getText(this.elements.ktaGridKtaType, async (result) => {
+        //         fs.appendFile('tests_output/ktanumber.txt', result.value, 'utf8', (err) => {
+        //             if (err) throw err;
+        //             console.log('KTA type saved to file!');
+        //         });
+        //     })
+    }
 };
