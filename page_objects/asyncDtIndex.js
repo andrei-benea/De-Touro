@@ -43,9 +43,6 @@ export default class AsyncDtIndex {
             browser.customSetValue(this.elements.ktaGridFilterBoxInput, data)
             console.log('Filtering for KTA:........ ', data);
         });
-
-        browser
-            .saveScreenshot('tests_output/detouroLE.png')
     }
 
     async checkForUnreadKtas() {

@@ -104,7 +104,6 @@ export default class AsyncKkx3 {
                 return;
             }
             browser
-                // .customClick(this.elements.ktaNrSearchInput)
                 .customSetValue(this.elements.ktaNrSearchInput, data)
                 .pause(3000)
                 .waitForElementVisible(this.elements.ktaGridKtaType, 'Kta type visible.........!')
@@ -116,15 +115,5 @@ export default class AsyncKkx3 {
                 })
             console.log('Filtering for KTA:........ ', data);
         });
-
-        // browser
-        //     // .pause(3000)
-        //     .waitForElementVisible(this.elements.ktaGridKtaType, 'Kta type visible.........!')
-        //     .getText(this.elements.ktaGridKtaType, async (result) => {
-        //         fs.appendFile('tests_output/ktanumber.txt', result.value, 'utf8', (err) => {
-        //             if (err) throw err;
-        //             console.log('KTA type saved to file!');
-        //         });
-        //     })
     }
 };
