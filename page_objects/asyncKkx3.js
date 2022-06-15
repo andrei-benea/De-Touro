@@ -36,7 +36,11 @@ export default class AsyncKkx3 {
         wizardSearchForFdlSendDaButton: '[id="ctl00_Content_linkButtonAuctionPublish"]',
         ktaDetailsKtaNumber: '[id="ctl00_labelKtaNumber"]',
         ktaDetailsKtaStatus: '[id="ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus"]',
+        ktaDetailsPublishAsKtaButton: '[id="ctl00_MainContent_formViewKta_linkButtonAuctionPublish"]',
         ktaDetailsPublishAsDaButton: '[id="ctl00_MainContent_formViewKta_linkButtonDirectInvite"]',
+        ktaDetailsConfirmPublishAsKtaButton: 'body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.no-close.error-dialog.confirm-kta-publish-dialog.ui-draggable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(2)',
+        ktaDetailsKtaIsPublishedWindowTitle: '#ui-id-1',
+        ktaDetailsKtaIsPublishedWindowCloseButton: '[class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front no-close error-dialog ui-draggable ui-dialog-buttons"] > div:nth-child(3) > div > button',
     };
     async initPage() {
         return browser
@@ -92,6 +96,19 @@ export default class AsyncKkx3 {
                 console.log('Moving up one frame!')
             })
             .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
+            .customClick(this.elements.ktaGridKtNavBarButton)
+            .pause(5000)
+    };
+    async publishKta() {
+        return browser
+            .customClick(this.elements.ktaDetailsPublishAsKtaButton)
+            .customClick(this.elements.ktaDetailsConfirmPublishAsKtaButton)
+            .getText(this.elements.ktaDetailsKtaIsPublishedWindowTitle, async (result) => {
+                if (result === 'KTA VERÖFFENTLICHT') {
+                    console.log('Successfully published as KTA!')
+                }
+            })
+            .customClick(this.elements.ktaDetailsKtaIsPublishedWindowCloseButton)
             .customClick(this.elements.ktaGridKtNavBarButton)
             .pause(5000)
     };
