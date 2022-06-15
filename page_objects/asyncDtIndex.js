@@ -4,6 +4,8 @@ export default class AsyncDtIndex {
         ktaGridBody: '[class="x-panel-body x-panel-body-default x-layout-fit x-panel-body-default x-docked-noborder-top x-docked-noborder-right x-docked-noborder-bottom x-docked-noborder-left"]',
         ktaHeaderKtaNr: '[id="tab1"] [class="x-panel view-panel x-box-item x-panel-default"] > div >div:nth-child(2) [class="x-grid-header-ct x-docked x-grid-header-ct-default x-docked-top x-grid-header-ct-docked-top x-grid-header-ct-default-docked-top x-box-layout-ct x-docked-noborder-top x-docked-noborder-right x-docked-noborder-left"] > div > div > div:nth-child(6)',
         ktaHeaderKtaNrFilterArrow: '[id="tab1"] [class="x-panel view-panel x-box-item x-panel-default"] > div >div:nth-child(2) [class="x-grid-header-ct x-docked x-grid-header-ct-default x-docked-top x-grid-header-ct-docked-top x-grid-header-ct-default-docked-top x-box-layout-ct x-docked-noborder-top x-docked-noborder-right x-docked-noborder-left"] > div > div > div:nth-child(6) > div > div',
+        ktaFooterRefreshButton: '[data-qtip="Aktualisieren"]',
+        ktaFooterPageNumber: '[class="x-toolbar x-docked x-toolbar-default x-docked-bottom x-toolbar-docked-bottom x-toolbar-default-docked-bottom x-box-layout-ct x-docked-noborder-right x-docked-noborder-bottom x-docked-noborder-left"] [class="x-toolbar-text x-box-item x-toolbar-item x-toolbar-text-default"]:last-child',
         ktaGridSingleRow: '[data-recordindex="0"]',
         ktaGridRowReadBidField: '[class="x-grid-row x-grid-data-row"] > td:nth-child(15)',
         ktaGridRowUnread: '[class="x-grid-row tour-grid-unread-row x-grid-data-row"]',
@@ -44,6 +46,7 @@ export default class AsyncDtIndex {
                     .customClick(this.elements.ktaHeaderKtaNrFilterArrow)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
                     .pause(3000)
+                    .customRefresh(this.elements.ktaFooterPageNumber, this.elements.ktaFooterRefreshButton)
                     .waitForElementVisible(this.elements.ktaGridSingleRow, 'Successfully filtered KTA list!')
                     .doubleClick(this.elements.ktaGridSingleRow)
                     .waitForElementVisible(this.elements.ktaDetailsContainer, 'Successfully loaded KTA details!')
@@ -59,7 +62,7 @@ export default class AsyncDtIndex {
                         .pause(2000)
                         .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
                         .saveScreenshot('tests_output/a-test-screen-da.png')
-                } 
+                }
                 else if (ktaInfo.kta.type === 'BA') {
                     browser
                         .customClick(this.elements.ktaDetailsPlaceBidButtonBa)
@@ -81,9 +84,9 @@ export default class AsyncDtIndex {
             }
         });
     }
-////////////////////////////////////////////////////////////////////////////
-////////////////////////// LOOP CODE BELOW /////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////// LOOP CODE BELOW /////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     async checkForUnreadKtas() {
         browser
             .pause(5000)
