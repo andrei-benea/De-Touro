@@ -4,6 +4,7 @@ export default class AsyncDtIndex {
         ktaGridBody: '[class="x-panel-body x-panel-body-default x-layout-fit x-panel-body-default x-docked-noborder-top x-docked-noborder-right x-docked-noborder-bottom x-docked-noborder-left"]',
         ktaHeaderKtaNr: '[id="tab1"] [class="x-panel view-panel x-box-item x-panel-default"] > div >div:nth-child(2) [class="x-grid-header-ct x-docked x-grid-header-ct-default x-docked-top x-grid-header-ct-docked-top x-grid-header-ct-default-docked-top x-box-layout-ct x-docked-noborder-top x-docked-noborder-right x-docked-noborder-left"] > div > div > div:nth-child(6)',
         ktaHeaderKtaNrFilterArrow: '[id="tab1"] [class="x-panel view-panel x-box-item x-panel-default"] > div >div:nth-child(2) [class="x-grid-header-ct x-docked x-grid-header-ct-default x-docked-top x-grid-header-ct-docked-top x-grid-header-ct-default-docked-top x-box-layout-ct x-docked-noborder-top x-docked-noborder-right x-docked-noborder-left"] > div > div > div:nth-child(6) > div > div',
+        ktaGridSingleRow: '[data-recordindex="0"]',
         ktaGridRowReadBidField: '[class="x-grid-row x-grid-data-row"] > td:nth-child(15)',
         ktaGridRowUnread: '[class="x-grid-row tour-grid-unread-row x-grid-data-row"]',
         ktaGridRowUnreadBidField: '[class="x-grid-row tour-grid-unread-row x-grid-data-row"] > td:nth-child(15)',
@@ -42,11 +43,29 @@ export default class AsyncDtIndex {
                     .pause(1500)
                     .customClick(this.elements.ktaHeaderKtaNrFilterArrow)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
+                    .pause(3000)
+                    .waitForElementVisible(this.elements.ktaGridSingleRow, 'Successfully filtered KTA list!')
+                    .doubleClick(this.elements.ktaGridSingleRow)
+                    .waitForElementVisible(this.elements.ktaDetailsContainer, 'Successfully loaded KTA details!')
                     .saveScreenshot('tests_output/a-test-screen.png')
+
+                if (ktaInfo.kta.type === 'DA') {
+                    browser
+                        .customClick(this.elements.ktaDetailsPlaceBidButtonDa)
+                        .customSetValue(this.elements.ktaDetailsBidInput, '123')
+                        .customClick(this.elements.ktaDetailsMwst19Button)
+                        .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
+                        .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                        .pause(2000)
+                        .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
+                        .saveScreenshot('tests_output/a-test-screen-2.png')
+                }
             }
         });
     }
-
+////////////////////////////////////////////////////////////////////////////
+////////////////////////// LOOP CODE BELOW /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
     async checkForUnreadKtas() {
         browser
             .pause(5000)
