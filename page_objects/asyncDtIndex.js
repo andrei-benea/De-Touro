@@ -27,21 +27,23 @@ export default class AsyncDtIndex {
     }
 
     async placeBid() {
-        browser
-            .pause(3000)
-            .customClick(this.elements.ktaHeaderKtaNr)
-            .pause(1500)
-            .customClick(this.elements.ktaHeaderKtaNrFilterArrow)
-
         const fs = require('fs');
 
-        fs.readFile('tests_output/ktanumber.txt', 'utf8', (err, data) => {
+        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
-                return;
+            } else {
+                let ktaInfo = JSON.parse(data);
+                console.log('KTA details are: ', ktaInfo)
+
+                browser
+                    .pause(3000)
+                    .customClick(this.elements.ktaHeaderKtaNr)
+                    .pause(1500)
+                    .customClick(this.elements.ktaHeaderKtaNrFilterArrow)
+                    .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
+                    .saveScreenshot('tests_output/a-test-screen.png')
             }
-            browser.customSetValue(this.elements.ktaGridFilterBoxInput, data)
-            console.log('Filtering for KTA:........ ', data);
         });
     }
 
@@ -115,9 +117,4 @@ export default class AsyncDtIndex {
                 })
             })
     }
-    // async smartKtas() {
-    //     return browser
-    //         .smartKtas(this.elements.ktaGridRowUnread, this.elements.ktaGridRowAltUnread)
-    //         // .smartKtasAlt(this.elements.ktaGridRowAltUnread)
-    //     }
 };
