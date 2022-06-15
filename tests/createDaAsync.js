@@ -21,7 +21,7 @@ describe('Create new DA', () => {
     it('publish as DA', async () => {
         await asyncKkx3.publishDa();
     })
-    // it('confirm and log order type', async () => {
-    //     await asyncKkx3.confirmKtaType();
-    // })
+    it('confirm and log order type', async () => {
+        await asyncKkx3.confirmKtaType();
+    })
 })

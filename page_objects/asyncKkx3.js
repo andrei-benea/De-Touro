@@ -98,22 +98,32 @@ export default class AsyncKkx3 {
     async confirmKtaType() {
         const fs = require('fs');
 
-        fs.readFile('tests_output/ktanumber.txt', 'utf8', (err, data) => {
+        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
-                return;
+            } else {
+                let testData = JSON.parse(data);
+                console.log('old data: ', testData)
+
+                browser
+                    .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
+                    .pause(3000)
+                    .waitForElementVisible(this.elements.ktaGridKtaType, 'KTA type can be identified....')
+                    .getText(this.elements.ktaGridKtaType, async (result) => {
+                        let newData = {
+                            kta: {
+                                number: testData.kta.number,
+                                type: result.value,
+                            }
+                        }
+                        console.log('new data: ', newData)
+                        var json = JSON.stringify(newData)
+                        fs.writeFile('tests_output/ktanumber.json', json, 'utf8', (err) => {
+                            if (err) throw err;
+                            console.log('Saving KTA type to output JSON!')
+                        })
+                    })
             }
-            browser
-                .customSetValue(this.elements.ktaNrSearchInput, data)
-                .pause(3000)
-                .waitForElementVisible(this.elements.ktaGridKtaType, 'Kta type visible.........!')
-                .getText(this.elements.ktaGridKtaType, async (result) => {
-                    fs.appendFile('tests_output/ktanumber.txt', `\n${result.value}`, 'utf8', (err) => {
-                        if (err) throw err;
-                        console.log('KTA type saved to file!');
-                    });
-                })
-            console.log('Filtering for KTA:........ ', data);
         });
-    }
+    };
 };
