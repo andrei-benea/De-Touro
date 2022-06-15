@@ -28,8 +28,11 @@ export default class AsyncKkx3 {
         wizardPatientNextButton: '[id="ctl00_MainContent_formViewInsured_ASPxButtonNext"]',
         wizardDoctorNextButton: '[id="ctl00_MainContent_formViewDoctor_ASPxButtonNext"]',
         wizardDetailsNextButton: '[id="ctl00_MainContent_formViewDetails_ASPxButtonNext"]',
+        wizardTransportVmktTreeContract: '[class="fancytree-lastsib fancytree-exp-nl fancytree-ico-c"]',
         wizardTransportSaveKtaButton: '[id="ctl00_MainContent_formViewTransport_ASPxButtonSave"]',
         wizardPrintConfirmButton: '[id="ctl00_Content_linkButtonPrintDocument"]',
+        wizardFdlSearchBaResultFirstRow: '#ctl00_Content_ASPxGridViewVmktDrivers_cell0_1_selectedCheckBox',
+        wizardSearchForFdlSendBaButton: '[id="ctl00_Content_linkButtonAuctionPublish"]',
         wizardSearchForFdlInput: '[id="ctl00_Content_textBoxControlSearch"]',
         wizardSearchForFdlButton: '[class="searchButton-icon"]',
         wizardSearchForFdlSingleResult: '[id="ctl00_Content_ASPxGridViewSearchDriver_cell0_1_ctl00"]',
@@ -38,6 +41,7 @@ export default class AsyncKkx3 {
         ktaDetailsKtaStatus: '[id="ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus"]',
         ktaDetailsPublishAsKtaButton: '[id="ctl00_MainContent_formViewKta_linkButtonAuctionPublish"]',
         ktaDetailsPublishAsDaButton: '[id="ctl00_MainContent_formViewKta_linkButtonDirectInvite"]',
+        ktaDetailsPublishAsBaButton: '[id="ctl00_MainContent_formViewKta_linkButtonAuctionContractInvitePublish"]',
         ktaDetailsConfirmPublishAsKtaButton: 'body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.no-close.error-dialog.confirm-kta-publish-dialog.ui-draggable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(2)',
         ktaDetailsKtaIsPublishedWindowTitle: '#ui-id-1',
         ktaDetailsKtaIsPublishedWindowCloseButton: '[class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front no-close error-dialog ui-draggable ui-dialog-buttons"] > div:nth-child(3) > div > button',
@@ -84,6 +88,25 @@ export default class AsyncKkx3 {
             })
             .logKtaNumber(this.elements.ktaDetailsKtaNumber)
     };
+    async saveNewBa() {
+        return browser
+            .customClick(this.elements.newKtaButton)
+            .customSetValue(this.elements.wizardKvnrInput, patient.kvnr)
+            .customClick(this.elements.wizardKvnrSearchResult)
+            .customClick(this.elements.wizardContainerFirstItem)
+            .customClick(this.elements.wizardContainerConfirmButton)
+            .customClick(this.elements.wizardPatientNextButton)
+            .customClick(this.elements.wizardDoctorNextButton)
+            .customClick(this.elements.wizardDetailsNextButton)
+            .customClick(this.elements.wizardTransportVmktTreeContract)
+            .customClick(this.elements.wizardTransportSaveKtaButton)
+            .customFrameSwitch(this.elements.framePrint, 0)
+            .customClick(this.elements.wizardPrintConfirmButton)
+            .frameParent(async () => {
+                console.log('Moving up one frame!')
+            })
+            .logKtaNumber(this.elements.ktaDetailsKtaNumber)
+    };
     async publishDa() {
         return browser
             .customClick(this.elements.ktaDetailsPublishAsDaButton)
@@ -92,6 +115,19 @@ export default class AsyncKkx3 {
             .customClick(this.elements.wizardSearchForFdlButton)
             .customClick(this.elements.wizardSearchForFdlSingleResult)
             .customClick(this.elements.wizardSearchForFdlSendDaButton)
+            .frameParent(async () => {
+                console.log('Moving up one frame!')
+            })
+            .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
+            .customClick(this.elements.ktaGridKtNavBarButton)
+            .pause(5000)
+    };
+    async publishBa() {
+        return browser
+            .customClick(this.elements.ktaDetailsPublishAsBaButton)
+            .customFrameSwitch(this.elements.frameFdl, 10)
+            .customClick(this.elements.wizardFdlSearchBaResultFirstRow)
+            .customClick(this.elements.wizardSearchForFdlSendBaButton)
             .frameParent(async () => {
                 console.log('Moving up one frame!')
             })
