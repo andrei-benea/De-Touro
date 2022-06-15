@@ -58,7 +58,25 @@ export default class AsyncDtIndex {
                         .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
                         .pause(2000)
                         .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
-                        .saveScreenshot('tests_output/a-test-screen-2.png')
+                        .saveScreenshot('tests_output/a-test-screen-da.png')
+                } 
+                else if (ktaInfo.kta.type === 'BA') {
+                    browser
+                        .customClick(this.elements.ktaDetailsPlaceBidButtonBa)
+                        .pause(2000)
+                        .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
+                        .saveScreenshot('tests_output/a-test-screen-ba.png')
+                }
+                else if (ktaInfo.kta.type === 'KTA') {
+                    browser
+                        .customClick(this.elements.ktaDetailsPlaceBidButtonKta)
+                        .customSetValue(this.elements.ktaDetailsBidInput, '123')
+                        .customClick(this.elements.ktaDetailsMwst19Button)
+                        .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
+                        .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                        .pause(2000)
+                        .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
+                        .saveScreenshot('tests_output/a-test-screen-kta.png')
                 }
             }
         });
