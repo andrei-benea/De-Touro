@@ -18,6 +18,11 @@ export default class AsyncKkx3 {
         ktaModuleStartButton: '#ctl00_MainContent_Image1',
         ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
         ktaGridKtNavBarButton: '[class="gridLink"]',
+        ktaGridKtFirstRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXDataRow0"]',
+        ktaGridKtRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT"]',
+        ktaGridKtRowDa: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT daRow"]',
+        ktaGridKtRowAlt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT dxgvDataRowAlt_deTouroKT"]',
+        ktaGridKtRowAltDa: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT dxgvDataRowAlt_deTouroKT daRow"]',
         ktaGridKtaType: '[id="ctl00_MainContent_ASPxGridViewDrives_tccell0_3"]',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
         ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]',
@@ -37,6 +42,7 @@ export default class AsyncKkx3 {
         wizardSearchForFdlButton: '[class="searchButton-icon"]',
         wizardSearchForFdlSingleResult: '[id="ctl00_Content_ASPxGridViewSearchDriver_cell0_1_ctl00"]',
         wizardSearchForFdlSendDaButton: '[id="ctl00_Content_linkButtonAuctionPublish"]',
+        ktaDetailsNavBarBidsButton: '[id="ctl00_linkBidHistory"]',
         ktaDetailsKtaNumber: '[id="ctl00_labelKtaNumber"]',
         ktaDetailsKtaStatus: '[id="ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus"]',
         ktaDetailsPublishAsKtaButton: '[id="ctl00_MainContent_formViewKta_linkButtonAuctionPublish"]',
@@ -45,6 +51,9 @@ export default class AsyncKkx3 {
         ktaDetailsConfirmPublishAsKtaButton: 'body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.no-close.error-dialog.confirm-kta-publish-dialog.ui-draggable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(2)',
         ktaDetailsKtaIsPublishedWindowTitle: '#ui-id-1',
         ktaDetailsKtaIsPublishedWindowCloseButton: '[class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front no-close error-dialog ui-draggable ui-dialog-buttons"] > div:nth-child(3) > div > button',
+        ktaDetailsBidsAssignToFirstButton: '[id="ctl00_MainContent_ASPxGridViewBidList_cell0_0_ASPxButtonSelect"]',
+        ktaDetailsBidsConfirmAssignmentButton: '[class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front no-close error-dialog confirm-kta-bid-dialog ui-draggable ui-dialog-buttons"] [class="ui-dialog-buttonset"] > button:nth-child(2)',
+        ktaDetailsDevelopmentKtaStatusBox: '[id="ctl00_MainContent_LabelKTAStatus"] > b',
     };
     async initPage() {
         return browser
@@ -156,7 +165,7 @@ export default class AsyncKkx3 {
                 console.error(err);
             } else {
                 let testData = JSON.parse(data);
-                console.log('old data: ', testData)
+                console.log('old data: ', testData);
 
                 browser
                     .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
@@ -178,5 +187,31 @@ export default class AsyncKkx3 {
                     })
             }
         });
+    };
+    async assignKta() {
+        const fs = require('fs');
+
+        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+            } else {
+                let testData = JSON.parse(data);
+                console.log('old data: ', testData);
+
+                browser
+                    .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
+                    .pause(3000)
+                    .customClick(this.elements.ktaGridKtFirstRow)
+                    .customClick(this.elements.ktaDetailsNavBarBidsButton)
+                    .customClick(this.elements.ktaDetailsBidsAssignToFirstButton)
+                    .customClick(this.elements.ktaDetailsBidsConfirmAssignmentButton)
+                    .customFrameSwitch(this.elements.framePrint, 2)
+                    .customClick(this.elements.wizardPrintConfirmButton)
+                    .frameParent(async () => {
+                        console.log('Moving up one frame!')
+                    })
+                    .expect.element(this.elements.ktaDetailsDevelopmentKtaStatusBox).text.to.contain('Zugeteilt')
+            }
+        })
     };
 };
