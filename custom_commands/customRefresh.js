@@ -1,56 +1,46 @@
 module.exports = class CustomRefresh {
-    async command(button) {
-        let i = 1;
-        while (i <= 2) {
-            let myPromise = new Promise(function (myResolve, myReject) {
-                browser
-                    .customClick(button)
-                    .pause(500)
-                    .waitForFirstXHR('', 1000, function browserTrigger() {
-                        browser.click(button)
-                    },
-                        function assertValues(xhr) {
-                            let data = xhr.responseData;
-                            let parsed = JSON.parse(data);
-                            // console.log(parsed);
-                            console.log('Nr. of KTAs identified: ' + parsed.TotalRecords)
-                            if (parsed.TotalRecords === 1) {
-                                myResolve(parsed.TotalRecords)
-                            }
-                            else {
-                                myReject('Rejecting promise...')
-                            }
-                        }
-                    )
+    async command(button, text) {
+        let rezz = await browser.getText(text, async (result) => {
+            console.log('inside rezz function ' + result.value)
+            return result.value;
+        });
+        console.log('outside first ' + rezz == 'Keine KTA gefunden')
+        while (rezz == 'Keine KTA gefunden') {
+            console.count('Attempt: ')
+            browser
+                .customClick(button)
+                .pause(5000)
+            let rezzNew = await browser.getText(text, async (result) => {
+                console.log('inside rezzNew function ' + result.value)
+                return result.value;
             });
-            myPromise.then(
-                function(value) {
-                    console.log(value)
-                },
-                function(error) {
-                    console.log(error)
-                }
-            )
-            // browser
-            //     .customClick(button)
-            //     .pause(500)
-            //     .waitForFirstXHR('', 1000, function browserTrigger() {
-            //         browser.click(button)
-            //     },
-            //         function assertValues(xhr) {
-            //             // browser.assert.equal(xhr.status, "success");
-            //             // browser.assert.equal(xhr.method, "POST");
-            //             // browser.assert.equal(xhr.requestData, "200");
-            //             // browser.assert.equal(xhr.httpResponseCode, "200");
-            //             // browser.assert.equal(xhr.responseData, "");
-            //             let data = xhr.responseData
-            //             // console.log(data)
-            //             let parsed = JSON.parse(data)
-            //             // console.log(parsed)
-            //             console.log('Nr. of KTAs identified: ' + parsed.TotalRecords)
-            //         })
-            console.log('Trying....: ' + i);
-            i++;
+            console.log('outside last ' + rezz)
+            if (rezzNew != 'Keine KTA gefunden') {
+                break;
+            }
         }
     }
 }
+///////////////////////////////////////////////////////////////////////////////////////
+////////////////////WORKING AWAIT STRUCTURE, NOT WORKING LOOP!!!!!!!!!!////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+// module.exports = class CustomRefresh {
+//     async command(button, text) {
+//         let rezz = await browser.getText(text, async (result) => {
+//             console.log('inside let ' + result.value)
+//             return result.value;
+//         });
+//         console.log('outside first ' + rezz == 'Keine KTA gefunden')
+//         do {
+//             browser
+//                 .customClick(button)
+//                 .pause(5000)
+//             console.count('Attempt: ')
+//         }
+//         while (rezz == 'Keine KTA gefunden')
+//         console.log('outside second ' + rezz)
+//     }
+// }
+//////////////////////////////////THE END//////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////

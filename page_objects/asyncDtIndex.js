@@ -45,7 +45,7 @@ export default class AsyncDtIndex {
                     .customClick(this.elements.ktaHeaderKtaNrFilterArrow)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
                     .pause(2000)
-                    // .customRefresh(this.elements.ktaFooterRefreshButton)
+                    .customRefresh(this.elements.ktaFooterRefreshButton, this.elements.ktaFooterPageNumber)
                     .waitForElementVisible(this.elements.ktaGridSingleRow, 'Successfully filtered KTA list!')
                     .doubleClick(this.elements.ktaGridSingleRow)
                     .waitForElementVisible(this.elements.ktaDetailsContainer, 'Successfully loaded KTA details!')
