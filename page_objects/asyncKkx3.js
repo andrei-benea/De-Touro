@@ -17,6 +17,8 @@ export default class AsyncKkx3 {
         frameFdl: '[id="dialogContent"]',
         ktaModuleStartButton: '#ctl00_MainContent_Image1',
         ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
+        ktaGridNavBar: '[id="ctl00_MainContent_MenuDisplayAuctions"]',
+        ktaGridNavBarAllButton: '[id="ctl00_MainContent_MenuDisplayAuctions"] > ul > li:nth-child(2)',
         ktaGridKtNavBarButton: '[class="gridLink"]',
         ktaGridKtFirstRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXDataRow0"]',
         ktaGridKtRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT"]',
@@ -24,6 +26,8 @@ export default class AsyncKkx3 {
         ktaGridKtRowAlt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT dxgvDataRowAlt_deTouroKT"]',
         ktaGridKtRowAltDa: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT dxgvDataRowAlt_deTouroKT daRow"]',
         ktaGridKtaType: '[id="ctl00_MainContent_ASPxGridViewDrives_tccell0_3"]',
+        ktaGridEmptyRow: '[class="dxgvEmptyDataRow_deTouroKT"]',
+        ktaGridEmptyRowTextBox: '[class="dxgvEmptyDataRow_deTouroKT"] > td > div',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
         ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]',
         wizardKvnrInput: '[id="ctl00_MainContent_formViewInsured_textBoxKVNR"]',
@@ -201,6 +205,7 @@ export default class AsyncKkx3 {
                 browser
                     .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
                     .pause(3000)
+                    .customRefreshKt(this.elements.ktaGridNavBarAllButton, this.elements.ktaGridEmptyRow)
                     .customClick(this.elements.ktaGridKtFirstRow)
                     .customClick(this.elements.ktaDetailsNavBarBidsButton)
                     .customClick(this.elements.ktaDetailsBidsAssignToFirstButton)
