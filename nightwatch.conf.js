@@ -11,11 +11,12 @@
 //             __/ |
 //            |___/
 //
-///ENV VAR CONFIG////////////////
+///ENV VAR CONFIG///////////////////////////////
 require('dotenv').config()
-// verify configuration
+// verify configuration ////////////////////////
 //console.log(process.env)
-/////BABEL CONFIGURATION FOR ES6/////////////////
+/////BABEL CONFIGURATION FOR ES6////////////////
+////////////////////////////////////////////////
 require('@babel/register')()
 // OR
 // require('babel-core/register')
@@ -30,10 +31,10 @@ module.exports = {
   page_objects_path: ['page_objects'],
 
   // See https://nightwatchjs.org/guide/extending-nightwatch/custom-commands.html
-  custom_commands_path: ['custom_commands'],
+  custom_commands_path: ['custom_commands', './node_modules/nightwatch-xhr/es5/commands'],
 
   // See https://nightwatchjs.org/guide/extending-nightwatch/custom-assertions.html
-  custom_assertions_path: '',
+  custom_assertions_path: ['./node_modules/nightwatch-xhr/es5/assertions'],
 
   // See https://nightwatchjs.org/guide/extending-nightwatch/plugin-api.html
   plugins: [

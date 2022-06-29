@@ -39,7 +39,43 @@ KT:
 `npm test -- --env kt tests/createDaAsync.js`
 
 LE:
-`npm test -- --env le tests/acceptDaAsync.js`
+`npm test -- --env le tests/placeBidAsync.js`
+
+### Test scenarios
+A list of commands that trigger corresponding tests. Currently they will have to be executed in the same order as presented here.
+
+#### KTA
+Save, publish, bid, assign, perform.
+
+`npm test -- --env kt tests/createKtaAsync.js`
+
+`npm test -- --env le tests/placeBidAsync.js`
+
+`npm test -- --env kt tests/assignKtaAsync.js`
+
+`npm test -- --env le tests/performRidesAsync.js`
+
+#### DA
+Save, publish, bid, assign, perform.
+
+`npm test -- --env kt tests/createDaAsync.js`
+
+`npm test -- --env le tests/placeBidAsync.js`
+
+`npm test -- --env kt tests/assignKtaAsync.js`
+
+`npm test -- --env le tests/performRidesAsync.js`
+
+#### BA
+Save, publish, accept, assign, perform.
+
+`npm test -- --env kt tests/createBaAsync.js`
+
+`npm test -- --env le tests/placeBidAsync.js`
+
+`npm test -- --env kt tests/assignKtaAsync.js`
+
+`npm test -- --env le tests/performRidesAsync.js`
 
 ## Commands for running available tests (old)
 Like in the below example simply run test while passing the --tag argument. Applies to tests in /tests/old folder

@@ -7,7 +7,7 @@ module.exports = {
         submitButton: '#ext-gen48',
         kkSwitchButton: '#ext-gen136',
         selectGroupInput: '#ext-comp-1037',
-        kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(33)',
+        kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(39)',
         loggedInUser: '#ext-comp-1181',
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
         frame: '[name="FDLiFrame"]',
@@ -57,7 +57,7 @@ module.exports = {
                 .setValue('@usernameInput', username)
         },
         setPass() {
-            const password = 'ungam+30'
+            const password = 'ungam+40'
             return this
                 .setValue('@passwordInput', password)
         },

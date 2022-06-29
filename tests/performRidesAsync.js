@@ -11,8 +11,7 @@ describe('Accept newest available DA', () => {
     it('login to LE', async () => {
         await asyncDtLogin.loginLe();
     })
-    it('place bid on all requests', async () => {
-        await asyncDtIndex.placeBidAll();
+    it('processing KTA', async () => {
+        await asyncDtIndex.simulateRide();
     })
 })
-

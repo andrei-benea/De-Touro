@@ -9,7 +9,7 @@ export default class AsyncKkx3 {
         loginButton: '#ext-gen48',
         kkSwitchButton: '#ext-gen136',
         selectGroupInput: '#ext-comp-1037',
-        kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(33)',
+        kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(39)',
         loggedInUser: '#ext-comp-1181',
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
         frameMain: '[name="FDLiFrame"]',
@@ -17,6 +17,17 @@ export default class AsyncKkx3 {
         frameFdl: '[id="dialogContent"]',
         ktaModuleStartButton: '#ctl00_MainContent_Image1',
         ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
+        ktaGridNavBar: '[id="ctl00_MainContent_MenuDisplayAuctions"]',
+        ktaGridNavBarAllButton: '[id="ctl00_MainContent_MenuDisplayAuctions"] > ul > li:nth-child(2)',
+        ktaGridKtNavBarButton: '[class="gridLink"]',
+        ktaGridKtFirstRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXDataRow0"]',
+        ktaGridKtRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT"]',
+        ktaGridKtRowDa: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT daRow"]',
+        ktaGridKtRowAlt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT dxgvDataRowAlt_deTouroKT"]',
+        ktaGridKtRowAltDa: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT dxgvDataRowAlt_deTouroKT daRow"]',
+        ktaGridKtaType: '[id="ctl00_MainContent_ASPxGridViewDrives_tccell0_3"]',
+        ktaGridEmptyRow: '[class="dxgvEmptyDataRow_deTouroKT"]',
+        ktaGridEmptyRowTextBox: '[class="dxgvEmptyDataRow_deTouroKT"] > td > div',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
         ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]',
         wizardKvnrInput: '[id="ctl00_MainContent_formViewInsured_textBoxKVNR"]',
@@ -26,15 +37,27 @@ export default class AsyncKkx3 {
         wizardPatientNextButton: '[id="ctl00_MainContent_formViewInsured_ASPxButtonNext"]',
         wizardDoctorNextButton: '[id="ctl00_MainContent_formViewDoctor_ASPxButtonNext"]',
         wizardDetailsNextButton: '[id="ctl00_MainContent_formViewDetails_ASPxButtonNext"]',
+        wizardTransportVmktTreeContract: '[class="fancytree-lastsib fancytree-exp-nl fancytree-ico-c"]',
         wizardTransportSaveKtaButton: '[id="ctl00_MainContent_formViewTransport_ASPxButtonSave"]',
         wizardPrintConfirmButton: '[id="ctl00_Content_linkButtonPrintDocument"]',
+        wizardFdlSearchBaResultFirstRow: '#ctl00_Content_ASPxGridViewVmktDrivers_cell0_1_selectedCheckBox',
+        wizardSearchForFdlSendBaButton: '[id="ctl00_Content_linkButtonAuctionPublish"]',
         wizardSearchForFdlInput: '[id="ctl00_Content_textBoxControlSearch"]',
         wizardSearchForFdlButton: '[class="searchButton-icon"]',
         wizardSearchForFdlSingleResult: '[id="ctl00_Content_ASPxGridViewSearchDriver_cell0_1_ctl00"]',
         wizardSearchForFdlSendDaButton: '[id="ctl00_Content_linkButtonAuctionPublish"]',
+        ktaDetailsNavBarBidsButton: '[id="ctl00_linkBidHistory"]',
         ktaDetailsKtaNumber: '[id="ctl00_labelKtaNumber"]',
         ktaDetailsKtaStatus: '[id="ctl00_MainContent_formViewKta_ASPxDockPanelStatus_textBoxStatus"]',
+        ktaDetailsPublishAsKtaButton: '[id="ctl00_MainContent_formViewKta_linkButtonAuctionPublish"]',
         ktaDetailsPublishAsDaButton: '[id="ctl00_MainContent_formViewKta_linkButtonDirectInvite"]',
+        ktaDetailsPublishAsBaButton: '[id="ctl00_MainContent_formViewKta_linkButtonAuctionContractInvitePublish"]',
+        ktaDetailsConfirmPublishAsKtaButton: 'body > div.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.no-close.error-dialog.confirm-kta-publish-dialog.ui-draggable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(2)',
+        ktaDetailsKtaIsPublishedWindowTitle: '#ui-id-1',
+        ktaDetailsKtaIsPublishedWindowCloseButton: '[class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front no-close error-dialog ui-draggable ui-dialog-buttons"] > div:nth-child(3) > div > button',
+        ktaDetailsBidsAssignToFirstButton: '[id="ctl00_MainContent_ASPxGridViewBidList_cell0_0_ASPxButtonSelect"]',
+        ktaDetailsBidsConfirmAssignmentButton: '[class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front no-close error-dialog confirm-kta-bid-dialog ui-draggable ui-dialog-buttons"] [class="ui-dialog-buttonset"] > button:nth-child(2)',
+        ktaDetailsDevelopmentKtaStatusBox: '[id="ctl00_MainContent_LabelKTAStatus"] > b',
     };
     async initPage() {
         return browser
@@ -78,6 +101,25 @@ export default class AsyncKkx3 {
             })
             .logKtaNumber(this.elements.ktaDetailsKtaNumber)
     };
+    async saveNewBa() {
+        return browser
+            .customClick(this.elements.newKtaButton)
+            .customSetValue(this.elements.wizardKvnrInput, patient.kvnr)
+            .customClick(this.elements.wizardKvnrSearchResult)
+            .customClick(this.elements.wizardContainerFirstItem)
+            .customClick(this.elements.wizardContainerConfirmButton)
+            .customClick(this.elements.wizardPatientNextButton)
+            .customClick(this.elements.wizardDoctorNextButton)
+            .customClick(this.elements.wizardDetailsNextButton)
+            .customClick(this.elements.wizardTransportVmktTreeContract)
+            .customClick(this.elements.wizardTransportSaveKtaButton)
+            .customFrameSwitch(this.elements.framePrint, 0)
+            .customClick(this.elements.wizardPrintConfirmButton)
+            .frameParent(async () => {
+                console.log('Moving up one frame!')
+            })
+            .logKtaNumber(this.elements.ktaDetailsKtaNumber)
+    };
     async publishDa() {
         return browser
             .customClick(this.elements.ktaDetailsPublishAsDaButton)
@@ -90,5 +132,91 @@ export default class AsyncKkx3 {
                 console.log('Moving up one frame!')
             })
             .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
+            .customClick(this.elements.ktaGridKtNavBarButton)
+            .pause(5000)
+    };
+    async publishBa() {
+        return browser
+            .customClick(this.elements.ktaDetailsPublishAsBaButton)
+            .customFrameSwitch(this.elements.frameFdl, 10)
+            .customClick(this.elements.wizardFdlSearchBaResultFirstRow)
+            .customClick(this.elements.wizardSearchForFdlSendBaButton)
+            .frameParent(async () => {
+                console.log('Moving up one frame!')
+            })
+            .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
+            .customClick(this.elements.ktaGridKtNavBarButton)
+            .pause(5000)
+    };
+    async publishKta() {
+        return browser
+            .customClick(this.elements.ktaDetailsPublishAsKtaButton)
+            .customClick(this.elements.ktaDetailsConfirmPublishAsKtaButton)
+            .getText(this.elements.ktaDetailsKtaIsPublishedWindowTitle, async (result) => {
+                if (result === 'KTA VERÖFFENTLICHT') {
+                    console.log('Successfully published as KTA!')
+                }
+            })
+            .customClick(this.elements.ktaDetailsKtaIsPublishedWindowCloseButton)
+            .customClick(this.elements.ktaGridKtNavBarButton)
+            .pause(5000)
+    };
+    async confirmKtaType() {
+        const fs = require('fs');
+
+        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+            } else {
+                let testData = JSON.parse(data);
+                console.log('old data: ', testData);
+
+                browser
+                    .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
+                    .pause(3000)
+                    .waitForElementVisible(this.elements.ktaGridKtaType, 'KTA type can be identified....')
+                    .getText(this.elements.ktaGridKtaType, async (result) => {
+                        let newData = {
+                            kta: {
+                                number: testData.kta.number,
+                                type: result.value,
+                            }
+                        }
+                        console.log('new data: ', newData)
+                        var json = JSON.stringify(newData)
+                        fs.writeFile('tests_output/ktanumber.json', json, 'utf8', (err) => {
+                            if (err) throw err;
+                            console.log('Saving KTA type to output JSON!')
+                        })
+                    })
+            }
+        });
+    };
+    async assignKta() {
+        const fs = require('fs');
+
+        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+            } else {
+                let testData = JSON.parse(data);
+                console.log('old data: ', testData);
+
+                browser
+                    .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
+                    .pause(3000)
+                    .customRefreshKt(this.elements.ktaGridNavBarAllButton, this.elements.ktaGridEmptyRow)
+                    .customClick(this.elements.ktaGridKtFirstRow)
+                    .customClick(this.elements.ktaDetailsNavBarBidsButton)
+                    .customClick(this.elements.ktaDetailsBidsAssignToFirstButton)
+                    .customClick(this.elements.ktaDetailsBidsConfirmAssignmentButton)
+                    .customFrameSwitch(this.elements.framePrint, 2)
+                    .customClick(this.elements.wizardPrintConfirmButton)
+                    .frameParent(async () => {
+                        console.log('Moving up one frame!')
+                    })
+                    .expect.element(this.elements.ktaDetailsDevelopmentKtaStatusBox).text.to.contain('Zugeteilt')
+            }
+        })
     };
 };
