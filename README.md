@@ -46,23 +46,35 @@ A list of commands that trigger corresponding tests. Currently they will have to
 
 #### KTA
 Save, publish, bid, assign, perform.
+
 `npm test -- --env kt tests/createKtaAsync.js`
+
 `npm test -- --env le tests/placeBidAsync.js`
+
 `npm test -- --env kt tests/assignKtaAsync.js`
+
 `npm test -- --env le tests/performRidesAsync.js`
 
 #### DA
 Save, publish, bid, assign, perform.
+
 `npm test -- --env kt tests/createDaAsync.js`
+
 `npm test -- --env le tests/placeBidAsync.js`
+
 `npm test -- --env kt tests/assignKtaAsync.js`
+
 `npm test -- --env le tests/performRidesAsync.js`
 
 #### BA
 Save, publish, accept, assign, perform.
+
 `npm test -- --env kt tests/createBaAsync.js`
+
 `npm test -- --env le tests/placeBidAsync.js`
+
 `npm test -- --env kt tests/assignKtaAsync.js`
+
 `npm test -- --env le tests/performRidesAsync.js`
 
 ## Commands for running available tests (old)
