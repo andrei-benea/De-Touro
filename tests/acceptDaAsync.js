@@ -11,8 +11,8 @@ describe('Accept newest available DA', () => {
     it('login to LE', async () => {
         await asyncDtLogin.loginLe();
     })
-    it('kta analysis, checking for unread KTAs', async () => {
-        await asyncDtIndex.checkForUnreadKtas();
+    it('place bid on all requests', async () => {
+        await asyncDtIndex.placeBidAll();
     })
 })
 
