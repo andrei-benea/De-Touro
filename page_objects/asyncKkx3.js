@@ -157,7 +157,7 @@ export default class AsyncKkx3 {
     };
     async confirmKtaType() {
         const fs = require('fs');
-        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+        fs.readFile('tests_output/ktainfo.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
@@ -176,7 +176,7 @@ export default class AsyncKkx3 {
                         }
                         console.log('new data: ', newData)
                         var json = JSON.stringify(newData)
-                        fs.writeFile('tests_output/ktanumber.json', json, 'utf8', (err) => {
+                        fs.writeFile('tests_output/ktainfo.json', json, 'utf8', (err) => {
                             if (err) throw err;
                             console.log('Saving KTA type to output JSON!')
                         })
@@ -186,7 +186,7 @@ export default class AsyncKkx3 {
     };
     async assignKta() {
         const fs = require('fs');
-        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+        fs.readFile('tests_output/ktainfo.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {

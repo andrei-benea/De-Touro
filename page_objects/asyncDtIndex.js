@@ -53,7 +53,7 @@ export default class AsyncDtIndex {
     };
     async placeBid() {
         const fs = require('fs');
-        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+        fs.readFile('tests_output/ktainfo.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
@@ -104,7 +104,7 @@ export default class AsyncDtIndex {
     };
     async simulateRide() {
         const fs = require('fs');
-        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+        fs.readFile('tests_output/ktainfo.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
