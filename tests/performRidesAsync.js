@@ -4,14 +4,14 @@ import AsyncDtIndex from "../page_objects/asyncDtIndex";
 const asyncDtLogin = new AsyncDtLogin();
 const asyncDtIndex = new AsyncDtIndex();
 
-describe('Accept newest available DA', () => {
+describe('Upload proof of performance', () => {
     it('browser initialization', async () => {
         await asyncDtLogin.initPage();
     })
     it('login to LE', async () => {
         await asyncDtLogin.loginLe();
     })
-    it('processing KTA', async () => {
+    it('upload proof of performance', async () => {
         await asyncDtIndex.simulateRide();
     })
 })

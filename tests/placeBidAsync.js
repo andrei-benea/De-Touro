@@ -4,7 +4,7 @@ import AsyncDtIndex from "../page_objects/asyncDtIndex";
 const asyncDtLogin = new AsyncDtLogin();
 const asyncDtIndex = new AsyncDtIndex();
 
-describe('Accept newest available DA', () => {
+describe('Place bid on KTA', () => {
     it('browser initialization', async () => {
         await asyncDtLogin.initPage();
     })
