@@ -1,4 +1,4 @@
-module.exports = class CustomRefresh {
+module.exports = class CustomRefreshKt {
     async command(button, element) {
         let refresh = await browser.isVisible(element, async (result) => {
             console.log(result.status)
