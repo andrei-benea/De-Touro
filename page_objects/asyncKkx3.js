@@ -8,7 +8,6 @@ export default class AsyncKkx3 {
         passwordInput: '#ext-comp-1021',
         loginButton: '#ext-gen48',
         kkSwitchButton: '#ext-gen136',
-        selectGroupInput: '#ext-comp-1037',
         kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(39)',
         loggedInUser: '#ext-comp-1181',
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
@@ -21,13 +20,8 @@ export default class AsyncKkx3 {
         ktaGridNavBarAllButton: '[id="ctl00_MainContent_MenuDisplayAuctions"] > ul > li:nth-child(2)',
         ktaGridKtNavBarButton: '[class="gridLink"]',
         ktaGridKtFirstRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXDataRow0"]',
-        ktaGridKtRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT"]',
-        ktaGridKtRowDa: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT daRow"]',
-        ktaGridKtRowAlt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT dxgvDataRowAlt_deTouroKT"]',
-        ktaGridKtRowAltDa: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] [class="dxgvDataRow_deTouroKT dxgvDataRowAlt_deTouroKT daRow"]',
         ktaGridKtaType: '[id="ctl00_MainContent_ASPxGridViewDrives_tccell0_3"]',
         ktaGridEmptyRow: '[class="dxgvEmptyDataRow_deTouroKT"]',
-        ktaGridEmptyRowTextBox: '[class="dxgvEmptyDataRow_deTouroKT"] > td > div',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
         ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]',
         wizardKvnrInput: '[id="ctl00_MainContent_formViewInsured_textBoxKVNR"]',
@@ -163,14 +157,12 @@ export default class AsyncKkx3 {
     };
     async confirmKtaType() {
         const fs = require('fs');
-
         fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
                 let testData = JSON.parse(data);
                 console.log('old data: ', testData);
-
                 browser
                     .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
                     .pause(3000)
@@ -194,14 +186,12 @@ export default class AsyncKkx3 {
     };
     async assignKta() {
         const fs = require('fs');
-
         fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
                 let testData = JSON.parse(data);
                 console.log('old data: ', testData);
-
                 browser
                     .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
                     .pause(3000)
