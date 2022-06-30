@@ -205,7 +205,7 @@ export default class AsyncKkx3 {
                     .frameParent(async () => {
                         console.log('Moving up one frame!')
                     })
-                    .expect.element(this.elements.ktaDetailsDevelopmentKtaStatusBox).text.to.contain('Zugeteilt')
+                    .customAssertText(this.elements.ktaDetailsDevelopmentKtaStatusBox, 'Zugeteilt')
             }
         })
     };
