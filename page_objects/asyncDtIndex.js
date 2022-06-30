@@ -50,18 +50,15 @@ export default class AsyncDtIndex {
         uploadProofLocatorG: '[id="certificateFile-button-btnWrap"]',
         uploadProofLocatorH: '[id="certificateFile-button-btnEl"]',
         uploadProofLocatorI: '[id="certificateFile-inputEl"]',
-    }
-
+    };
     async placeBid() {
         const fs = require('fs');
-
         fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
                 let ktaInfo = JSON.parse(data);
                 console.log('KTA details are: ', ktaInfo)
-
                 browser
                     .pause(3000)
                     .customClick(this.elements.ktaHeaderKtaNr)
@@ -73,7 +70,6 @@ export default class AsyncDtIndex {
                     .doubleClick(this.elements.ktaGridSingleRow)
                     .waitForElementVisible(this.elements.ktaDetailsContainer, 'Successfully loaded KTA details!')
                     .saveScreenshot('tests_output/a-test-screen.png')
-
                 if (ktaInfo.kta.type === 'DA') {
                     browser
                         .customClick(this.elements.ktaDetailsPlaceBidButtonDa)
@@ -105,17 +101,15 @@ export default class AsyncDtIndex {
                 }
             }
         });
-    }
+    };
     async simulateRide() {
         const fs = require('fs');
-
         fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
                 let ktaInfo = JSON.parse(data);
                 console.log('KTA details are: ', ktaInfo)
-
                 browser
                     .pause(5000)
                     .customClick(this.elements.ktaHeaderMyAssignedRides)
@@ -138,9 +132,9 @@ export default class AsyncDtIndex {
             }
         });
     }
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////// LOOP CODE BELOW /////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+///////////////// LOOP (through all orders w/o bids) CODE BELOW ////////////////
+////////////////////////////////////////////////////////////////////////////////
     async checkForUnreadKtas() {
         browser
             .pause(5000)
