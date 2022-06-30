@@ -5,7 +5,7 @@ export default class AsyncDtLogin {
         usernameInput: '[placeholder="E-Mail"]',
         passwordInput: '[placeholder="Kennwort"]',
         loginButton: '[id="button-1021-btnEl"]',
-    }
+    };
     async initPage() {
         return browser
             .maximizeWindow()
@@ -16,5 +16,5 @@ export default class AsyncDtLogin {
     async loginLe() {
         return browser
             .customLogin(this.elements.usernameInput, this.elements.passwordInput, this.elements.loginButton)
-    }
+    };
 };
