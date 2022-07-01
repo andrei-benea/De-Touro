@@ -60,7 +60,7 @@ export default class AsyncDtIndex {
                 let ktaInfo = JSON.parse(data);
                 console.log('KTA details are: ', ktaInfo)
                 browser
-                    .pause(3000)
+                    .pause(5000)
                     .customClick(this.elements.ktaHeaderKtaNr)
                     .customClick(this.elements.ktaHeaderKtaNrFilterArrow)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
