@@ -1,3 +1,5 @@
+import { credentials } from "../tests_input/credentials/andreiBenea";
+
 export default class AsyncDtLogin {
     url = 'https://qa.de-touro.de/Login';
     elements = {
@@ -11,10 +13,16 @@ export default class AsyncDtLogin {
             .maximizeWindow()
             .url(this.url)
             .assert.urlContains(this.url)
-            .customClick(this.elements.closeCookiesButton)
+            .specialClick(this.elements.closeCookiesButton)
+    };
+    async softInitPage() {
+        return browser
+            .navigateTo(this.url)
+            .assert.urlContains(this.url)
+            .specialClick(this.elements.closeCookiesButton)
     };
     async loginLe() {
         return browser
-            .customLogin(this.elements.usernameInput, this.elements.passwordInput, this.elements.loginButton)
+            .easyLogin(this.elements.usernameInput, credentials.le.userName, this.elements.passwordInput, credentials.le.passWord, this.elements.loginButton)
     };
 };

@@ -1,5 +1,6 @@
 import { patient } from "../tests_input/patientData";
 import { service_providers } from "../tests_input/serviceProviderData";
+import { credentials } from "../tests_input/credentials/andreiBenea";
 
 export default class AsyncKkx3 {
     url = 'https://check-kkx3.zhp-online.de/x3/de/';
@@ -59,37 +60,42 @@ export default class AsyncKkx3 {
             .url(this.url)
             .assert.urlContains(this.url)
     };
+    async softInitPage() {
+        return browser
+            .navigateTo(this.url)
+            .assert.urlContains(this.url)
+    };
     async loginKt() {
         return browser
-            .customLogin(this.elements.usernameInput, this.elements.passwordInput, this.elements.loginButton)
-            .customClick(this.elements.kkSwitchButton)
-            .customClick(this.elements.kkDeTouroGroup)
+            .easyLogin(this.elements.usernameInput, credentials.kt.userName, this.elements.passwordInput, credentials.kt.passWord, this.elements.loginButton)
+            .specialClick(this.elements.kkSwitchButton)
+            .specialClick(this.elements.kkDeTouroGroup)
             .customAssertText(this.elements.loggedInUser, 'Andrei Benea')
     };
     async loadDeTouro() {
         return browser
             .pause(2000)
-            .customClick(this.elements.treeDeTouro)
+            .specialClick(this.elements.treeDeTouro)
             .customFrameSwitch(this.elements.frameMain, 0)
     };
     async loadKtaModule() {
         return browser
-            .customClick(this.elements.ktaModuleStartButton)
+            .specialClick(this.elements.ktaModuleStartButton)
             .waitForElementVisible(this.elements.ktaGridKt, 'KTA grid loaded!')
     };
     async saveNewKta() {
         return browser
-            .customClick(this.elements.newKtaButton)
+            .specialClick(this.elements.newKtaButton)
             .customSetValue(this.elements.wizardKvnrInput, patient.kvnr)
-            .customClick(this.elements.wizardKvnrSearchResult)
-            .customClick(this.elements.wizardContainerFirstItem)
-            .customClick(this.elements.wizardContainerConfirmButton)
-            .customClick(this.elements.wizardPatientNextButton)
-            .customClick(this.elements.wizardDoctorNextButton)
-            .customClick(this.elements.wizardDetailsNextButton)
-            .customClick(this.elements.wizardTransportSaveKtaButton)
+            .specialClick(this.elements.wizardKvnrSearchResult)
+            .specialClick(this.elements.wizardContainerFirstItem)
+            .specialClick(this.elements.wizardContainerConfirmButton)
+            .specialClick(this.elements.wizardPatientNextButton)
+            .specialClick(this.elements.wizardDoctorNextButton)
+            .specialClick(this.elements.wizardDetailsNextButton)
+            .specialClick(this.elements.wizardTransportSaveKtaButton)
             .customFrameSwitch(this.elements.framePrint, 0)
-            .customClick(this.elements.wizardPrintConfirmButton)
+            .specialClick(this.elements.wizardPrintConfirmButton)
             .frameParent(async () => {
                 console.log('Moving up one frame!')
             })
@@ -97,18 +103,18 @@ export default class AsyncKkx3 {
     };
     async saveNewBa() {
         return browser
-            .customClick(this.elements.newKtaButton)
+            .specialClick(this.elements.newKtaButton)
             .customSetValue(this.elements.wizardKvnrInput, patient.kvnr)
-            .customClick(this.elements.wizardKvnrSearchResult)
-            .customClick(this.elements.wizardContainerFirstItem)
-            .customClick(this.elements.wizardContainerConfirmButton)
-            .customClick(this.elements.wizardPatientNextButton)
-            .customClick(this.elements.wizardDoctorNextButton)
-            .customClick(this.elements.wizardDetailsNextButton)
-            .customClick(this.elements.wizardTransportVmktTreeContract)
-            .customClick(this.elements.wizardTransportSaveKtaButton)
+            .specialClick(this.elements.wizardKvnrSearchResult)
+            .specialClick(this.elements.wizardContainerFirstItem)
+            .specialClick(this.elements.wizardContainerConfirmButton)
+            .specialClick(this.elements.wizardPatientNextButton)
+            .specialClick(this.elements.wizardDoctorNextButton)
+            .specialClick(this.elements.wizardDetailsNextButton)
+            .specialClick(this.elements.wizardTransportVmktTreeContract)
+            .specialClick(this.elements.wizardTransportSaveKtaButton)
             .customFrameSwitch(this.elements.framePrint, 0)
-            .customClick(this.elements.wizardPrintConfirmButton)
+            .specialClick(this.elements.wizardPrintConfirmButton)
             .frameParent(async () => {
                 console.log('Moving up one frame!')
             })
@@ -116,43 +122,43 @@ export default class AsyncKkx3 {
     };
     async publishDa() {
         return browser
-            .customClick(this.elements.ktaDetailsPublishAsDaButton)
+            .specialClick(this.elements.ktaDetailsPublishAsDaButton)
             .customFrameSwitch(this.elements.frameFdl, 10)
             .customSetValue(this.elements.wizardSearchForFdlInput, service_providers.fdl.name)
-            .customClick(this.elements.wizardSearchForFdlButton)
-            .customClick(this.elements.wizardSearchForFdlSingleResult)
-            .customClick(this.elements.wizardSearchForFdlSendDaButton)
+            .specialClick(this.elements.wizardSearchForFdlButton)
+            .specialClick(this.elements.wizardSearchForFdlSingleResult)
+            .specialClick(this.elements.wizardSearchForFdlSendDaButton)
             .frameParent(async () => {
                 console.log('Moving up one frame!')
             })
             .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
-            .customClick(this.elements.ktaGridKtNavBarButton)
+            .specialClick(this.elements.ktaGridKtNavBarButton)
             .pause(5000)
     };
     async publishBa() {
         return browser
-            .customClick(this.elements.ktaDetailsPublishAsBaButton)
+            .specialClick(this.elements.ktaDetailsPublishAsBaButton)
             .customFrameSwitch(this.elements.frameFdl, 10)
-            .customClick(this.elements.wizardFdlSearchBaResultFirstRow)
-            .customClick(this.elements.wizardSearchForFdlSendBaButton)
+            .specialClick(this.elements.wizardFdlSearchBaResultFirstRow)
+            .specialClick(this.elements.wizardSearchForFdlSendBaButton)
             .frameParent(async () => {
                 console.log('Moving up one frame!')
             })
             .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
-            .customClick(this.elements.ktaGridKtNavBarButton)
+            .specialClick(this.elements.ktaGridKtNavBarButton)
             .pause(5000)
     };
     async publishKta() {
         return browser
-            .customClick(this.elements.ktaDetailsPublishAsKtaButton)
-            .customClick(this.elements.ktaDetailsConfirmPublishAsKtaButton)
+            .specialClick(this.elements.ktaDetailsPublishAsKtaButton)
+            .specialClick(this.elements.ktaDetailsConfirmPublishAsKtaButton)
             .getText(this.elements.ktaDetailsKtaIsPublishedWindowTitle, async (result) => {
                 if (result === 'KTA VERÖFFENTLICHT') {
                     console.log('Successfully published as KTA!')
                 }
             })
-            .customClick(this.elements.ktaDetailsKtaIsPublishedWindowCloseButton)
-            .customClick(this.elements.ktaGridKtNavBarButton)
+            .specialClick(this.elements.ktaDetailsKtaIsPublishedWindowCloseButton)
+            .specialClick(this.elements.ktaGridKtNavBarButton)
             .pause(5000)
     };
     async confirmKtaType() {
@@ -196,12 +202,12 @@ export default class AsyncKkx3 {
                     .customSetValue(this.elements.ktaNrSearchInput, testData.kta.number)
                     .pause(3000)
                     .customRefreshKt(this.elements.ktaGridNavBarAllButton, this.elements.ktaGridEmptyRow)
-                    .customClick(this.elements.ktaGridKtFirstRow)
-                    .customClick(this.elements.ktaDetailsNavBarBidsButton)
-                    .customClick(this.elements.ktaDetailsBidsAssignToFirstButton)
-                    .customClick(this.elements.ktaDetailsBidsConfirmAssignmentButton)
+                    .specialClick(this.elements.ktaGridKtFirstRow)
+                    .specialClick(this.elements.ktaDetailsNavBarBidsButton)
+                    .specialClick(this.elements.ktaDetailsBidsAssignToFirstButton)
+                    .specialClick(this.elements.ktaDetailsBidsConfirmAssignmentButton)
                     .customFrameSwitch(this.elements.framePrint, 2)
-                    .customClick(this.elements.wizardPrintConfirmButton)
+                    .specialClick(this.elements.wizardPrintConfirmButton)
                     .frameParent(async () => {
                         console.log('Moving up one frame!')
                     })

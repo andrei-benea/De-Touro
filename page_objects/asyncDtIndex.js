@@ -63,8 +63,8 @@ export default class AsyncDtIndex {
                 console.log('KTA details are: ', ktaInfo)
                 browser
                     .pause(5000)
-                    .customClick(this.elements.ktaHeaderKtaNr)
-                    .customClick(this.elements.ktaHeaderKtaNrFilterArrow)
+                    .specialClick(this.elements.ktaHeaderKtaNr)
+                    .specialClick(this.elements.ktaHeaderKtaNrFilterArrow)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
                     .pause(2000)
                     .customRefreshLe(this.elements.ktaFooterRefreshButton, this.elements.ktaFooterPageNumber)
@@ -74,29 +74,29 @@ export default class AsyncDtIndex {
                     .saveScreenshot('tests_output/a-test-screen.png')
                 if (ktaInfo.kta.type === 'DA') {
                     browser
-                        .customClick(this.elements.ktaDetailsPlaceBidButtonDa)
+                        .specialClick(this.elements.ktaDetailsPlaceBidButtonDa)
                         .customSetValue(this.elements.ktaDetailsBidInput, '123')
-                        .customClick(this.elements.ktaDetailsMwst19Button)
-                        .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
-                        .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                        .specialClick(this.elements.ktaDetailsMwst19Button)
+                        .specialClick(this.elements.ktaDetailsInnerPlaceBidButton)
+                        .specialClick(this.elements.ktaDetailsInnerConfirmBidButton)
                         .pause(2000)
                         .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
                         .saveScreenshot('tests_output/a-test-screen-da.png')
                 }
                 else if (ktaInfo.kta.type === 'BA') {
                     browser
-                        .customClick(this.elements.ktaDetailsPlaceBidButtonBa)
+                        .specialClick(this.elements.ktaDetailsPlaceBidButtonBa)
                         .pause(2000)
                         .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
                         .saveScreenshot('tests_output/a-test-screen-ba.png')
                 }
                 else if (ktaInfo.kta.type === 'KTA') {
                     browser
-                        .customClick(this.elements.ktaDetailsPlaceBidButtonKta)
+                        .specialClick(this.elements.ktaDetailsPlaceBidButtonKta)
                         .customSetValue(this.elements.ktaDetailsBidInput, '123')
-                        .customClick(this.elements.ktaDetailsMwst19Button)
-                        .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
-                        .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                        .specialClick(this.elements.ktaDetailsMwst19Button)
+                        .specialClick(this.elements.ktaDetailsInnerPlaceBidButton)
+                        .specialClick(this.elements.ktaDetailsInnerConfirmBidButton)
                         .pause(2000)
                         .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
                         .saveScreenshot('tests_output/a-test-screen-kta.png')
@@ -114,22 +114,22 @@ export default class AsyncDtIndex {
                 console.log('KTA details are: ', ktaInfo)
                 browser
                     .pause(5000)
-                    .customClick(this.elements.ktaHeaderMyAssignedRides)
+                    .specialClick(this.elements.ktaHeaderMyAssignedRides)
                     .pause(5000)
-                    .customClick(this.elements.ktaHeaderAssignedRidesKtaNr)
-                    .customClick(this.elements.ktaHeaderAssignedRidesKtaNrFilterArrow)
+                    .specialClick(this.elements.ktaHeaderAssignedRidesKtaNr)
+                    .specialClick(this.elements.ktaHeaderAssignedRidesKtaNrFilterArrow)
                     .pause(2000)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
                     .pause(2000)
                     .customRefreshLe(this.elements.ktaFooterRefreshButton, this.elements.ktaFooterPageNumber)
                     .waitForElementVisible(this.elements.ktaGridAssignedRidesSingleRow, 'Successfully filtered KTA list!')
-                    .customClick(this.elements.ktaGridAssignedRidesUploadProofButton)
-                    .customClick(this.elements.uploadProofWindowTopSection)
+                    .specialClick(this.elements.ktaGridAssignedRidesUploadProofButton)
+                    .specialClick(this.elements.uploadProofWindowTopSection)
                     .customSetValue(this.elements.uploadProofWindowTourTypComboBox, 'Hin- und Rückfahrt')
                     .sendKeys(this.elements.uploadProofWindowTourTypComboBox, [browser.Keys.ENTER])
                     .setValue(this.elements.uploadProofWindowFileInput, require('path').resolve(__dirname + '/../tests_input/test-image.PNG'))
-                    .customClick(this.elements.uploadProofWindowOkButton)
-                    .customClick(this.elements.uploadProofWindowConfirmationButton)
+                    .specialClick(this.elements.uploadProofWindowOkButton)
+                    .specialClick(this.elements.uploadProofWindowConfirmationButton)
                     .pause(2000)
             }
         });
@@ -160,11 +160,11 @@ export default class AsyncDtIndex {
                                                 console.log(text)
                                                 if (text.value === 'Direkt-Anfrage (DA)') {
                                                     browser
-                                                        .customClick(this.elements.ktaDetailsPlaceBidButtonDa)
+                                                        .specialClick(this.elements.ktaDetailsPlaceBidButtonDa)
                                                         .customSetValue(this.elements.ktaDetailsBidInput, '123')
-                                                        .customClick(this.elements.ktaDetailsMwst19Button)
-                                                        .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
-                                                        .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                                                        .specialClick(this.elements.ktaDetailsMwst19Button)
+                                                        .specialClick(this.elements.ktaDetailsInnerPlaceBidButton)
+                                                        .specialClick(this.elements.ktaDetailsInnerConfirmBidButton)
                                                         .pause(2000)
                                                 }
                                                 else return
@@ -186,11 +186,11 @@ export default class AsyncDtIndex {
                                                 console.log(text)
                                                 if (text.value === 'Direkt-Anfrage (DA)') {
                                                     browser
-                                                        .customClick(this.elements.ktaDetailsPlaceBidButtonDa)
+                                                        .specialClick(this.elements.ktaDetailsPlaceBidButtonDa)
                                                         .customSetValue(this.elements.ktaDetailsBidInput, '123')
-                                                        .customClick(this.elements.ktaDetailsMwst19Button)
-                                                        .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
-                                                        .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                                                        .specialClick(this.elements.ktaDetailsMwst19Button)
+                                                        .specialClick(this.elements.ktaDetailsInnerPlaceBidButton)
+                                                        .specialClick(this.elements.ktaDetailsInnerConfirmBidButton)
                                                         .pause(2000)
                                                 }
                                                 else return
@@ -230,11 +230,11 @@ export default class AsyncDtIndex {
             //                                 console.log(text)
             //                                 if (text.value === 'Direkt-Anfrage (DA)') {
             //                                     browser
-            //                                         .customClick(this.elements.ktaDetailsPlaceBidButtonDa)
+            //                                         .specialClick(this.elements.ktaDetailsPlaceBidButtonDa)
             //                                         .customSetValue(this.elements.ktaDetailsBidInput, '123')
-            //                                         .customClick(this.elements.ktaDetailsMwst19Button)
-            //                                         .customClick(this.elements.ktaDetailsInnerPlaceBidButton)
-            //                                         .customClick(this.elements.ktaDetailsInnerConfirmBidButton)
+            //                                         .specialClick(this.elements.ktaDetailsMwst19Button)
+            //                                         .specialClick(this.elements.ktaDetailsInnerPlaceBidButton)
+            //                                         .specialClick(this.elements.ktaDetailsInnerConfirmBidButton)
             //                                         .pause(2000)
             //                                 }
             //                                 else return

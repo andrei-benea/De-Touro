@@ -21,6 +21,7 @@ tryouts.js
 *.xml
 *.log
 tests_output/
+tests_input/credentials
 
 #Logs
 logs/
