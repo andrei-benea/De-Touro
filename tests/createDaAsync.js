@@ -2,7 +2,7 @@ import AsyncKkx from "../page_objects/asyncKkx3";
 
 const asyncKkx3 = new AsyncKkx();
 
-describe('Create new DA', () => {
+describe('Publish new DA', () => {
     it('browser initialization', async () => {
         await asyncKkx3.initPage();
     })

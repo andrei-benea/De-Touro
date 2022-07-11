@@ -52,30 +52,26 @@ export default class AsyncDtIndex {
         uploadProofLocatorG: '[id="certificateFile-button-btnWrap"]',
         uploadProofLocatorH: '[id="certificateFile-button-btnEl"]',
         uploadProofLocatorI: '[id="certificateFile-inputEl"]',
-    }
-
+    };
     async placeBid() {
         const fs = require('fs');
-
-        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+        fs.readFile('tests_output/ktainfo.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
                 let ktaInfo = JSON.parse(data);
                 console.log('KTA details are: ', ktaInfo)
-
                 browser
-                    .pause(3000)
+                    .pause(5000)
                     .customClick(this.elements.ktaHeaderKtaNr)
                     .customClick(this.elements.ktaHeaderKtaNrFilterArrow)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
                     .pause(2000)
-                    .customRefresh(this.elements.ktaFooterRefreshButton, this.elements.ktaFooterPageNumber)
+                    .customRefreshLe(this.elements.ktaFooterRefreshButton, this.elements.ktaFooterPageNumber)
                     .waitForElementVisible(this.elements.ktaGridSingleRow, 'Successfully filtered KTA list!')
                     .doubleClick(this.elements.ktaGridSingleRow)
                     .waitForElementVisible(this.elements.ktaDetailsContainer, 'Successfully loaded KTA details!')
                     .saveScreenshot('tests_output/a-test-screen.png')
-
                 if (ktaInfo.kta.type === 'DA') {
                     browser
                         .customClick(this.elements.ktaDetailsPlaceBidButtonDa)
@@ -107,17 +103,15 @@ export default class AsyncDtIndex {
                 }
             }
         });
-    }
+    };
     async simulateRide() {
         const fs = require('fs');
-
-        fs.readFile('tests_output/ktanumber.json', 'utf8', (err, data) => {
+        fs.readFile('tests_output/ktainfo.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
                 let ktaInfo = JSON.parse(data);
                 console.log('KTA details are: ', ktaInfo)
-
                 browser
                     .pause(5000)
                     .customClick(this.elements.ktaHeaderMyAssignedRides)
@@ -127,7 +121,7 @@ export default class AsyncDtIndex {
                     .pause(2000)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
                     .pause(2000)
-                    .customRefresh(this.elements.ktaFooterRefreshButton, this.elements.ktaFooterPageNumber)
+                    .customRefreshLe(this.elements.ktaFooterRefreshButton, this.elements.ktaFooterPageNumber)
                     .waitForElementVisible(this.elements.ktaGridAssignedRidesSingleRow, 'Successfully filtered KTA list!')
                     .customClick(this.elements.ktaGridAssignedRidesUploadProofButton)
                     .customClick(this.elements.uploadProofWindowTopSection)
@@ -140,9 +134,9 @@ export default class AsyncDtIndex {
             }
         });
     }
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////// LOOP CODE BELOW /////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+///////////////// LOOP (through all orders w/o bids) CODE BELOW ////////////////
+////////////////////////////////////////////////////////////////////////////////
     async checkForUnreadKtas() {
         browser
             .pause(5000)

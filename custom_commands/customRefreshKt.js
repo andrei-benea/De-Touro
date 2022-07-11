@@ -1,7 +1,6 @@
-module.exports = class CustomRefresh {
+module.exports = class CustomRefreshKt {
     async command(button, element) {
-        let refresh = await browser.isVisible(element, async (result) => {
-            console.log(result.status)
+        let refresh = await browser.isVisible({selector: element, suppressNotFoundErrors: 1}, async (result) => {
             return result.status
         });
         if (refresh != -1) {
@@ -15,7 +14,7 @@ module.exports = class CustomRefresh {
             browser
                 .customClick(button)
                 .pause(5000)
-            let fresh = await browser.isVisible(element, async (result) => {
+            let fresh = await browser.isVisible({selector: element, suppressNotFoundErrors: 1}, async (result) => {
                 return result.status;
             });
             if (fresh == -1) {

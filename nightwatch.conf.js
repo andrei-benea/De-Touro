@@ -1,4 +1,3 @@
-//
 // Refer to the online docs for more details:
 // https://nightwatchjs.org/gettingstarted/configuration/
 //
@@ -11,16 +10,21 @@
 //             __/ |
 //            |___/
 //
-///ENV VAR CONFIG///////////////////////////////
+///////////////////////////////////////////
+/////ENV VAR CONFIG////////////////////////
+///////////////////////////////////////////
 require('dotenv').config()
-// verify configuration ////////////////////////
+
+/////VERIFY ENV VAR CONFIG/////////////////
 //console.log(process.env)
-/////BABEL CONFIGURATION FOR ES6////////////////
-////////////////////////////////////////////////
+
+///////////////////////////////////////////
+/////BABEL CONFIGURATION FOR ES6///////////
+///////////////////////////////////////////
 require('@babel/register')()
 // OR
 // require('babel-core/register')
-////////////////////////////////////////////////
+///////////////////////////////////////////
 
 module.exports = {
   // An array of folders (excluding subfolders) where your tests are located;
@@ -37,11 +41,7 @@ module.exports = {
   custom_assertions_path: ['./node_modules/nightwatch-xhr/es5/assertions'],
 
   // See https://nightwatchjs.org/guide/extending-nightwatch/plugin-api.html
-  plugins: [
-    // require("@babel/core").transform("code", {
-    //   presets: ["@babel/preset-env"],
-    // }),
-  ],
+  plugins: [],
 
   // See https://nightwatchjs.org/guide/#external-globals
   globals_path: '',
@@ -50,11 +50,11 @@ module.exports = {
 
   test_settings: {
     default: {
-      disable_error_log: false,
+      disable_error_log: true,
       launch_url: 'https://nightwatchjs.org',
 
       screenshots: {
-        enabled: true,
+        enabled: false,
         path: 'tests_output/screens',
         on_failure: true
       },

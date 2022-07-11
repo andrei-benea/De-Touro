@@ -1,4 +1,4 @@
-module.exports = class CustomRefresh {
+module.exports = class CustomRefreshLe {
     async command(button, text) {
         let refresh = await browser.getText(text, async (result) => {
             return result.value;
@@ -13,7 +13,7 @@ module.exports = class CustomRefresh {
             console.count('Attempt: ')
             browser
                 .customClick(button)
-                .pause(5000)
+                .pause(10000)
             let fresh = await browser.getText(text, async (result) => {
                 return result.value;
             });
