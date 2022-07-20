@@ -23,6 +23,11 @@ export default class AsyncDtLogin {
     };
     async loginLe() {
         return browser
+            .specialClick(this.elements.closeCookiesButton)
+            .easyLogin(this.elements.usernameInput, credentials.le.userName, this.elements.passwordInput, credentials.le.passWord, this.elements.loginButton)
+    };
+    async softLoginLe() {
+        return browser
             .easyLogin(this.elements.usernameInput, credentials.le.userName, this.elements.passwordInput, credentials.le.passWord, this.elements.loginButton)
     };
 };

@@ -133,7 +133,7 @@ export default class AsyncKkx3 {
             })
             .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
             .specialClick(this.elements.ktaGridKtNavBarButton)
-            .pause(5000)
+            // .pause(5000)
     };
     async publishBa() {
         return browser
@@ -214,5 +214,11 @@ export default class AsyncKkx3 {
                     .customAssertText(this.elements.ktaDetailsDevelopmentKtaStatusBox, 'Zugeteilt')
             }
         })
+    };
+    async switchToLe() {
+        return browser.customEnvSwitch('https://qa.de-touro.de/Login?')
+    };
+    async stopStep() {
+        return browser.end()
     };
 };

@@ -133,7 +133,13 @@ export default class AsyncDtIndex {
                     .pause(2000)
             }
         });
-    }
+    };
+    async switchToKt() {
+        return browser.customEnvSwitch('https://check-kkx3.zhp-online.de/x3/de/')
+    };
+    async stopStep() {
+        return browser.end()
+    };
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////// LOOP (through all orders w/o bids) CODE BELOW ////////////////
 ////////////////////////////////////////////////////////////////////////////////
