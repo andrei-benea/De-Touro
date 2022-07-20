@@ -8,7 +8,9 @@ export default class AsyncDtIndex {
         ktaHeaderKtaNrFilterArrow: '[id="tab1"] [class="x-panel view-panel x-box-item x-panel-default"] > div >div:nth-child(2) [class="x-grid-header-ct x-docked x-grid-header-ct-default x-docked-top x-grid-header-ct-docked-top x-grid-header-ct-default-docked-top x-box-layout-ct x-docked-noborder-top x-docked-noborder-right x-docked-noborder-left"] > div > div > div:nth-child(6) > div > div',
         ktaHeaderAssignedRidesKtaNrFilterArrow: '[class="x-column-header x-column-header-align-center x-box-item x-column-header-default x-unselectable x-column-header-sort-ASC"] > div > div',
         ktaFooterRefreshButton: '[data-qtip="Aktualisieren"]',
+        ktaFooterRefreshButtonXPath: '/html/body/div[1]/div/div[2]/div[2]/div/div/div/div[2]/div/div[3]/div[3]/div/div/div/div/div/a[5]',
         ktaFooterPageNumber: '[class="x-toolbar x-docked x-toolbar-default x-docked-bottom x-toolbar-docked-bottom x-toolbar-default-docked-bottom x-box-layout-ct x-docked-noborder-right x-docked-noborder-bottom x-docked-noborder-left"] [class="x-toolbar-text x-box-item x-toolbar-item x-toolbar-text-default"]:last-child',
+        ktaFooterPageNumberXPath: '/html/body/div[1]/div/div[2]/div[2]/div/div/div/div[2]/div/div[3]/div[3]/div/div/div/div/div/div[7]',
         ktaGridSingleRow: '[data-recordindex="0"]',
         ktaGridRowReadBidField: '[class="x-grid-row x-grid-data-row"] > td:nth-child(15)',
         ktaGridRowUnread: '[class="x-grid-row tour-grid-unread-row x-grid-data-row"]',
@@ -121,7 +123,9 @@ export default class AsyncDtIndex {
                     .pause(2000)
                     .customSetValue(this.elements.ktaGridFilterBoxInput, ktaInfo.kta.number)
                     .pause(2000)
-                    .customRefreshLe(this.elements.ktaFooterRefreshButton, this.elements.ktaFooterPageNumber)
+                    .useXpath()
+                    .customRefreshLe(this.elements.ktaFooterRefreshButtonXPath, this.elements.ktaFooterPageNumberXPath)
+                    .useCss()
                     .waitForElementVisible(this.elements.ktaGridAssignedRidesSingleRow, 'Successfully filtered KTA list!')
                     .specialClick(this.elements.ktaGridAssignedRidesUploadProofButton)
                     .specialClick(this.elements.uploadProofWindowTopSection)

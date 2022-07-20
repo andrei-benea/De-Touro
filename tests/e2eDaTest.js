@@ -1,7 +1,6 @@
 import AsyncKkx from "../page_objects/asyncKkx3";
 import AsyncDtLogin from "../page_objects/asyncDtLogin";
 import AsyncDtIndex from "../page_objects/asyncDtIndex";
-import { it } from "nightwatch";
 
 const asyncKkx3 = new AsyncKkx();
 const asyncDtLogin = new AsyncDtLogin();
@@ -12,7 +11,7 @@ describe('DA: publish, bid, assign and perform', async () => {
     ///////////////// PART 1 ///////////////////////
     ////////////////////////////////////////////////
     describe('Part 1: KT', async () => {
-        it('browser initialization', async () => {
+        it('browser initialization 1', async () => {
             await asyncKkx3.initPage();
         })
         it('login to KT', async () => {
@@ -41,11 +40,11 @@ describe('DA: publish, bid, assign and perform', async () => {
     ///////////////// PART 2 ///////////////////////
     ////////////////////////////////////////////////
     describe('Part 2: LE', async () => {
-        it('switch to LE side', async () => {
-            await asyncKkx3.switchToLe();
+        it('browser initialization 2', async () => {
+            await asyncDtLogin.initPage();
         })
         it('login to LE', async () => {
-            await asyncDtLogin.loginLe();
+            await asyncDtLogin.softLoginLe();
         })
         it('place bid on KTA', async () => {
             await asyncDtIndex.placeBid();
@@ -58,8 +57,11 @@ describe('DA: publish, bid, assign and perform', async () => {
     ///////////////// PART 3 ///////////////////////
     ////////////////////////////////////////////////
     describe('Part 3: KT', async () => {
-        it('switch to KT side', async () => {
-            await asyncDtIndex.switchToKt();
+        it('browser initialization 3', async () => {
+            await asyncKkx3.initPage();
+        })
+        it('login to KT', async () => {
+            await asyncKkx3.loginKt();
         })
         it('De-Touro start-up', async () => {
             await asyncKkx3.loadDeTouro();
@@ -78,8 +80,8 @@ describe('DA: publish, bid, assign and perform', async () => {
     ///////////////// PART 4 ///////////////////////
     ////////////////////////////////////////////////
     describe('Part 4: LE', async () => {
-        it('switch to LE side', async () => {
-            await asyncKkx3.switchToLe();
+        it('browser initialization 4', async () => {
+            await asyncDtLogin.initPage();
         })
         it('login to LE', async () => {
             await asyncDtLogin.softLoginLe();

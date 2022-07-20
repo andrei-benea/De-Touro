@@ -8,6 +8,7 @@ module.exports = class CustomRefreshLe {
         }
         else {
             console.log('KTA identified!')
+            console.log(refresh.value)
         }
         while (refresh == 'Keine KTA gefunden') {
             console.count('Attempt: ')
