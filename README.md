@@ -21,9 +21,13 @@ Open the folder where you cloned the project using VSC and run the following com
 
 ## Running your first test
 
-Run the following command in order to verify the complete DA process:
+Run the following commands to start up e2e tests that verify saving, publishing, bidding, assigning and performing rides on all De-Touro order types:
+
+`npm test tests/e2eKtaTest.js`
 
 `npm test tests/e2eDaTest.js`
+
+`npm test tests/e2eBaTest.js`
 
 Commands for running all DeTouro tests will be added here, keep checking for updates.
 
