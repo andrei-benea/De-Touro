@@ -1,8 +1,8 @@
-import AsyncKkx from "../page_objects/asyncKkx3";
+import AsyncKkx from "../../page_objects/asyncKkx3";
 
 const asyncKkx3 = new AsyncKkx();
 
-describe('Publish new KTA', () => {
+describe('Publish new DA', () => {
     it('browser initialization', async () => {
         await asyncKkx3.initPage();
     })
@@ -18,8 +18,8 @@ describe('Publish new KTA', () => {
     it('save a new KTA', async () => {
         await asyncKkx3.saveNewKta();
     })
-    it('publish as KTA', async () => {
-        await asyncKkx3.publishKta();
+    it('publish as DA', async () => {
+        await asyncKkx3.publishDa();
     })
     it('confirm and log order type', async () => {
         await asyncKkx3.confirmKtaType();
