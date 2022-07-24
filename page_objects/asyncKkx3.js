@@ -1,6 +1,6 @@
 import { patient } from "../tests_input/patientData";
 import { service_providers } from "../tests_input/serviceProviderData";
-import { credentials } from "../tests_input/credentials/andreiBenea";
+import { credentials } from "../tests_input/credentials/testAccount";
 
 export default class AsyncKkx3 {
     url = 'https://check-kkx3.zhp-online.de/x3/de/';
@@ -70,7 +70,7 @@ export default class AsyncKkx3 {
             .easyLogin(this.elements.usernameInput, credentials.kt.userName, this.elements.passwordInput, credentials.kt.passWord, this.elements.loginButton)
             .specialClick(this.elements.kkSwitchButton)
             .specialClick(this.elements.kkDeTouroGroup)
-            .customAssertText(this.elements.loggedInUser, 'Andrei Benea')
+            .customAssertText(this.elements.loggedInUser, credentials.kt.firstName + ' ' + credentials.kt.lastName)
     };
     async loadDeTouro() {
         return browser

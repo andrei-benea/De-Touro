@@ -19,7 +19,12 @@ Open the folder where you cloned the project using VSC and run the following com
 
 `npm install dotenv --save`
 
+'dotenv' package no longer required due to refactorization.
+
 ## Running your first test
+
+1. Create a `tests_input/credentials` folder
+2. Create a new file in that folder
 
 Run the following commands to start up e2e tests that verify saving, publishing, bidding, assigning and performing rides on all De-Touro order types:
 
@@ -35,67 +40,3 @@ Commands for running all DeTouro tests will be added here, keep checking for upd
 If you want to contribute, run the following command to create your first branch:
 
 `git checkout -b new-branch-name`
-
-## Setup .env file (obsolete)
-For the async tests to work (successful login), you'll have to create a .env file in your root folder. That is where you'll have to store the required credentials
-
-File contents:
-
-`KT_USER="insert_your_KT_username_here"`
-
-`KT_PASS="insert_your_KT_password_here"`
-
-`LE_USER="insert_your_LE_username_here"`
-
-`LE_PASS="insert_your_LE_password_here"`
-
-## Commands for running available async tests (obsolete)
-Because this setup is using environment variables, the command for running the test must include the '--env' argument.
-Possible values are: 'kt' and 'le'
-
-KT:
-`npm test -- --env kt tests/createDaAsync.js`
-
-LE:
-`npm test -- --env le tests/placeBidAsync.js`
-
-### Test scenarios (obsolete)
-A list of commands that trigger corresponding tests. Currently they will have to be executed in the same order as presented here.
-
-#### KTA (obsolete)
-Save, publish, bid, assign, perform.
-
-`npm test -- --env kt tests/createKtaAsync.js`
-
-`npm test -- --env le tests/placeBidAsync.js`
-
-`npm test -- --env kt tests/assignKtaAsync.js`
-
-`npm test -- --env le tests/performRidesAsync.js`
-
-#### DA (obsolete)
-Save, publish, bid, assign, perform.
-
-`npm test -- --env kt tests/createDaAsync.js`
-
-`npm test -- --env le tests/placeBidAsync.js`
-
-`npm test -- --env kt tests/assignKtaAsync.js`
-
-`npm test -- --env le tests/performRidesAsync.js`
-
-#### BA (obsolete)
-Save, publish, accept, assign, perform.
-
-`npm test -- --env kt tests/createBaAsync.js`
-
-`npm test -- --env le tests/placeBidAsync.js`
-
-`npm test -- --env kt tests/assignKtaAsync.js`
-
-`npm test -- --env le tests/performRidesAsync.js`
-
-## Commands for running older tests (obsolete)
-Like in the below example simply run test while passing the --tag argument. Applies to tests in /tests/old folder
-
-`npm test -- --tag tagname`

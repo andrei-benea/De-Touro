@@ -1,4 +1,4 @@
-import { credentials } from "../tests_input/credentials/andreiBenea";
+import { credentials } from "../tests_input/credentials/testAccount";
 
 export default class AsyncDtLogin {
     url = 'https://qa.de-touro.de/Login';
