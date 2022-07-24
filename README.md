@@ -1,13 +1,4 @@
 # De-Touro
-
-```
-    ____           ______                     
-   / __ \___      /_  __/___  __  ___________ 
-  / / / / _ \______/ / / __ \/ / / / ___/ __ \
- / /_/ /  __/_____/ / / /_/ / /_/ / /  / /_/ /
-/_____/\___/     /_/  \____/\__,_/_/   \____/ 
-                                              
-```
 Test library for verifying De-Touro KT and LE processes.
 
 ## How to fetch the code?
@@ -33,7 +24,6 @@ Open the folder where you cloned the project using VSC and run the following com
 'dotenv' package no longer required due to refactorization.
 
 ## Running your first test
-
 1. Create a `tests_input/credentials` folder
 2. Create a new file called 'testAccount' that has the following contents:
 
