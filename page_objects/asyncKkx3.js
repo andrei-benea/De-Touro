@@ -215,9 +215,6 @@ export default class AsyncKkx3 {
             }
         })
     };
-    async switchToLe() {
-        return browser.customEnvSwitch('https://qa.de-touro.de/Login?')
-    };
     async stopStep() {
         return browser.end()
     };

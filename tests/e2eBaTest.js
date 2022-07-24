@@ -10,7 +10,7 @@ describe('BA: publish, bid, assign and perform', async () => {
     ////////////////////////////////////////////////
     ///////////////// PART 1 ///////////////////////
     ////////////////////////////////////////////////
-    describe('Part 1: KT', async () => {
+    describe('Part 1: KT - publishing a BA', async () => {
         it('browser initialization 1', async () => {
             await asyncKkx3.initPage();
         })
@@ -39,7 +39,7 @@ describe('BA: publish, bid, assign and perform', async () => {
     ////////////////////////////////////////////////
     ///////////////// PART 2 ///////////////////////
     ////////////////////////////////////////////////
-    describe('Part 2: LE', async () => {
+    describe('Part 2: LE - accepting the BA', async () => {
         it('browser initialization 2', async () => {
             await asyncDtLogin.initPage();
         })
@@ -56,7 +56,7 @@ describe('BA: publish, bid, assign and perform', async () => {
     ////////////////////////////////////////////////
     ///////////////// PART 3 ///////////////////////
     ////////////////////////////////////////////////
-    describe('Part 3: KT', async () => {
+    describe('Part 3: KT - assigning the BA', async () => {
         it('browser initialization 3', async () => {
             await asyncKkx3.initPage();
         })
@@ -79,7 +79,7 @@ describe('BA: publish, bid, assign and perform', async () => {
     ////////////////////////////////////////////////
     ///////////////// PART 4 ///////////////////////
     ////////////////////////////////////////////////
-    describe('Part 4: LE', async () => {
+    describe('Part 4: LE - uploading signature proofs for the BA', async () => {
         it('browser initialization 4', async () => {
             await asyncDtLogin.initPage();
         })

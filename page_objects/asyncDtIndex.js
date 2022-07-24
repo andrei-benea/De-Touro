@@ -138,9 +138,6 @@ export default class AsyncDtIndex {
             }
         });
     };
-    async switchToKt() {
-        return browser.customEnvSwitch('https://check-kkx3.zhp-online.de/x3/de/')
-    };
     async stopStep() {
         return browser.end()
     };
@@ -223,39 +220,39 @@ export default class AsyncDtIndex {
                 console.log('bid even value: ', bids.value)
                 
             })
-            // .elements('css selector', this.elements.ktaGridRowAltBidField, (object) => {
-            //     let bids = object[Object.keys(object)[0]]
-            //     console.log('bid row odd ', bids.length)
-            //     console.log('bid odd value: ', bids.value)
-            //     if (bids.value === ' ') {
-            //         for (let i = 0; i < bids.length; i++) {
-            //             browser
-            //                 .doubleClick(bids[i])
-            //                 .waitForElementVisible(this.elements.ktaDetailsContainer)
-            //                 .getAttribute(this.elements.ktaDetailsDaIdentifier, 'style', (result) => {
-            //                     console.log(result)
-            //                     if (result.value === 'right: auto; left: 0px; margin: 0px; width: 930px; top: 53px;') {
-            //                         browser
-            //                             .getText(this.elements.ktaDetailsDaIdentifier, (text) => {
-            //                                 console.log(text)
-            //                                 if (text.value === 'Direkt-Anfrage (DA)') {
-            //                                     browser
-            //                                         .specialClick(this.elements.ktaDetailsPlaceBidButtonDa)
-            //                                         .customSetValue(this.elements.ktaDetailsBidInput, '123')
-            //                                         .specialClick(this.elements.ktaDetailsMwst19Button)
-            //                                         .specialClick(this.elements.ktaDetailsInnerPlaceBidButton)
-            //                                         .specialClick(this.elements.ktaDetailsInnerConfirmBidButton)
-            //                                         .pause(2000)
-            //                                 }
-            //                                 else return
-            //                             })
-            //                     }
-            //                     else return
-            //                 })
-            //                 .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
-            //         }
-            //     }
-            //     else return
-            // })
+            .elements('css selector', this.elements.ktaGridRowAltBidField, (object) => {
+                let bids = object[Object.keys(object)[0]]
+                console.log('bid row odd ', bids.length)
+                console.log('bid odd value: ', bids.value)
+                if (bids.value === ' ') {
+                    for (let i = 0; i < bids.length; i++) {
+                        browser
+                            .doubleClick(bids[i])
+                            .waitForElementVisible(this.elements.ktaDetailsContainer)
+                            .getAttribute(this.elements.ktaDetailsDaIdentifier, 'style', (result) => {
+                                console.log(result)
+                                if (result.value === 'right: auto; left: 0px; margin: 0px; width: 930px; top: 53px;') {
+                                    browser
+                                        .getText(this.elements.ktaDetailsDaIdentifier, (text) => {
+                                            console.log(text)
+                                            if (text.value === 'Direkt-Anfrage (DA)') {
+                                                browser
+                                                    .specialClick(this.elements.ktaDetailsPlaceBidButtonDa)
+                                                    .customSetValue(this.elements.ktaDetailsBidInput, '123')
+                                                    .specialClick(this.elements.ktaDetailsMwst19Button)
+                                                    .specialClick(this.elements.ktaDetailsInnerPlaceBidButton)
+                                                    .specialClick(this.elements.ktaDetailsInnerConfirmBidButton)
+                                                    .pause(2000)
+                                            }
+                                            else return
+                                        })
+                                }
+                                else return
+                            })
+                            .sendKeys(this.elements.ktaDetailsContainer, [browser.Keys.ESCAPE])
+                    }
+                }
+                else return
+            })
     }
 };

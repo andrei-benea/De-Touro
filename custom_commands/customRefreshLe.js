@@ -13,7 +13,7 @@ module.exports = class CustomRefreshLe {
         while (refresh == 'Keine KTA gefunden') {
             console.count('Attempt: ')
             browser
-                .customClick(button)
+                .specialClick(button)
                 .pause(10000)
             let fresh = await browser.getText(text, async (result) => {
                 return result.value;

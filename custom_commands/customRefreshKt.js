@@ -12,7 +12,7 @@ module.exports = class CustomRefreshKt {
         while (refresh == 0 || refresh == 1) {
             console.count('Attempt: ')
             browser
-                .customClick(button)
+                .specialClick(button)
                 .pause(5000)
             let fresh = await browser.isVisible({selector: element, suppressNotFoundErrors: 1}, async (result) => {
                 return result.status;
