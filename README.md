@@ -51,7 +51,7 @@ export const credentials = {
 
 `npm test tests/e2eBaTest.js`
 
-Commands for running all DeTouro tests will be added here, keep checking for updates.
+4. Commands for running all DeTouro tests will be added here, keep checking for updates.
 
 ## Create your first branch!
 If you want to contribute, run the following command to create your first branch:
