@@ -26,7 +26,7 @@ Open the folder where you cloned the project using VSC and run the following com
 ## Running your first test
 
 1. Create a `tests_input/credentials` folder
-2. Create a new file in that folder like the one below:
+2. Create a new file called 'testAccount' that has the following contents:
 
 ```
 export const credentials = {
