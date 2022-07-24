@@ -1,6 +1,10 @@
 export default class AsyncDtIndex {
     url = 'https://qa.de-touro.de/Index';
     elements = {
+        navBarNewCompanyButton: '[id="addCompany"]',
+        newCompanyFirmaButton: '[class="x-btn x-unselectable x-box-item x-toolbar-item x-btn-default-small x-noicon x-btn-noicon x-btn-default-small-noicon"]:nth-child(2)',
+        newCompanyFirmaButtonX: '/html/body/div[6]/div[3]/div/div/a[2]',
+        newCompanyIkField: '[name="Ik"]',
         ktaHeaderMyAssignedRides: '[class="x-toolbar navigation-panel x-box-item x-toolbar-default x-table-layout-ct"] > table > tbody > tr:nth-child(2) > td:nth-child(4) [class="x-btn-button"]',
         ktaGridBody: '[class="x-panel-body x-panel-body-default x-layout-fit x-panel-body-default x-docked-noborder-top x-docked-noborder-right x-docked-noborder-bottom x-docked-noborder-left"]',
         ktaHeaderKtaNr: '[id="tab1"] [class="x-panel view-panel x-box-item x-panel-default"] > div >div:nth-child(2) [class="x-grid-header-ct x-docked x-grid-header-ct-default x-docked-top x-grid-header-ct-docked-top x-grid-header-ct-default-docked-top x-box-layout-ct x-docked-noborder-top x-docked-noborder-right x-docked-noborder-left"] > div > div > div:nth-child(6)',
@@ -137,6 +141,18 @@ export default class AsyncDtIndex {
                     .pause(2000)
             }
         });
+    };
+    async createCompany() {
+        let number = '60' + Math.floor(Math.random() * 9999999);
+        console.log(parseInt(number))
+        return browser
+            .checkLuhn(parseInt(number))
+            .specialClick(this.elements.navBarNewCompanyButton)
+            .useXpath()
+            .specialClick(this.elements.newCompanyFirmaButtonX)
+            .useCss()
+            .customSetValue(this.elements.newCompanyIkField, number)
+            .saveScreenshot('tests_output/detouroLE.png')
     };
     async stopStep() {
         return browser.end()
