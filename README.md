@@ -5,7 +5,7 @@ Test library for verifying De-Touro KT and LE processes.
 Always use master branch as it should only contain working tests!
 `git clone https://...`
 
-In case you have already cloned the master branch frequently use `git pull` to frequently for updates!
+In case you have already cloned the master branch frequently use `git pull` to check for updates!
 
 ## Initialize project
 Make sure you have NodeJs and Visual Studio Code properly installed on your machine.
