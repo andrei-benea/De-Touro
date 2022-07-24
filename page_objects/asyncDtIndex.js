@@ -4,6 +4,18 @@ export default class AsyncDtIndex {
         navBarNewCompanyButton: '[id="addCompany"]',
         newCompanyFirmaButton: '[class="x-btn x-unselectable x-box-item x-toolbar-item x-btn-default-small x-noicon x-btn-noicon x-btn-default-small-noicon"]:nth-child(2)',
         newCompanyFirmaButtonX: '/html/body/div[6]/div[3]/div/div/a[2]',
+        newCompanyVehicleTypeComboBox: '[name="TransVehicleTypeUid"]',
+        newCompanyVehicleTaxiAndRentalItemX: '/html/body/div[10]/div/ul/li[3]',
+        newCompanyFirmaNameField: '[name="CompanyName"]',
+        newCompanyGenderComboBox: '[name="Gender"]',
+        newCompanyGenderMaleX: '/html/body/div[11]/div/ul/li[1]',
+        newCompanyLastNameField: 'name="LastName"',
+        newCompanyFirstNameField: 'name="FirstName"',
+        newCompanyStreetField: '[name="AddressStreet"]',
+        newCompanyStreetNrField: '[name="AddressStreetNumber"]',
+        newCompanyPostalCodeField: '[name="AddressPostalcode"]',
+        newCompanyCityField: '[name="AddressPlace"]',
+        newCompanyTelephoneField: '[name="Telephone"]',
         newCompanyIkField: '[name="Ik"]',
         ktaHeaderMyAssignedRides: '[class="x-toolbar navigation-panel x-box-item x-toolbar-default x-table-layout-ct"] > table > tbody > tr:nth-child(2) > td:nth-child(4) [class="x-btn-button"]',
         ktaGridBody: '[class="x-panel-body x-panel-body-default x-layout-fit x-panel-body-default x-docked-noborder-top x-docked-noborder-right x-docked-noborder-bottom x-docked-noborder-left"]',
@@ -144,6 +156,7 @@ export default class AsyncDtIndex {
     };
     async createCompany() {
         let number = '60' + Math.floor(Math.random() * 9999999);
+        console.log('Generating LE IK:')
         console.log(parseInt(number))
         return browser
             .checkLuhn(parseInt(number))
@@ -151,8 +164,25 @@ export default class AsyncDtIndex {
             .useXpath()
             .specialClick(this.elements.newCompanyFirmaButtonX)
             .useCss()
+            .pause(2000)
             .customSetValue(this.elements.newCompanyIkField, number)
             .saveScreenshot('tests_output/detouroLE.png')
+            .specialClick(this.elements.newCompanyVehicleTypeComboBox)
+            .useXpath()
+            .specialClick(this.elements.newCompanyVehicleTaxiAndRentalItemX)
+            .useCss()
+            .customSetValue(this.elements.newCompanyFirmaNameField, 'AutoTest-Company')
+            .specialClick(this.elements.newCompanyGenderField)
+            .useXpath()
+            .specialClick(this.elements.newCompanyGenderMaleX)
+            .useCss()
+            .customSetValue(this.elements.newCompanyLastNameField, 'AutoTester')
+            .customSetValue(this.elements.newCompanyFirstNameField, 'Bot')
+            .customSetValue(this.elements.newCompanyStreetField, 'Eurotec-Ring')
+            .customSetValue(this.elements.newCompanyStreetNrField, 10)
+            .customSetValue(this.elements.newCompanyPostalCodeField, 47441)
+            .customSetValue(this.elements.newCompanyCityField, 'Moers')
+            .customSetValue(this.elements.newCompanyTelephoneField, '00488882311')
     };
     async stopStep() {
         return browser.end()
