@@ -50,6 +50,8 @@ export const credentials = {
 
 `npm test tests/e2eBaTest.js`
 
+`npm test tests/e2eCopyToDa.js`
+
 4. Commands for running all DeTouro tests will be added here, keep checking for updates.
 
 ## Create your first branch!
