@@ -19,10 +19,14 @@ export default class AsyncKkx3 {
         ktaGridKt: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"]',
         ktaGridNavBar: '[id="ctl00_MainContent_MenuDisplayAuctions"]',
         ktaGridNavBarAllButton: '[id="ctl00_MainContent_MenuDisplayAuctions"] > ul > li:nth-child(2)',
+        ktaGridNavBarNewButton: '[id="ctl00_MainContent_MenuDisplayAuctions"] > ul > li:nth-child(3)',
         ktaGridKtNavBarButton: '[class="gridLink"]',
+        ktaGridKtTableRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXMainTable"] > tbody > tr',
         ktaGridKtFirstRow: '[id="ctl00_MainContent_ASPxGridViewDrives_DXDataRow0"]',
+        ktaGridStartDateColumnHeader: '[id="ctl00_MainContent_ASPxGridViewDrives_col10"]',
         ktaGridKtaType: '[id="ctl00_MainContent_ASPxGridViewDrives_tccell0_3"]',
         ktaGridEmptyRow: '[class="dxgvEmptyDataRow_deTouroKT"]',
+        ktaGridContextMenuCopyKta: '[id="ctl00_MainContent_ASPxPopupMenuRow_DXI2_T"]',
         newKtaButton: '#ctl00_MainContent_linkButtonNewKta',
         ktaNrSearchInput: '[name="ctl00$MainContent$ASPxGridViewDrives$DXFREditorcol2"]',
         wizardKvnrInput: '[id="ctl00_MainContent_formViewInsured_textBoxKVNR"]',
@@ -120,6 +124,25 @@ export default class AsyncKkx3 {
             })
             .logKtaNumber(this.elements.ktaDetailsKtaNumber)
     };
+    async copyKta() {
+        browser
+            .specialClick(this.elements.ktaGridStartDateColumnHeader)
+            .pause(2000)
+            .specialClick(this.elements.ktaGridStartDateColumnHeader)
+            .pause(2000)
+            .rightClick(this.elements.ktaGridKtFirstRow)
+            .specialClick(this.elements.ktaGridContextMenuCopyKta)
+            .specialClick(this.elements.wizardPatientNextButton)
+            .specialClick(this.elements.wizardDoctorNextButton)
+            .specialClick(this.elements.wizardDetailsNextButton)
+            .specialClick(this.elements.wizardTransportSaveKtaButton)
+            .customFrameSwitch(this.elements.framePrint, 0)
+            .specialClick(this.elements.wizardPrintConfirmButton)
+            .frameParent(async () => {
+                console.log('Moving up one frame!')
+            })
+            .logKtaNumber(this.elements.ktaDetailsKtaNumber)
+    };
     async publishDa() {
         return browser
             .specialClick(this.elements.ktaDetailsPublishAsDaButton)
@@ -133,7 +156,6 @@ export default class AsyncKkx3 {
             })
             .customAssertText(this.elements.ktaDetailsKtaStatus, 'Laufend')
             .specialClick(this.elements.ktaGridKtNavBarButton)
-            // .pause(5000)
     };
     async publishBa() {
         return browser
