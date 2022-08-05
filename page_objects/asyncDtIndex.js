@@ -155,41 +155,53 @@ export default class AsyncDtIndex {
         });
     };
     async createCompany() {
-        let number = '60' + Math.floor(Math.random() * 9999999);
-        console.log('Generating LE IK:')
-        console.log(parseInt(number))
-        return browser
-            .checkLuhn(parseInt(number))
-            .specialClick(this.elements.navBarNewCompanyButton)
-            .useXpath()
-            .specialClick(this.elements.newCompanyFirmaButtonX)
-            .useCss()
-            .pause(2000)
-            .customSetValue(this.elements.newCompanyIkField, number)
-            .saveScreenshot('tests_output/detouroLE.png')
-            .specialClick(this.elements.newCompanyVehicleTypeComboBox)
-            .useXpath()
-            .specialClick(this.elements.newCompanyVehicleTaxiAndRentalItemX)
-            .useCss()
-            .customSetValue(this.elements.newCompanyFirmaNameField, 'AutoTest-Company')
-            .specialClick(this.elements.newCompanyGenderField)
-            .useXpath()
-            .specialClick(this.elements.newCompanyGenderMaleX)
-            .useCss()
-            .customSetValue(this.elements.newCompanyLastNameField, 'AutoTester')
-            .customSetValue(this.elements.newCompanyFirstNameField, 'Bot')
-            .customSetValue(this.elements.newCompanyStreetField, 'Eurotec-Ring')
-            .customSetValue(this.elements.newCompanyStreetNrField, 10)
-            .customSetValue(this.elements.newCompanyPostalCodeField, 47441)
-            .customSetValue(this.elements.newCompanyCityField, 'Moers')
-            .customSetValue(this.elements.newCompanyTelephoneField, '00488882311')
+        let i = 0;
+        for (i = 0; i < 100; i++) {
+            let number = '60' + Math.floor(Math.random() * 9999999);
+            console.count('Attempt: ')
+            console.log('Generating LE IK:')
+            console.log(parseInt(number))
+            let checker = await browser.checkLuhn(parseInt(number));
+
+            if (checker == true) {
+                console.log('Checker is: ' + checker)
+                await browser
+                    .specialClick(this.elements.navBarNewCompanyButton)
+                    .useXpath()
+                    .specialClick(this.elements.newCompanyFirmaButtonX)
+                    .useCss()
+                    .pause(2000)
+                    .customSetValue(this.elements.newCompanyIkField, number)
+                    .pause(2000)
+                    .saveScreenshot('tests_output/detouroLE.png')
+                    break;
+                    // .saveScreenshot('tests_output/detouroLE.png')
+                    // .specialClick(this.elements.newCompanyVehicleTypeComboBox)
+                    // .useXpath()
+                    // .specialClick(this.elements.newCompanyVehicleTaxiAndRentalItemX)
+                    // .useCss()
+                    // .customSetValue(this.elements.newCompanyFirmaNameField, 'AutoTest-Company')
+                    // .specialClick(this.elements.newCompanyGenderComboBox)
+                    // .useXpath()
+                    // .specialClick(this.elements.newCompanyGenderMaleX)
+                    // .useCss()
+                    // .customSetValue(this.elements.newCompanyLastNameField, 'AutoTester')
+                    // .customSetValue(this.elements.newCompanyFirstNameField, 'Bot')
+                    // .customSetValue(this.elements.newCompanyStreetField, 'Eurotec-Ring')
+                    // .customSetValue(this.elements.newCompanyStreetNrField, 10)
+                    // .customSetValue(this.elements.newCompanyPostalCodeField, 47441)
+                    // .customSetValue(this.elements.newCompanyCityField, 'Moers')
+                    // .customSetValue(this.elements.newCompanyTelephoneField, '00488882311')
+            }
+            else console.log('Not good enough, try again! "checker" is ' + checker)
+        }
     };
     async stopStep() {
         return browser.end()
     };
-////////////////////////////////////////////////////////////////////////////////
-///////////////// LOOP (through all orders w/o bids) CODE BELOW ////////////////
-////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ///////////////// LOOP (through all orders w/o bids) CODE BELOW ////////////////
+    ////////////////////////////////////////////////////////////////////////////////
     async checkForUnreadKtas() {
         browser
             .pause(5000)
@@ -264,7 +276,7 @@ export default class AsyncDtIndex {
                 console.log(bids)
                 console.log('bid rows even: ', bids.length)
                 console.log('bid even value: ', bids.value)
-                
+
             })
             .elements('css selector', this.elements.ktaGridRowAltBidField, (object) => {
                 let bids = object[Object.keys(object)[0]]

@@ -9,7 +9,7 @@ export default class AsyncKkx3 {
         passwordInput: '#ext-comp-1021',
         loginButton: '#ext-gen48',
         kkSwitchButton: '#ext-gen136',
-        kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(39)',
+        kkDeTouroGroup: '#ext-comp-1033 > div > div:nth-child(40)',
         loggedInUser: '#ext-comp-1181',
         treeDeTouro: '#ext-gen50 > div > li:nth-child(2) > div',
         frameMain: '[name="FDLiFrame"]',

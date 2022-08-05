@@ -26,7 +26,7 @@ describe('KTA: publish, bid, assign and perform', async () => {
         it('save a new KTA', async () => {
             await asyncKkx3.saveNewKta();
         })
-        it('publish as DA', async () => {
+        it('publish as KTA', async () => {
             await asyncKkx3.publishKta();
         })
         it('confirm and log order type', async () => {
