@@ -161,7 +161,7 @@ export default class AsyncDtIndex {
             console.count('Attempt: ')
             console.log('Generating LE IK:')
             console.log(parseInt(number))
-            let checker = await browser.checkLuhn(parseInt(number));
+            let checker = await browser.ikChecker(parseInt(number));
 
             if (checker == true) {
                 console.log('Checker is: ' + checker)
