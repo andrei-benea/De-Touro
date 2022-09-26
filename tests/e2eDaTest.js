@@ -32,7 +32,7 @@ describe('DA: publish, bid, assign and perform', async () => {
         it('confirm and log order type', async () => {
             await asyncKkx3.confirmKtaType();
         })
-        it('stop', async () => {
+        it('stop1', async () => {
             await asyncKkx3.stopStep();
         })
     })
@@ -49,7 +49,7 @@ describe('DA: publish, bid, assign and perform', async () => {
         it('place bid on KTA', async () => {
             await asyncDtIndex.placeBid();
         })
-        it('stop', async () => {
+        it('stop2', async () => {
             await asyncDtIndex.stopStep();
         })
     })
@@ -72,7 +72,7 @@ describe('DA: publish, bid, assign and perform', async () => {
         it('Assign KTA to FDL', async () => {
             await asyncKkx3.assignKta();
         })
-        it('stop', async () => {
+        it('stop3', async () => {
             await asyncKkx3.stopStep();
         })
     })
@@ -89,7 +89,7 @@ describe('DA: publish, bid, assign and perform', async () => {
         it('upload proof of performance', async () => {
             await asyncDtIndex.simulateRide();
         })
-        it('stop', async () => {
+        it('stop4', async () => {
             await asyncDtIndex.stopStep();
         })
     })

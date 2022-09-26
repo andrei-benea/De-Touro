@@ -22,6 +22,8 @@ tryouts.js
 *.log
 tests_output/
 tests_input/credentials
+challengesBasic.js
+challengesObjects.js
 
 #Logs
 logs/
