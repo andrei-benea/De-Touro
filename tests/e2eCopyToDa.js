@@ -23,7 +23,7 @@ describe('Copy: from KTA to DA', async () => {
         it('KTA Module start-up', async () => {
             await asyncKkx3.loadKtaModule();
         })
-        it('save a new KTA', async () => {
+        it('copy latest KTA', async () => {
             await asyncKkx3.copyKta();
         })
         it('publish as DA', async () => {
